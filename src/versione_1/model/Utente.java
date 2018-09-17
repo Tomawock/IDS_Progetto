@@ -1,5 +1,6 @@
 package versione_1.model;
 
+import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
 public class Utente {
@@ -12,7 +13,14 @@ public class Utente {
 	private String username;
 	private String password;
 	
-	public Utente () {
+	public Utente (ArrayList<String> dati) {
+		this.nome = dati.get(0);
+		this.cognome = dati.get(1);
+		this.mail = dati.get(2);
+		this.data_di_nascita = new GregorianCalendar(Integer.parseInt(dati.get(5)),Integer.parseInt(dati.get(4))-1,Integer.parseInt(dati.get(3)));
+		this.c_f = dati.get(6);
+		this.username = dati.get(7);
+		this.password = dati.get(8);
 		
 	}
 	
@@ -54,6 +62,12 @@ public class Utente {
 	
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	@Override
+	public String toString() {
+		return "Utente [nome=" + nome + ", cognome=" + cognome + ", mail=" + mail + ", data_di_nascita="
+				+ data_di_nascita.toString() + ", c_f=" + c_f + ", username=" + username + ", password=" + password + "]";
 	}
 	
 	
