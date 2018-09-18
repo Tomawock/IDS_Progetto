@@ -1,8 +1,8 @@
 package versione_1.model;
 
 import java.io.*;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.GregorianCalendar;
 
 import utilita.IO;
 
@@ -241,8 +241,8 @@ public class Database_file implements Salvataggio{
 	
 	public static void main (String[] args) {
 		Database_file db=new Database_file();
-		Utente u=new Utente("test", "test", "test",  new GregorianCalendar(2012,10,10) ,"test", "test", "test");
-		Utente u2=new Utente("test2", "test2", "test2",  new GregorianCalendar(2012,10,10) ,"test2", "test2", "test2");
+		Utente u=new Utente("test", "test", "test",  LocalDateTime.of(2012,12,12,0,0) ,"test", "test", "test");
+		Utente u2=new Utente("test2", "test2", "test2",  LocalDateTime.of(2012,12,12,0,0) ,"test2", "test2", "test2");
 		db.salva_utente(u);
 		db.salva_utente(u2);
 		

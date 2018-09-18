@@ -1,15 +1,9 @@
 package versione_1.model;
 
-<<<<<<< HEAD
-
 import java.time.LocalDateTime;
 
 import utilita.Costanti;
-import versione_1.controller.Controller;
-=======
 import java.io.Serializable;
-import java.util.GregorianCalendar;
->>>>>>> 08a4b2ce66c3e8ec82ca2e4dac8af3075e42516c
 
 public class Fruitore implements Serializable{
 
