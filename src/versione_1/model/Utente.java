@@ -1,8 +1,12 @@
 package versione_1.model;
 
+<<<<<<< HEAD
 
 import java.io.Serializable;
 
+=======
+import java.io.Serializable;
+>>>>>>> ba31057f1513b2aeee4b5e7ec2a35d8a94ec1331
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
