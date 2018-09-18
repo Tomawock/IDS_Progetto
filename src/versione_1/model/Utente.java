@@ -1,5 +1,6 @@
 package versione_1.model;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
@@ -62,6 +63,16 @@ public class Utente {
 	
 	public void setPassword(String password) {
 		this.password = password;
+	}
+	
+	
+
+	public int getEtà() {
+		return (LocalDate.now().getYear()-this.data_di_nascita.toZonedDateTime().getYear());
+	}
+	
+	public String getUsername() {
+		return username;
 	}
 
 	@Override

@@ -3,6 +3,7 @@ package versione_1.view;
 import java.util.ArrayList;
 
 import utilita.IO;
+import versione_1.model.Utente;
 
 public class View {
 	
@@ -12,6 +13,12 @@ public class View {
 		return Integer.parseInt(str);
 	}
 
+	public int log_fruitore_operatore (Utente utente){
+		System.out.println("Ciao "+ utente.getUsername() +" vuoi diventare fruitore o operatore?\n1)Fruitore \n2)Operatore");
+		String str=IO.inKeyBoard(true);
+		return Integer.parseInt(str);
+	}
+	
 	public String log() {
 		System.out.println("Inserire username");
 		String user=IO.inKeyBoard(true);
@@ -45,4 +52,5 @@ public class View {
 		return dati;
 	}
 
+	
 }

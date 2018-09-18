@@ -10,10 +10,13 @@ public class Fruitore {
 	private GregorianCalendar data_fine_iscrizione;
 	private GregorianCalendar data_rinnovo_iscrizione;
 	
+	
+	
+	
 	public Fruitore(Utente utente) {
 		this.utente=utente;
-		
 	}
+	
 
 	public Utente getUtente() {
 		return utente;
