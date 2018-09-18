@@ -71,7 +71,9 @@ public class Utente implements Serializable{
 		this.password = password;
 	}
 	
-	
+	public String getPassword() {
+		return this.password;
+	}
 
 	public int getEta() {
 		return (LocalDate.now().getYear()-this.data_di_nascita.toZonedDateTime().getYear());

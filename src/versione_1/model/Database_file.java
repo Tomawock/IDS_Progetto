@@ -99,22 +99,57 @@ public class Database_file implements Salvataggio{
         }
 	}
 
+	/**
+	 * @return utente corrispondente o null in caso in cui non npè presente 
+	 */
 	@Override
 	public Utente carica_utente(String username, String psw) {
-		// TODO Auto-generated method stub
-		return null;
+		ArrayList<Utente> utenti= new ArrayList<Utente>();
+		utenti=this.carica_tutti_utenti();
+		if (utenti==null) {
+			return null;
+		}
+		else{
+			for(Utente u:utenti) {
+				if (u.getUsername().equals(username)&& u.getPassword().equals(psw))
+					return u;
+			}
+			return null;
+		}
 	}
 
 	@Override
 	public Fruitore carica_fruitore(String username, String psw) {
-		// TODO Auto-generated method stub
-		return null;
+		ArrayList<Fruitore> fruitori= new ArrayList<Fruitore>();
+		fruitori=this.carica_tutti_fruitori();
+		if (fruitori==null) {
+			return null;
+		}
+		else{
+			for(Fruitore f:fruitori) {
+				Utente u=f.getUtente();
+				if (u.getUsername().equals(username)&& u.getPassword().equals(psw))
+					return f;
+			}
+			return null;
+		}
 	}
 
 	@Override
 	public Operatore carica_operatore(String username, String psw) {
-		// TODO Auto-generated method stub
-		return null;
+		ArrayList<Operatore> operatori= new ArrayList<Operatore>();
+		operatori=this.carica_tutti_operatori();
+		if (operatori==null) {
+			return null;
+		}
+		else{
+			for(Operatore o:operatori) {
+				Utente u=o.getUtente();
+				if (u.getUsername().equals(username)&& u.getPassword().equals(psw))
+					return o;
+			}
+			return null;
+		}
 	}
 
 	@Override
@@ -234,6 +269,24 @@ public class Database_file implements Salvataggio{
 		for(Operatore o:operatrori) {
 			System.out.println(o.toString());
 		}
+		
+		System.out.println("SELECT UTENTE TRUE");
+		System.out.println(db.carica_utente("test", "test").toString());
+		System.out.println("SELECT UTENTE FALSE");
+		String result=(db.carica_utente("test3", "test3")==null)?"Utente O Password Errati":"OK";
+		System.out.println(result);
+		
+		System.out.println("SELECT FRUITORE TRUE");
+		System.out.println(db.carica_fruitore("test", "test").toString());
+		System.out.println("SELECT FRUITORE FALSE");
+		String result1=(db.carica_fruitore("test3", "test3")==null)?"Utente O Password Errati":"OK";
+		System.out.println(result1);
+		
+		System.out.println("SELECT OPERATORE TRUE");
+		System.out.println(db.carica_operatore("test", "test").toString());
+		System.out.println("SELECT OPERATORE FALSE");
+		String result2=(db.carica_operatore("test3", "test3")==null)?"Utente O Password Errati":"OK";
+		System.out.println(result2);
 	}
 
 }

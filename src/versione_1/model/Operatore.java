@@ -24,4 +24,10 @@ public class Operatore implements Serializable{
 		//TODO
 		return new ArrayList<>();
 	}
+
+	@Override
+	public String toString() {
+		return "Operatore [utente=" + utente.toString() + "]";
+	}
+	
 }
