@@ -47,7 +47,7 @@ public class Controller {
 	public void log_new_fruitore_operatore(Utente utente){
 		int valore=view.log_in_scelta();
 		if (valore== 1) {
-			if(utente.getEtà()>=18) {
+			if(utente.getEta()>=18) {
 				System.out.println(utente.getUsername()+" sei diventato fruitore");
 				new Database_file().salva_fruitore(new Fruitore(utente));
 			}

@@ -67,7 +67,7 @@ public class Utente {
 	
 	
 
-	public int getEtà() {
+	public int getEta() {
 		return (LocalDate.now().getYear()-this.data_di_nascita.toZonedDateTime().getYear());
 	}
 	
