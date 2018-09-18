@@ -38,10 +38,13 @@ public class Controller {
 			//TODO
 		}else
 			System.out.println("Errore");
+	}
+	
+	public void log_fruitore_operatore() {
 		
 	}
 	
-	public void log_fruitore_operatore(Utente utente){
+	public void log_new_fruitore_operatore(Utente utente){
 		int valore=view.log_in_scelta();
 		if (valore== 1) {
 			if(utente.getEtà()>=18) {
