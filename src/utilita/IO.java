@@ -7,6 +7,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+import versione_1.model.Database_file;
+
 public class IO 
 {	
 	public final static String SEPARATORE_STRINGHE="--";
@@ -70,6 +72,27 @@ public class IO
 		}
 	    
 	    return file;
+	}
+	/**
+	 * Crea il file , se è gia presente non fa nulla
+	 * 
+	 * @param percorso di destinazione del file
+	 * 
+	 */
+	public static void CreaFile(String percorso)
+	{
+		File file = new File(percorso);	
+	    try 
+	    {
+	    	if (!file.exists())
+			{
+	    		file.createNewFile();
+	    		IO.out("File creato in "+percorso);
+			}
+		} catch (IOException e)
+	    {
+			IO.out(e);
+		}
 	}
 	
 	/**
@@ -153,17 +176,15 @@ public class IO
 	
 	public static void main(String[] args)
 	{	
-		//File f;
-		//IO.outOnFrame("Ciaos");
-		//f=IO.apreCreaFile("src/File/test.txt");
-		/*f=IO.apreCreaFile("src/File/test2.xls");
-		IO.svuotaFileTxt(f);
+		IO.CreaFile(Database_file.PERCORSO_FILE_UTENTE);
+		//f=IO.apreCreaFile("src/File/test2.xls");
+		/*IO.svuotaFileTxt(f);
 		IO.scriviFileTxt(f, "P XXX LOL \n");
 		IO.scriviFileTxt(f, "PP \n");
-		IO.out(IO.leggiFileTxt(f));*/
+		IO.out(IO.leggiFileTxt(f));
 		System.out.println("cf");
 		String st=IO.inCodiceFiscale();
-		System.out.println("fine");
+		System.out.println("fine");*/
 	}
 
 }

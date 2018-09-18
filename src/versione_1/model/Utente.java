@@ -1,9 +1,10 @@
 package versione_1.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
-public class Utente {
+public class Utente implements Serializable{
 	
 	private String nome;
 	private String cognome;
