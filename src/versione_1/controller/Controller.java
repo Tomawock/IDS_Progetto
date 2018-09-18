@@ -38,6 +38,25 @@ public class Controller {
 			//TODO
 		}else
 			System.out.println("Errore");
+	}
+	
+	public void log_fruitore_operatore() {
 		
+	}
+	
+	public void log_new_fruitore_operatore(Utente utente){
+		int valore=view.log_in_scelta();
+		if (valore== 1) {
+			if(utente.getEtà()>=18) {
+				System.out.println(utente.getUsername()+" sei diventato fruitore");
+				new Database_file().salva_fruitore(new Fruitore(utente));
+			}
+			else System.out.println("Non puoi diventare fruitore in quanto non sei maggiorenne");
+		}
+		else if(valore == 2) {
+			System.out.println(utente.getUsername()+" sei diventato operatore");
+			new Database_file().salva_operatore(new Operatore(utente));		
+		}else
+			System.out.println("Errore");
 	}
 }

@@ -166,9 +166,9 @@ public class IO
 	public static String inCodiceFiscale()
 	{
 		 String cf="";
-		 while( ! cf.matches("(?:[B-DF-HJ-NP-TV-Z]|[AEIOU])[AEIOU][AEIOUX]|[B-DF-HJ-NP-TV-Z]{2}[A-Z]")) {
+		 while( ! cf.matches("(/^[A-Z]{6}\\d{2}[A-Z]\\d{2}[A-Z]\\d{3}[A-Z]$/i")) {
 			 cf = IO.inKeyBoard(true);
-			 if (! cf.matches("(?:[B-DF-HJ-NP-TV-Z]|[AEIOU])[AEIOU][AEIOUX]|[B-DF-HJ-NP-TV-Z]{2}[A-Z]")) System.out.println("rifo");
+			 if (! cf.matches("/^[A-Z]{6}\\d{2}[A-Z]\\d{2}[A-Z]\\d{3}[A-Z]$/i")) System.out.println("rifo");
 		 }
 		 return cf;
 	}

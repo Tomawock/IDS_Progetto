@@ -1,6 +1,10 @@
 package versione_1.model;
 
+<<<<<<< HEAD
 import java.io.Serializable;
+=======
+import java.time.LocalDate;
+>>>>>>> 65bf308cc4c45dfdf7e4475ad7b28eaaf82966b1
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
@@ -63,6 +67,16 @@ public class Utente implements Serializable{
 	
 	public void setPassword(String password) {
 		this.password = password;
+	}
+	
+	
+
+	public int getEtà() {
+		return (LocalDate.now().getYear()-this.data_di_nascita.toZonedDateTime().getYear());
+	}
+	
+	public String getUsername() {
+		return username;
 	}
 
 	@Override
