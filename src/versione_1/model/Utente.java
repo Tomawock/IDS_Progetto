@@ -79,7 +79,9 @@ public class Utente implements Serializable{
 		this.password = password;
 	}
 	
-	
+	public String getPassword() {
+		return this.password;
+	}
 
 	//DA VERIFICARE
 	public int getEta() {
