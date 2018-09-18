@@ -1,8 +1,12 @@
 package versione_1.model;
 
 import java.io.Serializable;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.GregorianCalendar;
 
 public class Utente implements Serializable{
@@ -15,7 +19,7 @@ public class Utente implements Serializable{
 	private String nome;
 	private String cognome;
 	private String mail;
-	private GregorianCalendar data_di_nascita;
+	private LocalDateTime data_di_nascita;
 	private String c_f;
 	private String username;
 	private String password;
@@ -24,14 +28,17 @@ public class Utente implements Serializable{
 		this.nome = dati.get(0);
 		this.cognome = dati.get(1);
 		this.mail = dati.get(2);
-		this.data_di_nascita = new GregorianCalendar(Integer.parseInt(dati.get(5)),Integer.parseInt(dati.get(4))-1,Integer.parseInt(dati.get(3)));
+		
+		//data di nascita in formato (ANNO, MESE, GIORNO, ORA, MINUTI) NB: gli ultimi due "0,0" sono per ora e minuti
+		this.data_di_nascita = LocalDateTime.of(Integer.parseInt(dati.get(5)), Integer.parseInt(dati.get(4)), Integer.parseInt(dati.get(3)), 0 , 0);
+		
 		this.c_f = dati.get(6);
 		this.username = dati.get(7);
 		this.password = dati.get(8);
 		
 	}
 	
-	public Utente(String nome, String cognome, String mail, GregorianCalendar data_di_nascita, String c_f,
+	public Utente(String nome, String cognome, String mail, LocalDateTime data_di_nascita, String c_f,
 			String username, String password) {
 		super();
 		this.nome = nome;
@@ -43,6 +50,7 @@ public class Utente implements Serializable{
 		this.password = password;
 	}
 	
+
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
@@ -55,7 +63,7 @@ public class Utente implements Serializable{
 		this.mail = mail;
 	}
 	
-	public void setData_di_nascita(GregorianCalendar data_di_nascita) {
+	public void setData_di_nascita(LocalDateTime data_di_nascita) {
 		this.data_di_nascita = data_di_nascita;
 	}
 	
@@ -73,9 +81,12 @@ public class Utente implements Serializable{
 	
 	
 
+	//DA VERIFICARE
 	public int getEta() {
-		return (LocalDate.now().getYear()-this.data_di_nascita.toZonedDateTime().getYear());
+		return (LocalDate.now().getYear() - this.data_di_nascita.getYear());
 	}
+	
+
 	
 	public String getUsername() {
 		return username;
