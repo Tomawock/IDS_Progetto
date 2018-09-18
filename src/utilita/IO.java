@@ -141,16 +141,30 @@ public class IO
 		} 
 	}
 	
+	public static String inCodiceFiscale()
+	{
+		 String cf="";
+		 while( ! cf.matches("(?:[B-DF-HJ-NP-TV-Z]|[AEIOU])[AEIOU][AEIOUX]|[B-DF-HJ-NP-TV-Z]{2}[A-Z]")) {
+			 cf = IO.inKeyBoard(true);
+			 if (! cf.matches("(?:[B-DF-HJ-NP-TV-Z]|[AEIOU])[AEIOU][AEIOUX]|[B-DF-HJ-NP-TV-Z]{2}[A-Z]")) System.out.println("rifo");
+		 }
+		 return cf;
+	}
+	
+	
 	public static void main(String[] args)
 	{	
-		File f;
+		//File f;
 		//IO.outOnFrame("Ciaos");
 		//f=IO.apreCreaFile("src/File/test.txt");
-		f=IO.apreCreaFile("src/File/test2.xls");
+		/*f=IO.apreCreaFile("src/File/test2.xls");
 		IO.svuotaFileTxt(f);
 		IO.scriviFileTxt(f, "P XXX LOL \n");
 		IO.scriviFileTxt(f, "PP \n");
-		IO.out(IO.leggiFileTxt(f));
+		IO.out(IO.leggiFileTxt(f));*/
+		System.out.println("cf");
+		String st=IO.inCodiceFiscale();
+		System.out.println("fine");
 	}
 
 }
