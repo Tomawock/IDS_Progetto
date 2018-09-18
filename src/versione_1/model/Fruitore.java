@@ -42,6 +42,13 @@ public class Fruitore {
 	public void setData_rinnovo_iscrizione(GregorianCalendar data_rinnovo_iscrizione) {
 		this.data_rinnovo_iscrizione = data_rinnovo_iscrizione;
 	}
+
+	@Override
+	public String toString() {
+		return "Fruitore [utente=" + utente.toString() + ", data_iscrizione=" + data_iscrizione + ", data_fine_iscrizione="
+				+ data_fine_iscrizione + ", data_rinnovo_iscrizione=" + data_rinnovo_iscrizione + "]";
+	}
+	
 	
 	
 }

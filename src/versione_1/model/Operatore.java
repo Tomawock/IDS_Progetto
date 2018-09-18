@@ -16,6 +16,7 @@ public class Operatore {
 	}
 	
 	public ArrayList<Fruitore> visualizza_fruitori(){
+		//TODO
 		return new ArrayList<>();
 	}
 }
