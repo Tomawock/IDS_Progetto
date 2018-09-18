@@ -1,9 +1,14 @@
 package versione_1.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Operatore {
+public class Operatore implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3L;
 	private Utente utente;
 	
 	public Operatore(Utente utente) {

@@ -1,8 +1,14 @@
 package versione_1.model;
 
+import java.io.Serializable;
 import java.util.GregorianCalendar;
 
-public class Fruitore {
+public class Fruitore implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2L;
 
 	private Utente utente;
 	
