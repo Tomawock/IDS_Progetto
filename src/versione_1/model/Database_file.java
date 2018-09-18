@@ -52,8 +52,36 @@ public class Database_file implements Salvataggio{
 	}
 
 	@Override
+<<<<<<< HEAD
 	public ArrayList<Utente> carica_tutti_utenti() {
 		// TODO Auto-generated method stub
 		return null;
 	}
+=======
+	public void salva_fruitore(Fruitore f) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void salva_operatore(Operatore o) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Fruitore carica_fruitore(String username, String psw) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Operatore carica_operatore(String username, String psw) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+
+>>>>>>> beb74ceb70c404cc52e8d15242263f9e0b4fe531
 }
