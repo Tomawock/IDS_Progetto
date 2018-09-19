@@ -245,6 +245,113 @@ public class Database_file implements Salvataggio{
 		return operatori;
 	}
 	
+	@Override
+	public void elimina_utente(Utente utente) {
+		ArrayList<Utente> utenti=this.carica_tutti_utenti();
+		if (!utenti.contains(utente)) {
+			//impossibile eliminare utente poichè non è presente nel db
+			
+		}else {
+			utenti.remove(utenti.indexOf(utente));
+			this.reset_utenti(utenti);
+		}	
+	}
+
+	@Override
+	public void elimina_fruitore(Fruitore fruitore) {
+		ArrayList<Fruitore> fruitori=this.carica_tutti_fruitori();
+		if (fruitori.contains(fruitore)) {
+			//impossibile eliminare utente poichè non è presente nel db
+			
+		}else {
+			fruitori.remove(fruitori.indexOf(fruitore));
+			this.reset_fruitori(fruitori);
+		}	
+	}
+
+	@Override
+	public void elimina_operatore(Operatore operatore) {
+		ArrayList<Operatore> operatori=this.carica_tutti_operatori();
+		if (operatori.contains(operatori)) {
+			//impossibile eliminare utente poichè non è presente nel db
+			
+		}else {
+			operatori.remove(operatori.indexOf(operatore));
+			this.reset_operatori(operatori);
+		}
+	}
+
+	@Override
+	public void reset_utenti(ArrayList<Utente> utenti) {
+		//crea il file nel percorso se non e presente
+		IO.CreaFile(Database_file.PERCORSO_FILE_UTENTE);
+		// Serialization  
+        try{    
+            //Saving of object in a file 
+            FileOutputStream file = new FileOutputStream(Database_file.PERCORSO_FILE_UTENTE); 
+            ObjectOutputStream out = new ObjectOutputStream(file); 
+              
+            // Method for serialization of object 
+            out.writeObject(utenti); 
+              
+            out.close(); 
+            file.close(); 
+              
+            System.out.println("Utenti resettati"); 
+  
+        }catch(IOException ex) { 
+            System.err.println("IOException is caught"); 
+        }	
+	}
+
+	@Override
+	public void reset_fruitori(ArrayList<Fruitore> fruitori) {
+		//crea il file nel percorso se non e presente
+		IO.CreaFile(Database_file.PERCORSO_FILE_FRUITORE);
+		// Serialization  
+        try{    
+            //Saving of object in a file 
+            FileOutputStream file = new FileOutputStream(Database_file.PERCORSO_FILE_FRUITORE); 
+            ObjectOutputStream out = new ObjectOutputStream(file); 
+              
+            // Method for serialization of object 
+            out.writeObject(fruitori); 
+              
+            out.close(); 
+            file.close(); 
+              
+            System.out.println("Fruitori resettati"); 
+  
+        }catch(IOException ex) { 
+            System.err.println("IOException is caught"); 
+        }	
+		
+	}
+
+	@Override
+	public void reset_operatori(ArrayList<Operatore> operatori) {
+		//crea il file nel percorso se non e presente
+		IO.CreaFile(Database_file.PERCORSO_FILE_OPERATORE);
+		// Serialization  
+        try{    
+            //Saving of object in a file 
+            FileOutputStream file = new FileOutputStream(Database_file.PERCORSO_FILE_OPERATORE); 
+            ObjectOutputStream out = new ObjectOutputStream(file); 
+              
+            // Method for serialization of object 
+            out.writeObject(operatori); 
+              
+            out.close(); 
+            file.close(); 
+              
+            System.out.println("Operatori resettati"); 
+  
+        }catch(IOException ex) { 
+            System.err.println("IOException is caught"); 
+        }
+		
+	}
+	
 	public static void main (String[] args) {
 		Database_file db=new Database_file();
 		Utente u=new Utente("test", "test", "test",  LocalDateTime.of(2012,12,12,0,0) ,"test", "test", "test");
@@ -293,6 +400,9 @@ public class Database_file implements Salvataggio{
 		System.out.println("SELECT OPERATORE FALSE");
 		String result2=(db.carica_operatore("test3", "test3")==null)?"Utente O Password Errati":"OK";
 		System.out.println(result2);
+		
+		System.out.println("ELIMINA UTENTE TRUE");
+		db.elimina_utente(u);
+		
 	}
-
 }

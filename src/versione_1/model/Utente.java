@@ -5,7 +5,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
-public class Utente implements Serializable{
+public class Utente implements Serializable,Comparable{
 	
 	/**
 	 * serve per la serializzazione degli oggetti 
@@ -79,6 +79,26 @@ public class Utente implements Serializable{
 		return this.password;
 	}
 
+	public String getNome() {
+		return nome;
+	}
+
+	public String getCognome() {
+		return cognome;
+	}
+
+	public String getMail() {
+		return mail;
+	}
+
+	public LocalDateTime getData_di_nascita() {
+		return data_di_nascita;
+	}
+
+	public String getC_f() {
+		return c_f;
+	}
+
 	//DA VERIFICARE
 	public int getEta() {
 		return (LocalDate.now().getYear() - this.data_di_nascita.getYear());
@@ -94,6 +114,15 @@ public class Utente implements Serializable{
 	public String toString() {
 		return "Utente [nome=" + nome + ", cognome=" + cognome + ", mail=" + mail + ", data_di_nascita="
 				+ data_di_nascita.toString() + ", c_f=" + c_f + ", username=" + username + ", password=" + password + "]";
+	}
+
+	@Override
+	public int compareTo(Object o) {
+		Utente u=(Utente) o;
+		if (this.c_f.equals(u.getC_f()))
+			return 0;
+		else
+			return 1;
 	}
 	
 	
