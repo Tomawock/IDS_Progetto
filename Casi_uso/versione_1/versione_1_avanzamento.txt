@@ -7,11 +7,13 @@ CASI D'USO COMPLETATI E NOTE RELATIVE AD ESSI:
 3)Diventare Fruitore
 	COMPLETATO: è possibile creare un nuovo fruitore secondo le condizioni del caso d'uso
 4)Validità fruitore
-	TODO:
+	COPMPLETATO: il software controlla ad ogni log in che il fruitore sia nel suo periodo 
+					di validità corretto, nel caso in cui non lo sia chiede il rinnovo,ed 
+					eventualmente lo cancella dal db locale in quanto non è piu fruitore
 5)Rinnovo fruitore
-	TODO:
+	COPMPLETATO: è possibile dopo la data di rinnovo effettuare il rinnovo del fruitore aggiornado i suoi dati
 6)Visualizzazione fruitori
-	COMPLETATO: � possibile far visualizzare l''operatore loggato tutti i fruitori presenti nel database
+	COMPLETATO: è possibile far visualizzare l''operatore loggato tutti i fruitori presenti nel database
 
 NOTE:
 1- SCELTA PROGETTUALE:	Abbiamo introdotto l'Operatore e il suo salvataggio in locale,
