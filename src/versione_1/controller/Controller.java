@@ -9,9 +9,11 @@ import versione_1.view.*;
 public class Controller {
 
 	private View view;
+	private Salvataggio db;
 	
 	public Controller() {
 		view=new View();
+		db=new Database_file();
 	}
 		
 	public void log_in(){
@@ -22,15 +24,13 @@ public class Controller {
 			String test_p=test.split(IO.SEPARATORE_STRINGHE)[1];
 			// prendi dati da archivio e controlla se ci sono
 			
-			this.view.scrivi(test_u);
-			this.view.scrivi(test_p);
 			//Funge
 		}
 		else if(valore == 2) {
 			ArrayList<String> test_dati=view.nuova_registrazione();
 			Utente user= new Utente(test_dati);
 			//salvataggio su file sempre fare in due passaggi cosi quando si cambia il codice per il db si sperca meno tempo
-			Salvataggio db=new Database_file();
+			
 			db.salva_utente(user);
 			//Messaggio coinferma iscrizione
 			this.view.scrivi("Ti sei iscritto correttamente "+user.getUsername());
