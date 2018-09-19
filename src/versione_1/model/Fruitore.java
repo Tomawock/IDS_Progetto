@@ -114,6 +114,17 @@ public class Fruitore implements Serializable{
 		return rinnovabile;
 	}
 
+	
+	@Override
+	public boolean equals(Object obj) {
+		Fruitore f=(Fruitore) obj;
+		if(this.getUtente().getUsername().equals(f.getUtente().getUsername()))
+		{
+			return true;
+		}else
+			return false;
+	}
+
 	public static void main(String[] args) {
 		String nome = "NomeTest";
 		String cognome = "COgnomeTest";

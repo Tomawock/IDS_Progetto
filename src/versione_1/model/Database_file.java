@@ -34,7 +34,7 @@ public class Database_file implements Salvataggio{
             out.close(); 
             file.close(); 
               
-            System.out.println("utente serializzato"); 
+            //System.out.println("utente serializzato"); 
   
         }catch(IOException ex) { 
             System.err.println("IOException is caught"); 
@@ -63,7 +63,7 @@ public class Database_file implements Salvataggio{
             out.close(); 
             file.close(); 
               
-            System.out.println("fruitore serializzato"); 
+            //System.out.println("fruitore serializzato"); 
   
         }catch(IOException ex) { 
             System.err.println("IOException is caught"); 
@@ -92,7 +92,7 @@ public class Database_file implements Salvataggio{
             out.close(); 
             file.close(); 
               
-            System.out.println("operatore serializzato"); 
+//            System.out.println("operatore serializzato"); 
   
         }catch(IOException ex) { 
             System.err.println("IOException is caught1"); 
@@ -176,7 +176,7 @@ public class Database_file implements Salvataggio{
             in.close(); 
             file.close(); 
               
-            System.out.println("Utenti deserializzati"); 
+//            System.out.println("Utenti deserializzati"); 
         }catch(EOFException ex) {
        	 	//System.out.println("EOFExceptionis caught"); // si verifica sempre qunado creo il file la prima volta ma non è fondamentale 
         }catch(IOException ex) {
@@ -205,7 +205,7 @@ public class Database_file implements Salvataggio{
             in.close(); 
             file.close(); 
               
-            System.out.println("fruitori deserializzati"); 
+//            System.out.println("fruitori deserializzati"); 
         }catch(EOFException ex) {
        	 	//System.out.println("EOFExceptionis caught"); // si verifica sempre qunado creo il file la prima volta ma non è fondamentale 
         }catch(IOException ex) {
@@ -234,7 +234,7 @@ public class Database_file implements Salvataggio{
             in.close(); 
             file.close(); 
               
-            System.out.println("operatori deserializzati"); 
+//            System.out.println("operatori deserializzati"); 
         }catch(EOFException ex) {
        	 	//System.out.println("EOFExceptionis caught"); // si verifica sempre qunado creo il file la prima volta ma non è fondamentale 
         }catch(IOException ex) {
@@ -254,13 +254,14 @@ public class Database_file implements Salvataggio{
 		}else {
 			utenti.remove(utenti.indexOf(utente));
 			this.reset_utenti(utenti);
+			//System.out.println(utenti.indexOf(utente));
 		}	
 	}
 
 	@Override
 	public void elimina_fruitore(Fruitore fruitore) {
 		ArrayList<Fruitore> fruitori=this.carica_tutti_fruitori();
-		if (fruitori.contains(fruitore)) {
+		if (!fruitori.contains(fruitore)) {
 			//impossibile eliminare utente poichè non è presente nel db
 			
 		}else {
@@ -272,7 +273,7 @@ public class Database_file implements Salvataggio{
 	@Override
 	public void elimina_operatore(Operatore operatore) {
 		ArrayList<Operatore> operatori=this.carica_tutti_operatori();
-		if (operatori.contains(operatori)) {
+		if (!operatori.contains(operatore)) {
 			//impossibile eliminare utente poichè non è presente nel db
 			
 		}else {
@@ -297,7 +298,7 @@ public class Database_file implements Salvataggio{
             out.close(); 
             file.close(); 
               
-            System.out.println("Utenti resettati"); 
+//            System.out.println("Utenti resettati"); 
   
         }catch(IOException ex) { 
             System.err.println("IOException is caught"); 
@@ -320,7 +321,7 @@ public class Database_file implements Salvataggio{
             out.close(); 
             file.close(); 
               
-            System.out.println("Fruitori resettati"); 
+//            System.out.println("Fruitori resettati"); 
   
         }catch(IOException ex) { 
             System.err.println("IOException is caught"); 
@@ -344,7 +345,7 @@ public class Database_file implements Salvataggio{
             out.close(); 
             file.close(); 
               
-            System.out.println("Operatori resettati"); 
+//            System.out.println("Operatori resettati"); 
   
         }catch(IOException ex) { 
             System.err.println("IOException is caught"); 
@@ -354,16 +355,24 @@ public class Database_file implements Salvataggio{
 	
 	public static void main (String[] args) {
 		Database_file db=new Database_file();
+		
 		Utente u=new Utente("test", "test", "test",  LocalDateTime.of(2012,12,12,0,0) ,"test", "test", "test");
 		Utente u2=new Utente("test2", "test2", "test2",  LocalDateTime.of(2012,12,12,0,0) ,"test2", "test2", "test2");
+		
+		Fruitore f=new Fruitore(u);
+		Fruitore f2=new Fruitore(u2);
+		
+		Operatore o=new Operatore(u);
+		Operatore o2=new Operatore(u2);
+		
 		db.salva_utente(u);
 		db.salva_utente(u2);
 		
-		db.salva_fruitore(new Fruitore(u));
-		db.salva_fruitore(new Fruitore(u2));
+		db.salva_fruitore(f);
+		db.salva_fruitore(f2);
 		
-		db.salva_operatore(new Operatore(u));
-		db.salva_operatore(new Operatore(u2));
+		db.salva_operatore(o);
+		db.salva_operatore(o2);
 		
 		System.out.println("**************UTENTI********************");
 		ArrayList<Utente> utenti=db.carica_tutti_utenti();
@@ -373,14 +382,14 @@ public class Database_file implements Salvataggio{
 		
 		System.out.println("**************FRUITORI********************");
 		ArrayList<Fruitore> fruitori=db.carica_tutti_fruitori();
-		for(Fruitore f:fruitori) {
-			System.out.println(f.toString());
+		for(Fruitore fr:fruitori) {
+			System.out.println(fr.toString());
 		}
 		
 		System.out.println("**************OPERATORI********************");
 		ArrayList<Operatore> operatrori=db.carica_tutti_operatori();
-		for(Operatore o:operatrori) {
-			System.out.println(o.toString());
+		for(Operatore op:operatrori) {
+			System.out.println(op.toString());
 		}
 		
 		System.out.println("SELECT UTENTE TRUE");
@@ -403,6 +412,18 @@ public class Database_file implements Salvataggio{
 		
 		System.out.println("ELIMINA UTENTE TRUE");
 		db.elimina_utente(u);
+		String result3=(db.carica_utente(u.getUsername(),u.getPassword())==null)?"Utente Eliminato":"OK";
+		System.out.println(result3);
+		
+		System.out.println("ELIMINA FRUITORE TRUE");
+		db.elimina_fruitore(f);
+		String result4=(db.carica_fruitore(f.getUtente().getUsername(),f.getUtente().getPassword())==null)?"Fruitore Eliminato":"OK";
+		System.out.println(result4);
+		
+		System.out.println("ELIMINA OPERATORE TRUE");
+		db.elimina_operatore(o);
+		String result5=(db.carica_operatore(o.getUtente().getUsername(),o.getUtente().getPassword())==null)?"Operatore Eliminato":"OK";
+		System.out.println(result5);
 		
 	}
 }
