@@ -22,22 +22,25 @@ public class Controller {
 			String test_p=test.split(IO.SEPARATORE_STRINGHE)[1];
 			// prendi dati da archivio e controlla se ci sono
 			
-			System.out.println(test_u);
-			System.out.println(test_p);
+			this.view.scrivi(test_u);
+			this.view.scrivi(test_p);
 			//Funge
 		}
 		else if(valore == 2) {
 			ArrayList<String> test_dati=view.nuova_registrazione();
 			Utente user= new Utente(test_dati);
-			//salvataggio su file
-			new Database_file().salva_utente(user);
-			//salvataggio su dbms
-			System.out.println(user.toString());
+			//salvataggio su file sempre fare in due passaggi cosi quando si cambia il codice per il db si sperca meno tempo
+			Salvataggio db=new Database_file();
+			db.salva_utente(user);
+			//Messaggio coinferma iscrizione
+			this.view.scrivi("Ti sei iscritto correttamente "+user.getUsername());
+			//una volta completata l'iscrizione torna al log in
+			this.log_in();
 		}
 		else if (valore ==3) {
 			//TODO
 		}else
-			System.out.println("Errore");
+			this.view.scrivi("Errore");
 	}
 	
 	public void log_fruitore_operatore() {
@@ -48,15 +51,19 @@ public class Controller {
 		int valore=view.log_in_scelta();
 		if (valore== 1) {
 			if(utente.getEta()>=18) {
-				System.out.println(utente.getUsername()+" sei diventato fruitore");
-				new Database_file().salva_fruitore(new Fruitore(utente));
+				this.view.scrivi(utente.getUsername()+" sei diventato fruitore");
+				//new Database_file().salva_fruitore(new Fruitore(utente));
+				Salvataggio db=new Database_file();
+				db.salva_fruitore(new Fruitore(utente));
 			}
-			else System.out.println("Non puoi diventare fruitore in quanto non sei maggiorenne");
+			else this.view.scrivi("Non puoi diventare fruitore in quanto non sei maggiorenne");
 		}
 		else if(valore == 2) {
-			System.out.println(utente.getUsername()+" sei diventato operatore");
-			new Database_file().salva_operatore(new Operatore(utente));		
+			this.view.scrivi(utente.getUsername()+" sei diventato operatore");
+			//new Database_file().salva_operatore(new Operatore(utente));		
+			Salvataggio db=new Database_file();
+			db.salva_operatore(new Operatore(utente));
 		}else
-			System.out.println("Errore");
+			this.view.scrivi("Errore");
 	}
 }

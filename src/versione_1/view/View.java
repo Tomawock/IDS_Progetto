@@ -7,6 +7,10 @@ import versione_1.model.Utente;
 
 public class View {
 	
+	public void scrivi(String informazioni) {
+		System.out.println(informazioni);
+	}
+	
 	public int log_in_scelta() {
 		System.out.println("Sei nell'log in \n1)Accedere \n2)Registrazione \n3)Esci");
 		String str=IO.inKeyBoard(true);

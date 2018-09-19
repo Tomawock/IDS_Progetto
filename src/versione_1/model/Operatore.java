@@ -19,10 +19,14 @@ public class Operatore implements Serializable{
 	public Utente getUtente() {
 		return utente;
 	}
-	
+	/**
+	 * Legge dal database locale tutti i fruitori 
+	 * @return insieme di tutti i Fruitori nel DB
+	 */
 	public ArrayList<Fruitore> visualizza_fruitori(){
-		//TODO
-		return new ArrayList<>();
+		//nel caso in cui si cambi il salvataggio cambiare il costruttore con quello desiterato dall'interfaccia
+		Salvataggio db= new Database_file();
+		return db.carica_tutti_fruitori();
 	}
 
 	@Override
