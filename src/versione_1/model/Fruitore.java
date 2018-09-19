@@ -36,17 +36,7 @@ public class Fruitore implements Serializable{
 //		this.data_rinnovo_iscrizione = this.data_fine_iscrizione.minusDays(Costanti.GIORNI_RINNOVO_ISCRIZIONE);	
 		
 		this.utente=utente;
-		this.data_iscrizione = LocalDateTime.now();
-		this.data_fine_iscrizione = LocalDateTime.of(data_iscrizione.getYear(),
-				data_iscrizione.getMonth(),
-				data_iscrizione.getDayOfMonth(), 
-				data_iscrizione.getHour(), 
-				data_iscrizione.getMinute()+Costanti.SCADENZA_TERMINE_FRUITORE); 	
-		this.data_rinnovo_iscrizione = 	LocalDateTime.of(data_iscrizione.getYear(),
-				data_iscrizione.getMonth(),
-				data_iscrizione.getDayOfMonth(), 
-				data_iscrizione.getHour(), 
-				data_iscrizione.getMinute()+Costanti.GIORNI_RINNOVO_ISCRIZIONE); 	
+		this.rinnova_iscrizione();	
 		
 	}
 	
@@ -138,6 +128,20 @@ public class Fruitore implements Serializable{
 		Fruitore f = new Fruitore(u);
 		System.out.print(f.toString());	
 		
+	}
+
+	public void rinnova_iscrizione() {
+		this.data_iscrizione = LocalDateTime.now();
+		this.data_fine_iscrizione = LocalDateTime.of(data_iscrizione.getYear(),
+				data_iscrizione.getMonth(),
+				data_iscrizione.getDayOfMonth(), 
+				data_iscrizione.getHour(), 
+				data_iscrizione.getMinute()+Costanti.SCADENZA_TERMINE_FRUITORE); 	
+		this.data_rinnovo_iscrizione = 	LocalDateTime.of(data_iscrizione.getYear(),
+				data_iscrizione.getMonth(),
+				data_iscrizione.getDayOfMonth(), 
+				data_iscrizione.getHour(), 
+				data_iscrizione.getMinute()+Costanti.GIORNI_RINNOVO_ISCRIZIONE); 
 	}
 	
 	

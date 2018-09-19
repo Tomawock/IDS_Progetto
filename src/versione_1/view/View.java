@@ -44,8 +44,8 @@ public class View {
 		System.out.println(Costanti.GRECA);
 		System.out.println("              MENU' FRUITORE         ");
 		System.out.println(Costanti.GRECA);
-		System.out.println("\nCosa vuoi fare?\n1)Torna indietro");
-		return IO.insertInt(1, 1);
+		System.out.println("\nCosa vuoi fare?\n1)Torna indietro\n2)Rinnova Iscrizione");
+		return IO.insertInt(1, 2);
 	}
 	
 	public String log() {

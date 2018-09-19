@@ -42,11 +42,12 @@ public class Controller {
 			this.log_in();
 		}
 		else if (valore ==3) {
-			//TODO
+			return;
 		}else {
 			this.view.scrivi("Errore");
 			this.log_in();
 		}
+		return;//chiude il programma
 	}
 
 	
@@ -63,6 +64,7 @@ public class Controller {
 				fruitore.controllo_validia();
 				if(!fruitore.is_valido()) {
 					this.view.scrivi("La registrazione come fruitore e' scaduta");
+					db.elimina_fruitore(fruitore);//elimina il fruitore
 					this.user_loggato(utente);
 				}
 				this.fruitore_loggato(fruitore);
@@ -133,12 +135,20 @@ public class Controller {
 
 	
 	private void fruitore_loggato(Fruitore fruitore) {
+		fruitore.controllo_validia();
 		if(fruitore.is_rinnovabile()) {
 			this.view.scrivi("Scadenza rinnovo vicina ti mancano X giorni alla scadenza");
 		}
 		int scelta=view.fruitore_view(fruitore);
 		if(scelta ==1) {
 			this.user_loggato(fruitore.getUtente());
+		}
+		else if(scelta ==2) {
+			if(fruitore.is_rinnovabile()) {
+				fruitore.rinnova_iscrizione();
+			}
+			else view.scrivi("Non puoi ancora rinnovare l'iscrizione");
+			this.fruitore_loggato(fruitore);
 		}
 		else {
 			this.user_loggato(fruitore.getUtente());
