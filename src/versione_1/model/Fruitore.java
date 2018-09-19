@@ -1,6 +1,7 @@
 package versione_1.model;
 
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 
 import utilita.Costanti;
 import java.io.Serializable;
@@ -18,6 +19,9 @@ public class Fruitore implements Serializable{
 	private LocalDateTime data_fine_iscrizione;
 	private LocalDateTime data_rinnovo_iscrizione;
 	
+	private boolean valido=false;
+	private boolean rinnovabile=false;
+	
 	
 	
 	//viene creato un nuovo fruitore con tutti i dati dell'utente in piu' :
@@ -32,6 +36,27 @@ public class Fruitore implements Serializable{
 		this.data_rinnovo_iscrizione = this.data_fine_iscrizione.minusDays(Costanti.GIORNI_RINNOVO_ISCRIZIONE);	
 	}
 	
+	public int get_giorni_scadenza() {
+		if(!this.rinnovabile) {
+			return 0;//caso in cui non sei nel periodo di rinnovabilità
+		}else {
+			return (int)LocalDateTime.now().until(data_fine_iscrizione, ChronoUnit.DAYS);
+		}
+	}
+	
+	public void controllo_validia() {
+		if (this.data_fine_iscrizione.isAfter(LocalDateTime.now())) {
+			this.valido=true;
+			if (this.data_rinnovo_iscrizione.isBefore(LocalDateTime.now())) {
+				this.rinnovabile=true;
+			}else {
+				this.rinnovabile=false;
+			}
+		}else {
+			this.valido=false;
+			this.rinnovabile=false;
+		}
+	}
 
 	public Utente getUtente() {
 		return utente;
@@ -66,8 +91,15 @@ public class Fruitore implements Serializable{
 		return "Fruitore [utente=" + utente.toString() + ", data_iscrizione=" + data_iscrizione + ", data_fine_iscrizione="
 				+ data_fine_iscrizione + ", data_rinnovo_iscrizione=" + data_rinnovo_iscrizione + "]";
 	}
-	
-	
+		
+	public boolean is_valido() {
+		return valido;
+	}
+
+	public boolean is_rinnovabile() {
+		return rinnovabile;
+	}
+
 	public static void main(String[] args) {
 		String nome = "NomeTest";
 		String cognome = "COgnomeTest";
