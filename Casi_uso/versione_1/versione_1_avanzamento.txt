@@ -1,0 +1,20 @@
+CASI D'USO COMPLETATI E NOTE RELATIVE AD ESSI:
+
+1)Accesso al sistema
+	COMPLETATO: è posibile accedere al sistema come utente o eventualmente registrarsi 
+2)Aggiunta nuovo utente
+	COMPLETATO: è possibile inserire i dati personali e salvare il nuovo utente in locale 
+3)Diventare Fruitore
+	COMPLETATO: è possibile creare un nuovo fruitore secondo le condizioni del caso d'uso
+4)Validità fruitore
+	TODO:
+5)Rinnovo fruitore
+	TODO:
+6)Visualizzazione fruitori
+	TODO:
+
+NOTE:
+1- SCELTA PROGETTUALE:	Abbiamo introdotto l'Operatore e il suo salvataggio in locale,
+						un utente puo essere sia operatore che fruitore contemporanteamente(ovvero è presente in entrambi i "DB") 
+						ma non durante la stessa sessione, si deve loggare o come Operatore o come Fruitore
+	

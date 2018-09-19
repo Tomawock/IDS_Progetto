@@ -100,7 +100,7 @@ public class Database_file implements Salvataggio{
 	}
 
 	/**
-	 * @return utente corrispondente o null in caso in cui non npè presente 
+	 * @return utente corrispondente o null in caso in cui non è presente 
 	 */
 	@Override
 	public Utente carica_utente(String username, String psw) {
@@ -118,6 +118,9 @@ public class Database_file implements Salvataggio{
 		}
 	}
 
+	/**
+	 * @return utente corrispondente o null in caso in cui non è presente 
+	 */
 	@Override
 	public Fruitore carica_fruitore(String username, String psw) {
 		ArrayList<Fruitore> fruitori= new ArrayList<Fruitore>();
@@ -134,7 +137,10 @@ public class Database_file implements Salvataggio{
 			return null;
 		}
 	}
-
+	
+	/**
+	 * @return utente corrispondente o null in caso in cui non è presente 
+	 */
 	@Override
 	public Operatore carica_operatore(String username, String psw) {
 		ArrayList<Operatore> operatori= new ArrayList<Operatore>();
