@@ -18,9 +18,14 @@ public class View {
 	}
 
 	public int log_fruitore_operatore (Utente utente){
-		System.out.println("Ciao "+ utente.getUsername() +" vuoi diventare fruitore o operatore?\n1)Fruitore \n2)Operatore");
+		System.out.println("Ciao "+ utente.getUsername() +"\n1)Logga come Fruitore \n2)Logga come Operatore\n3)Diventa Fruitore\n4)Diventa Operatore");
 		String str=IO.inKeyBoard(true);
 		return Integer.parseInt(str);
+	}
+	
+	public int operatore_view(Operatore operatore) {
+		
+		
 	}
 	
 	public String log() {
