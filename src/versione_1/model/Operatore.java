@@ -34,4 +34,14 @@ public class Operatore implements Serializable{
 		return "Operatore [utente=" + utente.toString() + "]";
 	}
 	
+	@Override
+	public boolean equals(Object obj) {
+		Operatore o=(Operatore) obj;
+		if(this.getUtente().getUsername().equals(o.getUtente().getUsername()))
+		{
+			return true;
+		}else
+			return false;
+	}
+	
 }

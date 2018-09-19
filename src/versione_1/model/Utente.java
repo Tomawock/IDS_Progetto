@@ -5,7 +5,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
-public class Utente implements Serializable,Comparable{
+public class Utente implements Serializable{
 	
 	/**
 	 * serve per la serializzazione degli oggetti 
@@ -117,14 +117,13 @@ public class Utente implements Serializable,Comparable{
 	}
 
 	@Override
-	public int compareTo(Object o) {
-		Utente u=(Utente) o;
-		if (this.c_f.equals(u.getC_f()))
-			return 0;
-		else
-			return 1;
+	public boolean equals(Object obj) {
+		Utente u=(Utente) obj;
+		if(this.username.equals(u.getUsername()))
+		{
+			return true;
+		}else
+			return false;
 	}
 	
-	
-
 }
