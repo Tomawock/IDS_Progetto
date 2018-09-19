@@ -163,20 +163,45 @@ public class IO
 		} 
 	}
 	
-	public static String inCodiceFiscale()
-	{
-		 String cf="";
-		 while( ! cf.matches("(/^[A-Z]{6}\\d{2}[A-Z]\\d{2}[A-Z]\\d{3}[A-Z]$/i")) {
-			 cf = IO.inKeyBoard(true);
-			 if (! cf.matches("/^[A-Z]{6}\\d{2}[A-Z]\\d{2}[A-Z]\\d{3}[A-Z]$/i")) System.out.println("rifo");
-		 }
-		 return cf;
+	public static String insertString(){
+		String input=inKeyBoard(true);
+		if(input==null) insertString();
+		return input;
 	}
 	
+	public static int insertInt() {
+		boolean numerico = true;
+		String s="0";
+		while(numerico) {
+			s=inKeyBoard(true);
+			char[] sequenza = s.toCharArray();
+			for (int i=0; i< sequenza.length; i++) {
+			try {
+				Integer.parseInt(Character.toString(sequenza[i]));
+			} 
+			catch (Exception e) {
+				System.out.println("Non hai inserito un corretto valore");
+				numerico=true;
+				break;
+			}
+			numerico=false;
+			}
+		}
+		return Integer.parseInt(s);
+	}
+
+	public static int insertInt(int a, int b) {
+		int numero=insertInt();
+		if (numero<a || numero>b) {
+			System.out.println("Numero inserito non compreso fra " + a +" e "+b);
+			insertInt(a, b);
+		}
+		return numero;
+	}
 	
 	public static void main(String[] args)
 	{	
-		IO.CreaFile(Database_file.PERCORSO_FILE_UTENTE);
+		//IO.CreaFile(Database_file.PERCORSO_FILE_UTENTE);
 		//f=IO.apreCreaFile("src/File/test2.xls");
 		/*IO.svuotaFileTxt(f);
 		IO.scriviFileTxt(f, "P XXX LOL \n");

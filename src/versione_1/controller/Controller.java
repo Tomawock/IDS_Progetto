@@ -133,10 +133,10 @@ public class Controller {
 
 	
 	private void fruitore_loggato(Fruitore fruitore) {
-		int scelta=view.fruitore_view(fruitore);
 		if(fruitore.is_rinnovabile()) {
 			this.view.scrivi("Scadenza rinnovo vicina ti mancano X giorni alla scadenza");
 		}
+		int scelta=view.fruitore_view(fruitore);
 		if(scelta ==1) {
 			this.user_loggato(fruitore.getUtente());
 		}
