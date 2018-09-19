@@ -101,19 +101,39 @@ public class Controller {
 				this.user_loggato(utente);
 			}
 		}
+		else if(valore==5) {
+			this.log_in();
+		}
 		else {
 			this.view.scrivi("Errore");
 			this.user_loggato(utente);
 		}
 	}
 
+	
+	
 	private void operatore_loggato(Operatore operatore) {
-		// TODO Auto-generated method stub
-		
+		int scelta = view.operatore_view(operatore);
+		if (scelta==1) {
+			this.view.stampa_fruitori(operatore.visualizza_fruitori());
+			this.operatore_loggato(operatore);
+		}
+		else if (scelta==2){
+			this.user_loggato(operatore.getUtente());
+		}
+		else {
+			this.user_loggato(operatore.getUtente());
+		}		
 	}
 
-	private void fruitore_loggato(Fruitore carica_fruitore) {
-		view.scrivi("FEWHQYW/(EY/(FEYW/(FEYNF/(WEY/(=WEYF/(EYFE/(");
-		
+	
+	private void fruitore_loggato(Fruitore fruitore) {
+		int scelta=view.fruitore_view(fruitore);
+		if(scelta ==1) {
+			this.user_loggato(fruitore.getUtente());
+		}
+		else {
+			this.user_loggato(fruitore.getUtente());
+		}
 	}
 }

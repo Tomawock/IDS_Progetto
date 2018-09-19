@@ -3,6 +3,8 @@ package versione_1.view;
 import java.util.ArrayList;
 
 import utilita.IO;
+import versione_1.model.Fruitore;
+import versione_1.model.Operatore;
 import versione_1.model.Utente;
 
 public class View {
@@ -18,14 +20,23 @@ public class View {
 	}
 
 	public int log_fruitore_operatore (Utente utente){
-		System.out.println("Ciao "+ utente.getUsername() +"\n1)Logga come Fruitore \n2)Logga come Operatore\n3)Diventa Fruitore\n4)Diventa Operatore");
+		System.out.println("Ciao "+ utente.getUsername() +"\n1)Logga come Fruitore \n2)Logga come Operatore\n3)Diventa Fruitore\n4)Diventa Operatore\n5)Esci");
 		String str=IO.inKeyBoard(true);
 		return Integer.parseInt(str);
 	}
 	
 	public int operatore_view(Operatore operatore) {
-		
-		
+		System.out.println("==============================");
+		System.out.println("Cosa vuoi fare?\n1)Stampare i fruitore presenti nel database\n2)Torna indietro");
+		System.out.println("==============================");
+		return Integer.parseInt(IO.inKeyBoard(true));
+	}
+	
+	public int fruitore_view(Fruitore fruitore) {
+		System.out.println("==============================");
+		System.out.println("Cosa vuoi fare?\n1)Torna indietro");
+		System.out.println("==============================");
+		return Integer.parseInt(IO.inKeyBoard(true));
 	}
 	
 	public String log() {
@@ -34,9 +45,17 @@ public class View {
 		System.out.println("Inserire password");
 		String password=IO.inKeyBoard(true);
 		return user+ IO.SEPARATORE_STRINGHE +password;
-		
 	}
 
+	
+	public void stampa_fruitori(ArrayList<Fruitore> fruitori){
+		for(Fruitore f : fruitori) {
+			this.scrivi(f.toString());
+		}	
+	}
+	
+	
+	
 	public ArrayList<String> nuova_registrazione() {
 		ArrayList<String> dati= new ArrayList<>();
 		System.out.println("Inserire Nome\n");

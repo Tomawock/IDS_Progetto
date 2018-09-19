@@ -11,7 +11,7 @@ CASI D'USO COMPLETATI E NOTE RELATIVE AD ESSI:
 5)Rinnovo fruitore
 	TODO:
 6)Visualizzazione fruitori
-	TODO:
+	COMPLETATO: è possibile far visualizzare l''operatore loggato tutti i fruitori presenti nel database
 
 NOTE:
 1- SCELTA PROGETTUALE:	Abbiamo introdotto l'Operatore e il suo salvataggio in locale,
