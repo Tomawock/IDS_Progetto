@@ -98,12 +98,7 @@ public class Utente implements Serializable{
 	@Override
 	public String toString() {
 		return "Utente [nome=" + nome + ", cognome=" + cognome + ", mail=" + mail + ", data_di_nascita="
-<<<<<<< HEAD
 				+ data_di_nascita.toString() + ", username=" + username + ", password=" + password + "]";
-	}
-
-=======
-				+ data_di_nascita.toString() + ", c_f=" + c_f + ", username=" + username + ", password=" + password + "]";
 	}
 
 	@Override
@@ -115,7 +110,5 @@ public class Utente implements Serializable{
 		}else
 			return false;
 	}
-	
->>>>>>> 4f689b00d086ae4a12f801ecfaf5e8fa0375ce19
 }
 	
