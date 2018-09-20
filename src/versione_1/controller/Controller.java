@@ -115,8 +115,6 @@ public class Controller {
 		}
 	}
 
-	
-	
 	private void operatore_loggato(Operatore operatore) {
 		int scelta = view.operatore_view(operatore);
 		if (scelta==1) {
@@ -131,10 +129,9 @@ public class Controller {
 		}		
 	}
 
-	
 	private void fruitore_loggato(Fruitore fruitore) {
 		if(fruitore.is_rinnovabile()) {
-			this.view.scrivi("Scadenza rinnovo vicina ti mancano "+fruitore.get_giorni_scadenza()+" giorni alla scadenza");
+			this.view.scrivi("Scadenza rinnovo vicina ti mancano " + fruitore.get_giorni_scadenza() + " giorni alla scadenza");
 		}
 		int scelta=view.fruitore_view(fruitore);
 		if(scelta ==1) {

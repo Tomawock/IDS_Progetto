@@ -90,8 +90,10 @@ public class Fruitore implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Fruitore [utente=" + utente.toString() + ", data_iscrizione=" + data_iscrizione + ", data_fine_iscrizione="
-				+ data_fine_iscrizione + ", data_rinnovo_iscrizione=" + data_rinnovo_iscrizione + "]";
+		return ("Fruitore = " +utente.toString() + 
+				", Data Iscrizione: "  + data_iscrizione.getDayOfMonth()+"/"+data_iscrizione.getMonth().getValue() +"/"+ data_iscrizione.getYear()+ 
+				", Data fi Fine Iscrizione: "+ data_fine_iscrizione.getDayOfMonth()+"/"+data_fine_iscrizione.getMonth().getValue()+"/"+data_fine_iscrizione.getYear()+
+				", Data di Rinnovo Iscrizione: " + data_rinnovo_iscrizione.getDayOfMonth()+"/"+data_rinnovo_iscrizione.getMonth().getValue()+"/"+data_fine_iscrizione.getYear());
 	}
 		
 	public boolean is_valido() {
@@ -138,13 +140,13 @@ public class Fruitore implements Serializable{
 				data_iscrizione.getDayOfMonth(), 
 				data_iscrizione.getHour(), 
 				data_iscrizione.getMinute()+Costanti.SCADENZA_TERMINE_FRUITORE); 	
+		
 		this.data_rinnovo_iscrizione = 	LocalDateTime.of(data_iscrizione.getYear(),
 				data_iscrizione.getMonth(),
 				data_iscrizione.getDayOfMonth(), 
 				data_iscrizione.getHour(), 
 				data_iscrizione.getMinute()+Costanti.GIORNI_RINNOVO_ISCRIZIONE); 
 		this.controllo_validia();
-		//System.out.println("RINNOVABILE::"+this.rinnovabile);
 	}
 	
 	
