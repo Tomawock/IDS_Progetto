@@ -42,12 +42,12 @@ public class Controller {
 			this.log_in();
 		}
 		else if (valore ==3) {
-			return;
-		}else {
+			return;}
+		/*}else {
 			this.view.scrivi("Errore");
 			this.log_in();
-		}
-		return;//chiude il programma
+		}*/
+
 	}
 
 	
@@ -137,7 +137,7 @@ public class Controller {
 	private void fruitore_loggato(Fruitore fruitore) {
 		fruitore.controllo_validia();
 		if(fruitore.is_rinnovabile()) {
-			this.view.scrivi("Scadenza rinnovo vicina ti mancano X giorni alla scadenza");
+			this.view.scrivi("Scadenza rinnovo vicina ti mancano "+fruitore.get_giorni_scadenza()+" giorni alla scadenza");
 		}
 		int scelta=view.fruitore_view(fruitore);
 		if(scelta ==1) {

@@ -176,15 +176,10 @@ public class IO
 			s=inKeyBoard(true);
 			char[] sequenza = s.toCharArray();
 			for (int i=0; i< sequenza.length; i++) {
-			try {
-				Integer.parseInt(Character.toString(sequenza[i]));
-			} 
-			catch (Exception e) {
-				System.out.println("Non hai inserito un corretto valore");
-				numerico=true;
-				break;
-			}
-			numerico=false;
+					if (sequenza[i]=='0'||sequenza[i]=='1'||sequenza[i]=='2'||sequenza[i]=='3'
+							||sequenza[i]=='4'||sequenza[i]=='5'||sequenza[i]=='6'||sequenza[i]=='7'||sequenza[i]=='8'||sequenza[i]=='9') {
+						numerico=false;
+					}
 			}
 		}
 		return Integer.parseInt(s);
