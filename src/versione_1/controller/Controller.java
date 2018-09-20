@@ -138,7 +138,7 @@ public class Controller {
 	private void fruitore_loggato(Fruitore fruitore) {
 		fruitore.controllo_validia();
 		if(fruitore.is_rinnovabile()) {
-			this.view.scrivi("Scadenza rinnovo vicina ti mancano "+fruitore.get_giorni_scadenza()+" giorni alla scadenza");
+			this.view.scrivi("Scadenza rinnovo vicina ti mancano " + fruitore.get_giorni_scadenza() + " giorni alla scadenza");
 		}
 		int scelta=view.fruitore_view(fruitore);
 		if(scelta ==1) {
@@ -147,6 +147,7 @@ public class Controller {
 		else if(scelta ==2) {
 			if(fruitore.is_rinnovabile()) {
 				fruitore.rinnova_iscrizione();
+				
 			}
 			else view.scrivi("Non puoi ancora rinnovare l'iscrizione");
 			this.fruitore_loggato(fruitore);

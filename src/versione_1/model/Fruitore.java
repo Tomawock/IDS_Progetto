@@ -137,11 +137,13 @@ public class Fruitore implements Serializable{
 				data_iscrizione.getDayOfMonth(), 
 				data_iscrizione.getHour(), 
 				data_iscrizione.getMinute()+Costanti.SCADENZA_TERMINE_FRUITORE); 	
+		
 		this.data_rinnovo_iscrizione = 	LocalDateTime.of(data_iscrizione.getYear(),
 				data_iscrizione.getMonth(),
 				data_iscrizione.getDayOfMonth(), 
 				data_iscrizione.getHour(), 
 				data_iscrizione.getMinute()+Costanti.GIORNI_RINNOVO_ISCRIZIONE); 
+	
 	}
 	
 	
