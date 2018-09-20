@@ -28,13 +28,7 @@ public class Fruitore implements Serializable{
 	//la data d'iscrizione = data attuale
 	//data fine iscrizione e' tra 5 anni, (considerando anche l'ora e i minuti)
 	//data rinnovo iscrizione e' = data fine iscrizione - 10 giorni prima della scadenza (costante)
-	public Fruitore(Utente utente) {
-//		this.utente=utente;
-//		this.data_iscrizione = LocalDateTime.now();
-//		this.data_fine_iscrizione = LocalDateTime.of(data_iscrizione.getYear() + Costanti.SCADENZA_TERMINE_FRUITORE, data_iscrizione.getMonth(),
-//				data_iscrizione.getDayOfMonth(), data_iscrizione.getHour(), data_iscrizione.getMinute()); 	
-//		this.data_rinnovo_iscrizione = this.data_fine_iscrizione.minusDays(Costanti.GIORNI_RINNOVO_ISCRIZIONE);	
-		
+	public Fruitore(Utente utente) {	
 		this.utente=utente;
 		this.rinnova_iscrizione();	
 		
