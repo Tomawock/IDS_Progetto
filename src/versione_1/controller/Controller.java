@@ -43,12 +43,10 @@ public class Controller {
 		}
 		else if (valore ==3) {
 			return;
-		}
-		/*}else {
+		}else {
 			this.view.scrivi("Errore");
 			this.log_in();
-		}*/
-
+		}
 	}
 
 	
@@ -62,13 +60,12 @@ public class Controller {
 				this.user_loggato(utente);
 			}
 			else {
-				fruitore.controllo_validia();
 				if(!fruitore.is_valido()) {
 					this.view.scrivi("La registrazione come fruitore e' scaduta");
 					db.elimina_fruitore(fruitore);//elimina il fruitore
 					this.user_loggato(utente);
 				}
-				this.fruitore_loggato(fruitore);
+			this.fruitore_loggato(fruitore);
 			}
 		}
 		else if(valore == 2) {
@@ -83,7 +80,7 @@ public class Controller {
 		}
 		else if(valore==3) {
 			if(db.carica_fruitore(utente.getUsername(), utente.getPassword())!=null) {
-				view.scrivi("Sei gi� registrato come fruitore");
+				view.scrivi("Sei gia registrato come fruitore");
 				this.user_loggato(utente);
 			}
 			else if(utente.getEta()>=18) {
@@ -136,7 +133,6 @@ public class Controller {
 
 	
 	private void fruitore_loggato(Fruitore fruitore) {
-		fruitore.controllo_validia();
 		if(fruitore.is_rinnovabile()) {
 			this.view.scrivi("Scadenza rinnovo vicina ti mancano "+fruitore.get_giorni_scadenza()+" giorni alla scadenza");
 		}
@@ -146,9 +142,13 @@ public class Controller {
 		}
 		else if(scelta ==2) {
 			if(fruitore.is_rinnovabile()) {
-				fruitore.rinnova_iscrizione();
+				db.elimina_fruitore(fruitore);
+				fruitore.rinnova_iscrizione();//rinnova oggetto ma non il db
+				db.salva_fruitore(fruitore);
 			}
-			else view.scrivi("Non puoi ancora rinnovare l'iscrizione");
+			else { 
+				view.scrivi("Non puoi ancora rinnovare l'iscrizione");
+			}
 			this.fruitore_loggato(fruitore);
 		}
 		else {

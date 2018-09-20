@@ -19,8 +19,8 @@ public class Fruitore implements Serializable{
 	private LocalDateTime data_fine_iscrizione;
 	private LocalDateTime data_rinnovo_iscrizione;
 	
-	private boolean valido=false;
-	private boolean rinnovabile=false;
+	private boolean valido;
+	private boolean rinnovabile;
 	
 	
 	
@@ -28,15 +28,18 @@ public class Fruitore implements Serializable{
 	//la data d'iscrizione = data attuale
 	//data fine iscrizione e' tra 5 anni, (considerando anche l'ora e i minuti)
 	//data rinnovo iscrizione e' = data fine iscrizione - 10 giorni prima della scadenza (costante)
-	public Fruitore(Utente utente) {	
+	public Fruitore(Utente utente) {
+		this.rinnovabile=false;
+		this.valido=false;
 		this.utente=utente;
+				
 		this.rinnova_iscrizione();	
 		
 	}
 	
 	public int get_giorni_scadenza() {
 		if(!this.rinnovabile) {
-			return 0;//caso in cui non sei nel periodo di rinnovabilità
+			return -1;//caso in cui non sei nel periodo di rinnovabilità
 		}else {
 			return (int)LocalDateTime.now().until(data_fine_iscrizione, ChronoUnit.DAYS);
 		}
@@ -54,6 +57,7 @@ public class Fruitore implements Serializable{
 			this.valido=false;
 			this.rinnovabile=false;
 		}
+		//System.out.println("RINNOVABILE_CICLO::"+this.rinnovabile);
 	}
 
 	public Utente getUtente() {
@@ -91,10 +95,12 @@ public class Fruitore implements Serializable{
 	}
 		
 	public boolean is_valido() {
+		this.controllo_validia();
 		return valido;
 	}
 
 	public boolean is_rinnovabile() {
+		this.controllo_validia();
 		return rinnovabile;
 	}
 
@@ -125,6 +131,7 @@ public class Fruitore implements Serializable{
 	}
 
 	public void rinnova_iscrizione() {
+		
 		this.data_iscrizione = LocalDateTime.now();
 		this.data_fine_iscrizione = LocalDateTime.of(data_iscrizione.getYear(),
 				data_iscrizione.getMonth(),
@@ -136,6 +143,8 @@ public class Fruitore implements Serializable{
 				data_iscrizione.getDayOfMonth(), 
 				data_iscrizione.getHour(), 
 				data_iscrizione.getMinute()+Costanti.GIORNI_RINNOVO_ISCRIZIONE); 
+		this.controllo_validia();
+		//System.out.println("RINNOVABILE::"+this.rinnovabile);
 	}
 	
 	
