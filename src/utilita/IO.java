@@ -47,7 +47,7 @@ public class IO
 	}
 	
 	/**
-	 * Crea il file , se è gia presente non fa nulla
+	 * Crea il file , se e' gia presente non fa nulla
 	 * 
 	 * @param percorso di destinazione del file
 	 * @return il file creato
@@ -63,7 +63,7 @@ public class IO
 	    		IO.out("File creato in "+percorso);
 			}
 			else 
-				IO.out("non è possibile crare il file in "+percorso);
+				IO.out("non e' possibile crare il file in "+percorso);
 		} catch (IOException e)
 	    {
 			IO.out(e);
@@ -72,7 +72,7 @@ public class IO
 	    return file;
 	}
 	/**
-	 * Crea il file , se è gia presente non fa nulla
+	 * Crea il file , se e' gia presente non fa nulla
 	 * 
 	 * @param percorso di destinazione del file
 	 * 
@@ -172,12 +172,12 @@ public class IO
 		String s=inKeyBoard(true);
 		while(!s.matches("(\\d+)"))//solo interi rioetuti piu di una volta
 		{
-			System.out.println("Il valore inserito non è un numero");
+			System.out.println("Il valore inserito non e' un numero");
 			s=inKeyBoard(true);
 		}
 		valore=Integer.parseInt(s);
 		if (valore<min||valore>max) {
-			System.out.println("Il valore inserito non è compreso fra "+min+" e "+max);
+			System.out.println("Il valore inserito non e' compreso fra "+min+" e "+max);
 			valore=insert_int(min,max);
 		}		
 		return valore;

@@ -118,8 +118,6 @@ public class Controller {
 		}
 	}
 
-	
-	
 	private void operatore_loggato(Operatore operatore) {
 		int scelta = view.operatore_view(operatore);
 		if (scelta==1) {
@@ -134,7 +132,6 @@ public class Controller {
 		}		
 	}
 
-	
 	private void fruitore_loggato(Fruitore fruitore) {
 		fruitore.controllo_validia();
 		if(fruitore.is_rinnovabile()) {

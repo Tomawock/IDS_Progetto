@@ -86,8 +86,10 @@ public class Fruitore implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Fruitore [utente=" + utente.toString() + ", data_iscrizione=" + data_iscrizione + ", data_fine_iscrizione="
-				+ data_fine_iscrizione + ", data_rinnovo_iscrizione=" + data_rinnovo_iscrizione + "]";
+		return ("Fruitore = " +utente.toString() + 
+				", Data Iscrizione: "  + data_iscrizione.getDayOfMonth()+"/"+data_iscrizione.getMonth().getValue() +"/"+ data_iscrizione.getYear()+ 
+				", Data fi Fine Iscrizione: "+ data_fine_iscrizione.getDayOfMonth()+"/"+data_fine_iscrizione.getMonth().getValue()+"/"+data_fine_iscrizione.getYear()+
+				", Data di Rinnovo Iscrizione: " + data_rinnovo_iscrizione.getDayOfMonth()+"/"+data_rinnovo_iscrizione.getMonth().getValue()+"/"+data_fine_iscrizione.getYear());
 	}
 		
 	public boolean is_valido() {
