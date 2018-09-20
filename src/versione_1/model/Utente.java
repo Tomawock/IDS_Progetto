@@ -41,7 +41,6 @@ public class Utente implements Serializable{
 		this.password = password;
 	}
 	
-
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
@@ -86,7 +85,6 @@ public class Utente implements Serializable{
 		return data_di_nascita;
 	}
 
-	//DA VERIFICARE
 	public int getEta() {
 		return (LocalDate.now().getYear() - this.data_di_nascita.getYear());
 	}
@@ -97,8 +95,9 @@ public class Utente implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Utente [nome=" + nome + ", cognome=" + cognome + ", mail=" + mail + ", data_di_nascita="
-				+ data_di_nascita.toString() + ", username=" + username + ", password=" + password + "]";
+		return "  ***** Utente Nome: " + this.nome + " - Cognome: " + this.cognome + " - Mail: " + this.mail + ", Data di Nascita: "
+				+ this.data_di_nascita.getDayOfMonth()  +"/"+ this.data_di_nascita.getMonth().getValue() +"/"+
+				this.data_di_nascita.getYear() +", Username= " + username + ", Password= $$$ "+ "*****";
 	}
 
 	@Override

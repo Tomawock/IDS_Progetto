@@ -20,7 +20,8 @@ public class View {
 		System.out.println(Costanti.GRECA);
 		System.out.println("              MENU' PRINCIPALE         ");
 		System.out.println(Costanti.GRECA);
-		System.out.println("\n1)Accedere \n2)Registrazione \n3)Esci");
+		System.out.println("1)Accedere \n2)Registrazione \n3)Esci");
+		System.out.println(Costanti.GRECA3);
 		return IO.insert_int(1, 3);
 	}
 
@@ -28,7 +29,8 @@ public class View {
 		System.out.println(Costanti.GRECA);
 		System.out.println("              MENU' ACCESSO BENVENUTO "+utente.getUsername()+"                   ");
 		System.out.println(Costanti.GRECA);
-		System.out.println("\n1)Logga come Fruitore \n2)Logga come Operatore\n3)Diventa Fruitore\n4)Diventa Operatore\n5)Esci");
+		System.out.println("1)Logga come Fruitore \n2)Logga come Operatore\n3)Diventa Fruitore\n4)Diventa Operatore\n5)Esci");
+		System.out.println(Costanti.GRECA3);
 		return IO.insert_int(1, 5);
 	}
 	
@@ -36,7 +38,8 @@ public class View {
 		System.out.println(Costanti.GRECA);
 		System.out.println("              MENU' OPERATORE         ");
 		System.out.println(Costanti.GRECA);
-		System.out.println("\nCosa vuoi fare?\n1)Stampare i fruitore presenti nel database\n2)Torna indietro");
+		System.out.println("Cosa vuoi fare?\n1)Stampare i fruitore presenti nel database\n2)Torna indietro");
+		System.out.println(Costanti.GRECA3);
 		return IO.insert_int(1, 2);
 	}
 	
@@ -44,14 +47,19 @@ public class View {
 		System.out.println(Costanti.GRECA);
 		System.out.println("              MENU' FRUITORE         ");
 		System.out.println(Costanti.GRECA);
-		System.out.println("\nCosa vuoi fare?\n1)Torna indietro\n2)Rinnova Iscrizione");
+		System.out.println("Cosa vuoi fare?\n1)Torna indietro\n2)Rinnova Iscrizione");
+		System.out.println(Costanti.GRECA3);
 		return IO.insert_int(1, 2);
 	}
 	
 	public String log() {
-		System.out.println("Inserire username");
+		System.out.println(Costanti.GRECA2);
+		System.out.println(" **** Inserire Username **** ");
+		System.out.println(Costanti.GRECA2);
 		String user=IO.inKeyBoard(true);
-		System.out.println("Inserire password");
+		System.out.println(Costanti.GRECA2);
+		System.out.println(" **** Inserire Password **** ");
+		System.out.println(Costanti.GRECA2);
 		String password=IO.inKeyBoard(true);
 		return user+ IO.SEPARATORE_STRINGHE +password;
 	}
@@ -67,21 +75,37 @@ public class View {
 	
 	public ArrayList<String> nuova_registrazione() {
 		ArrayList<String> dati= new ArrayList<>();
-		System.out.println("Inserire Nome");
+		System.out.println(Costanti.GRECA2);
+		System.out.println(" **** Inserire Nome **** ");
+		System.out.println(Costanti.GRECA2);
 		dati.add(IO.inKeyBoard(true));
-		System.out.println("Inserire Cognome");
+		System.out.println(Costanti.GRECA2);
+		System.out.println(" **** Inserire Cognome **** ");
+		System.out.println(Costanti.GRECA2);
 		dati.add(IO.inKeyBoard(true));
-		System.out.println("Inserire mail");
+		System.out.println(Costanti.GRECA2);
+		System.out.println(" **** Inserire Mail **** ");
+		System.out.println(Costanti.GRECA2);
 		dati.add(IO.inKeyBoard(true));
-		System.out.println("Inserire Data di nascita giorno 1-31");
+		System.out.println(Costanti.GRECA2);
+		System.out.println(" **** Inserire Data di Nascita (compresa fra 1 e 31) **** ");
+		System.out.println(Costanti.GRECA2);
 		dati.add(""+IO.insert_int(1, 31));
-		System.out.println("Inserire Data di nascita mese 1-12");
+		System.out.println(Costanti.GRECA2);
+		System.out.println(" **** Inserire Mese di Nascita (compreso fra 1 e 12) **** ");
+		System.out.println(Costanti.GRECA2);
 		dati.add(""+IO.insert_int(1, 12));
-		System.out.println("Inserire Data di nascita anno");
+		System.out.println(Costanti.GRECA2);
+		System.out.println(" **** Inserire Anno di Nascita (compreso fra 1930 e "+LocalDate.now().getYear()+" **** ");
+		System.out.println(Costanti.GRECA2);
 		dati.add(""+IO.insert_int(1930, LocalDate.now().getYear()));
-		System.out.println("Inserire Username");
+		System.out.println(Costanti.GRECA2);
+		System.out.println(" **** Inserire Username **** ");
+		System.out.println(Costanti.GRECA2);
 		dati.add(IO.inKeyBoard(true));
-		System.out.println("Inserire Password");
+		System.out.println(Costanti.GRECA2);
+		System.out.println(" **** Inserire Password **** ");
+		System.out.println(Costanti.GRECA2);
 		dati.add(IO.inKeyBoard(true));
 		return dati;
 	}

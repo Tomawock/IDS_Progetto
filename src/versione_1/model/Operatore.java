@@ -31,7 +31,7 @@ public class Operatore implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Operatore [utente=" + utente.toString() + "]";
+		return "Operatore + " + this.utente.getUsername();
 	}
 	
 	@Override
