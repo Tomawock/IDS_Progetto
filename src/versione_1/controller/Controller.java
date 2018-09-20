@@ -42,7 +42,8 @@ public class Controller {
 			this.log_in();
 		}
 		else if (valore ==3) {
-			return;}
+			return;
+		}
 		/*}else {
 			this.view.scrivi("Errore");
 			this.log_in();
@@ -98,7 +99,7 @@ public class Controller {
 		}
 		else if(valore==4) {
 			if(db.carica_operatore(utente.getUsername(), utente.getPassword())!=null) {
-				view.scrivi("Sei gi� registrato come operatore");
+				view.scrivi("Sei gia registrato come operatore");
 				this.user_loggato(utente);
 			}
 			else {

@@ -21,7 +21,7 @@ public class View {
 		System.out.println("              MENU' PRINCIPALE         ");
 		System.out.println(Costanti.GRECA);
 		System.out.println("\n1)Accedere \n2)Registrazione \n3)Esci");
-		return IO.insertInt(1, 3);
+		return IO.insert_int(1, 3);
 	}
 
 	public int log_fruitore_operatore (Utente utente){
@@ -29,7 +29,7 @@ public class View {
 		System.out.println("              MENU' ACCESSO BENVENUTO "+utente.getUsername()+"                   ");
 		System.out.println(Costanti.GRECA);
 		System.out.println("\n1)Logga come Fruitore \n2)Logga come Operatore\n3)Diventa Fruitore\n4)Diventa Operatore\n5)Esci");
-		return IO.insertInt(1, 5);
+		return IO.insert_int(1, 5);
 	}
 	
 	public int operatore_view(Operatore operatore) {
@@ -37,7 +37,7 @@ public class View {
 		System.out.println("              MENU' OPERATORE         ");
 		System.out.println(Costanti.GRECA);
 		System.out.println("\nCosa vuoi fare?\n1)Stampare i fruitore presenti nel database\n2)Torna indietro");
-		return IO.insertInt(1, 2);
+		return IO.insert_int(1, 2);
 	}
 	
 	public int fruitore_view(Fruitore fruitore) {
@@ -45,7 +45,7 @@ public class View {
 		System.out.println("              MENU' FRUITORE         ");
 		System.out.println(Costanti.GRECA);
 		System.out.println("\nCosa vuoi fare?\n1)Torna indietro\n2)Rinnova Iscrizione");
-		return IO.insertInt(1, 2);
+		return IO.insert_int(1, 2);
 	}
 	
 	public String log() {
@@ -67,21 +67,21 @@ public class View {
 	
 	public ArrayList<String> nuova_registrazione() {
 		ArrayList<String> dati= new ArrayList<>();
-		System.out.println("Inserire Nome\n");
+		System.out.println("Inserire Nome");
 		dati.add(IO.inKeyBoard(true));
-		System.out.println("Inserire Cognome\n");
+		System.out.println("Inserire Cognome");
 		dati.add(IO.inKeyBoard(true));
-		System.out.println("Inserire mail\n");
+		System.out.println("Inserire mail");
 		dati.add(IO.inKeyBoard(true));
-		System.out.println("Inserire Data di nascita giorno 1-31\n");
-		dati.add(""+IO.insertInt(1, 31));
-		System.out.println("Inserire Data di nascita mese 1-12\n");
-		dati.add(""+IO.insertInt(1, 12));
-		System.out.println("Inserire Data di nascita anno\n");
-		dati.add(""+IO.insertInt(1930, LocalDate.now().getYear()));
-		System.out.println("Inserire Username\n");
+		System.out.println("Inserire Data di nascita giorno 1-31");
+		dati.add(""+IO.insert_int(1, 31));
+		System.out.println("Inserire Data di nascita mese 1-12");
+		dati.add(""+IO.insert_int(1, 12));
+		System.out.println("Inserire Data di nascita anno");
+		dati.add(""+IO.insert_int(1930, LocalDate.now().getYear()));
+		System.out.println("Inserire Username");
 		dati.add(IO.inKeyBoard(true));
-		System.out.println("Inserire Password\n");
+		System.out.println("Inserire Password");
 		dati.add(IO.inKeyBoard(true));
 		return dati;
 	}

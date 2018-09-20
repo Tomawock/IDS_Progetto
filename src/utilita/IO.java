@@ -7,8 +7,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-import versione_1.model.Database_file;
-
 public class IO 
 {	
 	public final static String SEPARATORE_STRINGHE="--";
@@ -169,29 +167,20 @@ public class IO
 		return input;
 	}
 	
-	public static int insertInt() {
-		boolean numerico = true;
-		String s="0";
-		while(numerico) {
+	public static int insert_int(int min,int max) {
+		int valore=-1;
+		String s=inKeyBoard(true);
+		while(!s.matches("(\\d+)"))//solo interi rioetuti piu di una volta
+		{
+			System.out.println("Il valore inserito non è un numero");
 			s=inKeyBoard(true);
-			char[] sequenza = s.toCharArray();
-			for (int i=0; i< sequenza.length; i++) {
-					if (sequenza[i]=='0'||sequenza[i]=='1'||sequenza[i]=='2'||sequenza[i]=='3'
-							||sequenza[i]=='4'||sequenza[i]=='5'||sequenza[i]=='6'||sequenza[i]=='7'||sequenza[i]=='8'||sequenza[i]=='9') {
-						numerico=false;
-					}
-			}
 		}
-		return Integer.parseInt(s);
-	}
-
-	public static int insertInt(int a, int b) {
-		int numero=insertInt();
-		if (numero<a || numero>b) {
-			System.out.println("Numero inserito non compreso fra " + a +" e "+b);
-			insertInt(a, b);
-		}
-		return numero;
+		valore=Integer.parseInt(s);
+		if (valore<min||valore>max) {
+			System.out.println("Il valore inserito non è compreso fra "+min+" e "+max);
+			valore=insert_int(min,max);
+		}		
+		return valore;
 	}
 	
 	public static void main(String[] args)
@@ -205,6 +194,8 @@ public class IO
 		System.out.println("cf");
 		String st=IO.inCodiceFiscale();
 		System.out.println("fine");*/
+		int test=insert_int(1,12);
+		System.out.println(test);
 	}
 
 }
