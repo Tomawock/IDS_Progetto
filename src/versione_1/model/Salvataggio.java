@@ -25,4 +25,6 @@ public interface Salvataggio {
 	void elimina_operatore(Operatore operatore);
 	
 	void aggiorna_validita_fruitori();
+	
+	boolean is_presente(Utente utente);
 }

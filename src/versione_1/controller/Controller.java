@@ -35,10 +35,14 @@ public class Controller {
 		else if(valore == 2) {
 			ArrayList<String> nuovo_utente=view.nuova_registrazione();
 			Utente user= new Utente(nuovo_utente);
-			//salvataggio su file sempre fare in due passaggi cosi quando si cambia il codice per il db si sperca meno tempo
-			db.salva_utente(user);
-			//Messaggio coinferma iscrizione
-			this.view.scrivi("Ti sei iscritto correttamente "+user.getUsername());
+			if(!db.is_presente(user)) {
+				//salvataggio su file sempre fare in due passaggi cosi quando si cambia il codice per il db si sperca meno tempo
+				db.salva_utente(user);
+				//Messaggio coinferma iscrizione
+				this.view.scrivi("Ti sei iscritto correttamente "+user.getUsername());
+			}else {
+				this.view.scrivi("Username già utilizzato Inserirne un'altro");
+			}
 			//una volta completata l'iscrizione torna al log in
 			this.log_in();
 		}

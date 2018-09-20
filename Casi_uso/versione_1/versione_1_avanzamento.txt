@@ -19,4 +19,7 @@ NOTE:
 1- SCELTA PROGETTUALE:	Abbiamo introdotto l'Operatore e il suo salvataggio in locale,
 						un utente puo essere sia operatore che fruitore contemporanteamente(ovvero è presente in entrambi i "DB") 
 						ma non durante la stessa sessione, si deve loggare o come Operatore o come Fruitore
-	
+
+2- SCELTA PROGETTUALE:	le iterazioni sul db sono atomiche ovvero un quasiasi dato viene caricato dal db modificato dalle 
+						funzioni di salvataggio e poi risalvato nel db ( nel caso multi utente i dati sono coerenti sul db)
+						NON SONO PRESENTI RACE CONDITION SUI DATI perdiamo in performance ma guadagnamo in sicurezza e coerenza

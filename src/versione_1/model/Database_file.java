@@ -366,6 +366,11 @@ public class Database_file implements Salvataggio{
 		}
 	}
 	
+	@Override
+	public boolean is_presente(Utente utente) {
+		return (this.carica_tutti_utenti().contains(utente));
+	}
+	
 	public static void main (String[] args) {
 		Database_file db=new Database_file();
 		
