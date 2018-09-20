@@ -96,7 +96,7 @@ public class View {
 		System.out.println(Costanti.GRECA2);
 		dati.add(""+IO.insert_int(1, 12));
 		System.out.println(Costanti.GRECA2);
-		System.out.println(" **** Inserire Anno di Nascita (compreso fra 1930 e "+LocalDate.now().getYear()+" **** ");
+		System.out.println(" **** Inserire Anno di Nascita (compreso fra 1930 e "+LocalDate.now().getYear()+") **** ");
 		System.out.println(Costanti.GRECA2);
 		dati.add(""+IO.insert_int(1930, LocalDate.now().getYear()));
 		System.out.println(Costanti.GRECA2);

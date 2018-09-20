@@ -353,6 +353,19 @@ public class Database_file implements Salvataggio{
 		
 	}
 	
+	@Override
+	public void aggiorna_validita_fruitori() {
+		ArrayList<Fruitore> fruitori=this.carica_tutti_fruitori();
+		
+		if(fruitori!=null) {
+			for(Fruitore f :fruitori) {
+				if (!f.is_valido()){
+					this.elimina_fruitore(f);
+				}
+			}
+		}
+	}
+	
 	public static void main (String[] args) {
 		Database_file db=new Database_file();
 		

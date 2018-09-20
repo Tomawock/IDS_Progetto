@@ -23,4 +23,6 @@ public interface Salvataggio {
 	void elimina_utente(Utente utente);
 	void elimina_fruitore(Fruitore fruitore);
 	void elimina_operatore(Operatore operatore);
+	
+	void aggiorna_validita_fruitori();
 }

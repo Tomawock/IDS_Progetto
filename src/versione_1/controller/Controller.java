@@ -18,6 +18,7 @@ public class Controller {
 		
 	public void log_in(){
 		int valore=view.log_in_scelta();
+		db.aggiorna_validita_fruitori();//elimina eventuali fruitori non validi
 		if (valore== 1) {
 			String utente=view.log();
 			String utente_user=utente.split(IO.SEPARATORE_STRINGHE)[0];
@@ -43,9 +44,6 @@ public class Controller {
 		}
 		else if (valore ==3) {
 			return;
-		}else {
-			this.view.scrivi("Errore");
-			this.log_in();
 		}
 	}
 
