@@ -3,7 +3,7 @@ package versione_2.model;
 import java.util.ArrayList;
 
 public class Categoria {
-	String nome;
+	private String nome;
 		
 	ArrayList<Risorsa> risorse;
 	ArrayList<Categoria> sottocaotegorie; 
