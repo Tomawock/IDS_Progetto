@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Libro  implements Risorsa{
 	
-	private int n_licenze;
+	private int n_licenze;//TODO
 	private String id_libro;
 	//private id_inivoco= id_libro+n_licenza
 	
