@@ -34,25 +34,31 @@ public class Categoria {
 	/**
 	 * La funzione è ricorsiva se ci sono due categorie uguali mi ritorna la prima occorrenza
 	 * 
+	 * 
+	 * 
+	 * si puo migliorare
+	 * 
+	 * 
+	 * 
 	 * @param nome nome della sottocategoria
 	 * @return null nel caso non ci siano sottocategorie o non sia stata trovata, 
 	 * 			altrimenti riorna la categoria con il nome preso come input 
 	 */
-	public Categoria get_sottocategoria_by_name(String nome) {
-		if (sottocategorie==null) {
-			return null;//caso nel quale non ci sono sottocategorie
-		}
-		for(Categoria c:sottocategorie) {
-			if(c.equals(new Categoria(nome))) {
-				return c;
+	public Categoria get_sottocategoria_by_name(Categoria base,String nome) {
+		if (base.getNome().equals(nome)) {
+			return base;
+		}else {
+			if(base.getSottocategorie()!=null) {
+				for(Categoria c:base.getSottocategorie()) {
+					Categoria risultato=c.get_sottocategoria_by_name(c, nome);
+						if( risultato!=null)
+							return risultato;
+				}
 			}
-			if(c.getSottocategorie().contains(new Categoria(nome))) {//posso usare il contains in quanto ho definito che 2 oggetti sono uguali se hanno los tesso nome
-				//System.out.println("SEI NELLA CATEGORIA "+c.getNome());
-				return c.getSottocategorie().get(c.getSottocategorie().indexOf(new Categoria(nome)));
-			}
 		}
-		return new Categoria("Errore nella ricorsione");
+		return null;
 	}
+	
 	
 	@Override
 	public boolean equals(Object obj) {
@@ -105,7 +111,9 @@ public class Categoria {
 		risorse.getSottocategorie().get(1).add_sottocategoria(new Categoria("Documentari"));
 		risorse.getSottocategorie().get(1).add_sottocategoria(new Categoria("Animati"));
 		
-		System.out.println(risorse.getSottocategorie().get(0).get_sottocategoria_by_name("Fantasy").toString());
+		System.out.println(risorse.get_sottocategoria_by_name(risorse.getSottocategorie().get(0),"Fantasy").toString());
+		
+		//aggiungi_descrizione(risorse.getRisorse().get(0), dati);
 		
 	}
 }
