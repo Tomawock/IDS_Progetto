@@ -138,10 +138,10 @@ public class Controller {
 				else if(res instanceof Film) {
 					res.aggiungi_descrizione(this.view.nuova_descrizione_film());
 				}
-				this.operatore_loggato(operatore);//per continuare iterazioni
 			}else {
 				this.view.scrivi("Risorsa non trovata");
 			}
+			this.operatore_loggato(operatore);//per continuare iterazioni
 		}
 		else if(scelta == 4) {//rim desc
 			
