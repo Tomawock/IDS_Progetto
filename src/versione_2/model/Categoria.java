@@ -95,11 +95,13 @@ public class Categoria implements Serializable{
 	}
 
 	public void carica_tutte_risorse(Categoria root,ArrayList<Risorsa> risultato) {
-		if (root.getSottocategorie()==null) {
+		if (root.getRisorse()!=null && risultato!=null) {
 			risultato.addAll(root.getRisorse());
 		}else {
-			for(Categoria c: root.getSottocategorie() ){
-				c.carica_tutte_risorse(c, risultato);
+			if(root.getSottocategorie()!=null) {
+				for(Categoria c: root.getSottocategorie() ){
+					c.carica_tutte_risorse(c, risultato);
+				}
 			}
 		}
 	}

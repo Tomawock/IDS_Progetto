@@ -22,8 +22,7 @@ public class Main_v_2 {
 		
 		fantasy.add_risorsa(r1);
 		fantasy.add_risorsa(r2);
-		horror.add_risorsa(r3);
-		horror.add_risorsa(r4);
+		
 		
 		Database_file db= new Database_file();
 		db.salva_categoria_root(risorse);

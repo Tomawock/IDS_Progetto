@@ -150,9 +150,12 @@ public class Controller {
 			Categoria c= db.carica_root_categorie();
 			ArrayList<Risorsa> risultato=new ArrayList<>();
 			c.carica_tutte_risorse(c, risultato);
-			for(Risorsa r:risultato) {
-				this.view.scrivi(r.toString());
+			if(risultato!=null) {
+				for(Risorsa r:risultato) {
+						this.view.scrivi(r.toString());
+				}
 			}
+			else this.view.scrivi("Nulla trovato");
 			this.operatore_loggato(operatore);//per continuare iterazioni
 		}
 		else {
