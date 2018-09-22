@@ -27,4 +27,8 @@ public interface Salvataggio {
 	void aggiorna_validita_fruitori();
 	
 	boolean is_presente(Utente utente);
+	
+	Categoria carica_root_categorie();
+	void salva_categoria_root(Categoria root);
+	
 }

@@ -6,6 +6,11 @@ import utilita.Costanti;
 
 public class Libro  extends Risorsa{	
 
+	public Libro(int id) {
+		super(id);
+		this.rimuovi_descrizione();
+	}
+
 	private String titolo; 
 	private String autore;
 	private String numero_di_pagine; 

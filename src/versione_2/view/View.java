@@ -36,9 +36,9 @@ public class View {
 		System.out.println(Costanti.GRECA);
 		System.out.println("              MENU' OPERATORE         ");
 		System.out.println(Costanti.GRECA);
-		System.out.println("Cosa vuoi fare?\n1)Stampare i fruitore presenti nel database\n2)Torna indietro");
+		System.out.println("Cosa vuoi fare?\n1)Stampare i fruitore presenti nel database\n2)Torna indietro\n3)Aggiungi descrizione\n4)Rimuovi Descrizione\n5)visualizza risorse");
 		System.out.println(Costanti.GRECA3);
-		return IO.insert_int(1, 2);
+		return IO.insert_int(1, 5);
 	}
 	
 	public int fruitore_view(Fruitore fruitore) {
@@ -69,7 +69,44 @@ public class View {
 		}	
 	}
 	
+	public int ricerca_risorsa_id() {
+		System.out.println(Costanti.GRECA2);
+		System.out.println(" **** Inserire ID della Risorsa **** ");
+		return IO.insert_int(0,9999999);
+	}
 	
+	public ArrayList<String> nuova_descrizione_libro(){
+		ArrayList<String> dati= new ArrayList<>();
+		System.out.println(Costanti.GRECA2);
+		System.out.println(" **** Inserire Titolo **** ");
+		System.out.println(Costanti.GRECA2);
+		dati.add(IO.inKeyBoard(true));
+		System.out.println(Costanti.GRECA2);
+		System.out.println(" **** Inserire Autore **** ");
+		System.out.println(Costanti.GRECA2);
+		dati.add(IO.inKeyBoard(true));
+		System.out.println(Costanti.GRECA2);
+		System.out.println(" **** Inserire Numero di Pagine **** ");
+		dati.add(""+IO.insert_int(0,9999999));
+		dati.add(IO.inKeyBoard(true));
+		System.out.println(Costanti.GRECA2);
+		System.out.println(" **** Inserire Anno di pubblicazione **** ");
+		System.out.println(Costanti.GRECA2);
+		dati.add(""+IO.insert_int(0, LocalDate.now().getYear()));
+		System.out.println(Costanti.GRECA2);
+		System.out.println(" **** Inserire Casa Editrice **** ");
+		System.out.println(Costanti.GRECA2);
+		dati.add(IO.inKeyBoard(true));
+		System.out.println(Costanti.GRECA2);
+		System.out.println(" **** Inserire Lingua **** ");
+		System.out.println(Costanti.GRECA2);
+		dati.add(IO.inKeyBoard(true));
+		System.out.println(Costanti.GRECA2);
+		System.out.println(" **** Inserire Genere **** ");
+		System.out.println(Costanti.GRECA2);
+		dati.add(IO.inKeyBoard(true));
+		return dati;
+	}
 	
 	public ArrayList<String> nuova_registrazione() {
 		ArrayList<String> dati= new ArrayList<>();
@@ -108,5 +145,9 @@ public class View {
 		return dati;
 	}
 
-	
+	public ArrayList<String> nuova_descrizione_film() {
+		ArrayList<String> dati= new ArrayList<>();
+		System.out.println("non ci occupiamo di questa categoria");
+		return null;
+	}
 }

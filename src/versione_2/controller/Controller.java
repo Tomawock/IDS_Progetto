@@ -126,6 +126,35 @@ public class Controller {
 		else if (scelta==2){
 			this.user_loggato(operatore.getUtente());
 		}
+		else if(scelta == 3) {//add desc
+			int id=this.view.ricerca_risorsa_id();
+			Categoria cat=db.carica_root_categorie();
+			Risorsa res=cat.get_risorsa_by_id(cat, id);
+			if(res!=null) {
+				if(res instanceof Libro) {
+					res.aggiungi_descrizione(this.view.nuova_descrizione_libro());
+					db.salva_categoria_root(cat);
+				}
+				else if(res instanceof Film) {
+					res.aggiungi_descrizione(this.view.nuova_descrizione_film());
+				}
+				this.operatore_loggato(operatore);//per continuare iterazioni
+			}else {
+				this.view.scrivi("Risorsa non trovata");
+			}
+		}
+		else if(scelta == 4) {//rim desc
+			
+		}
+		else if(scelta == 5) {//visualizza tutte risorse
+			Categoria c= db.carica_root_categorie();
+			ArrayList<Risorsa> risultato=new ArrayList<>();
+			c.carica_tutte_risorse(c, risultato);
+			for(Risorsa r:risultato) {
+				this.view.scrivi(r.toString());
+			}
+			this.operatore_loggato(operatore);//per continuare iterazioni
+		}
 		else {
 			this.user_loggato(operatore.getUtente());
 		}		

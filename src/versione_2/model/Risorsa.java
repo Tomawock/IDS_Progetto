@@ -1,16 +1,24 @@
 package versione_2.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public abstract class  Risorsa {
+public abstract class  Risorsa implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5L;
 	private int n_licenze;
 	private int in_prestito;
 	private int id;
 	
-	abstract void aggiungi_descrizione(ArrayList<String> dati);
-	abstract void rimuovi_descrizione();
+	public abstract void aggiungi_descrizione(ArrayList<String> dati);
+	public abstract void rimuovi_descrizione();
 	
+	public Risorsa(int id) {
+		this.id =id;
+	}
 	public int get_n_licenze() {
 		return n_licenze;
 	}
@@ -31,7 +39,7 @@ public abstract class  Risorsa {
 	}
 	@Override
 	public String toString() {
-		return "Numero Identificativo: "+id+", Numero di Copie: " + n_licenze + ", Numero Attualmente Disponibili" + (n_licenze-in_prestito);
+		return "Numero Identificativo: "+id+", Numero di Copie: " + n_licenze + ", Numero Attualmente Disponibili: " + (n_licenze-in_prestito);
 	}
 	
 	

@@ -11,6 +11,7 @@ public class Database_file implements Salvataggio{
 	public static final String PERCORSO_FILE_UTENTE="src/Local_database/db_utenti";
 	public static final String PERCORSO_FILE_FRUITORE="src/Local_database/db_fruitori";
 	public static final String PERCORSO_FILE_OPERATORE="src/Local_database/db_operatore";
+	public static final String PERCORSO_FILE_CATEGORIE="src/Local_database/db_categorie";
 
 	@Override
 	public void salva_utente(Utente utente) {
@@ -371,6 +372,59 @@ public class Database_file implements Salvataggio{
 		return (this.carica_tutti_utenti().contains(utente));
 	}
 	
+	@Override
+	public Categoria carica_root_categorie() {
+		//crea il file nel percorso se non e presente
+		IO.CreaFile(Database_file.PERCORSO_FILE_CATEGORIE);
+		//creo arraylist per gli utenti 
+		Categoria root =new Categoria("");
+		// Deserialization 
+	    try {    
+	        // Reading the object from a file 
+	        FileInputStream file = new FileInputStream(Database_file.PERCORSO_FILE_CATEGORIE); 
+	        ObjectInputStream in = new ObjectInputStream(file); 
+	          
+	        // root for deserialization of object 
+	        root = (Categoria)in.readObject(); 
+	          
+	        in.close(); 
+	        file.close(); 
+	          
+		    System.out.println("operatori deserializzati"); 
+	    }catch(EOFException ex) {
+	   	 	//System.out.println("EOFExceptionis caught"); // si verifica sempre qunado creo il file la prima volta ma non è fondamentale 
+	    }catch(IOException ex) {
+	    	System.err.println("IOException is caught"); 
+	    }catch(ClassNotFoundException ex) {
+	        System.err.println("ClassNotFoundException is caught"); 
+	    } 	
+		return root;
+	}
+
+	@Override
+	public void salva_categoria_root(Categoria root) {
+		//crea il file nel percorso se non e presente
+		IO.CreaFile(Database_file.PERCORSO_FILE_CATEGORIE);
+		// Serialization  
+        try{    
+            //Saving of object in a file 
+            FileOutputStream file = new FileOutputStream(Database_file.PERCORSO_FILE_CATEGORIE); 
+            ObjectOutputStream out = new ObjectOutputStream(file); 
+              
+            // Method for serialization of object 
+            out.writeObject(root); 
+              
+            out.close(); 
+            file.close(); 
+              
+            //System.out.println("utente serializzato"); 
+  
+        }catch(IOException ex) { 
+            System.err.println("IOException is caught"); 
+        } 
+		
+	}
+	
 	public static void main (String[] args) {
 		Database_file db=new Database_file();
 		
@@ -444,4 +498,6 @@ public class Database_file implements Salvataggio{
 		System.out.println(result5);
 		
 	}
+
+
 }

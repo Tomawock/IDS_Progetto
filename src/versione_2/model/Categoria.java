@@ -1,9 +1,15 @@
 package versione_2.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Categoria {
+public class Categoria implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 4L;
+
 	private String nome;
 		
 	ArrayList<Risorsa> risorse;
@@ -60,6 +66,25 @@ public class Categoria {
 	}
 	
 	
+	
+	
+	public Risorsa get_risorsa_by_id(Categoria base,int id) {
+		if (base.getSottocategorie()==null) {
+			for (Risorsa r: base.getRisorse()) {
+				if(r.get_id()==id) return r;
+			}
+		}else {
+			for(Categoria c:base.getSottocategorie()){
+				Risorsa risultato=c.get_risorsa_by_id(c, id);
+				if( risultato!=null)
+					return risultato;
+					
+			}
+		}
+		return null;
+	}
+	
+	
 	@Override
 	public boolean equals(Object obj) {
 		Categoria c=(Categoria)obj;
@@ -69,7 +94,17 @@ public class Categoria {
 		return false;
 	}
 
-	
+	public void carica_tutte_risorse(Categoria root,ArrayList<Risorsa> risultato) {
+		if (root.getSottocategorie()==null) {
+			risultato.addAll(root.getRisorse());
+		}else {
+			for(Categoria c: root.getSottocategorie() ){
+				c.carica_tutte_risorse(c, risultato);
+			}
+		}
+	}
+
+
 	@Override
 	public String toString() {
 		return "Categoria " + nome;
@@ -104,16 +139,19 @@ public class Categoria {
 		Categoria risorse=new Categoria("Risorse");
 		risorse.add_sottocategoria(new Categoria("Libri"));
 		risorse.add_sottocategoria(new Categoria("Film"));
-		
+		//cartella libri
 		risorse.getSottocategorie().get(0).add_sottocategoria(new Categoria("Horror"));
 		risorse.getSottocategorie().get(0).add_sottocategoria(new Categoria("Fantasy"));
-		
+		//
 		risorse.getSottocategorie().get(1).add_sottocategoria(new Categoria("Documentari"));
 		risorse.getSottocategorie().get(1).add_sottocategoria(new Categoria("Animati"));
 		
 		System.out.println(risorse.get_sottocategoria_by_name(risorse.getSottocategorie().get(0),"Fantasy").toString());
 		
-		//aggiungi_descrizione(risorse.getRisorse().get(0), dati);
+		//Risorsa in horror
+		risorse.getSottocategorie().get(0).getSottocategorie().get(1).add_risorsa(new Film(1));
+		risorse.getSottocategorie().get(0).getSottocategorie().get(0).add_risorsa(new Libro(2));
+		System.out.println(risorse.get_risorsa_by_id(risorse, 1) instanceof Libro);
 		
 	}
 }
