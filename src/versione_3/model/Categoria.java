@@ -1,6 +1,7 @@
 package versione_3.model;
 
 import java.io.Serializable;
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 
 public class Categoria implements Serializable{
@@ -107,7 +108,21 @@ public class Categoria implements Serializable{
 			}
 		}
 	}
-
+	public void carica_tutti_libri(Categoria root,ArrayList<Libro> risultato) {
+		if (root.getRisorse()!=null && risultato!=null) {
+			for(Risorsa r:root.getRisorse()) {
+				if(r instanceof Libro) {
+					risultato.add((Libro)r);
+				}
+			}
+		}else {
+			if(root.getSottocategorie()!=null) {
+				for(Categoria c: root.getSottocategorie() ){
+					c.carica_tutti_libri(c, risultato);
+				}
+			}
+		}
+	}
 
 	@Override
 	public String toString() {
@@ -140,6 +155,7 @@ public class Categoria implements Serializable{
 	}
 
 	public static void main(String[] args) {
+		
 		Categoria risorse=new Categoria("Risorse");
 		risorse.add_sottocategoria(new Categoria("Libri"));
 		risorse.add_sottocategoria(new Categoria("Film"));
@@ -156,6 +172,13 @@ public class Categoria implements Serializable{
 		risorse.getSottocategorie().get(0).getSottocategorie().get(1).add_risorsa(new Film(1));
 		risorse.getSottocategorie().get(0).getSottocategorie().get(0).add_risorsa(new Libro(2));
 		System.out.println(risorse.get_risorsa_by_id(risorse, 1) instanceof Libro);
+		
+		ArrayList<Libro> libri=new ArrayList<>();
+		risorse.carica_tutti_libri(risorse, libri);
+		
+		for(Libro l:libri) {
+			System.out.println(l.toString());
+		}
 		
 	}
 }

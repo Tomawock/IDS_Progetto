@@ -12,6 +12,7 @@ public class Database_file implements Salvataggio{
 	public static final String PERCORSO_FILE_FRUITORE="src/Local_database/db_fruitori";
 	public static final String PERCORSO_FILE_OPERATORE="src/Local_database/db_operatore";
 	public static final String PERCORSO_FILE_CATEGORIE="src/Local_database/db_categorie";
+	public static final String PERCORSO_FILE_PRESTITI="src/Local_database/db_prestiti";
 
 	@Override
 	public void salva_utente(Utente utente) {
@@ -424,7 +425,89 @@ public class Database_file implements Salvataggio{
         } 
 		
 	}
+		
+	@Override
+	public ArrayList<Prestito> get_prestiti_per_fruitore_risorsa(Fruitore fruitore, Risorsa res) {
+		ArrayList<Prestito>prestiti=this.carica_tutti_prestiti();
+		ArrayList<Prestito>risultato=new ArrayList<>();
+		for(Prestito p:prestiti) {
+			if(p.getFruitore().equals(fruitore) && 
+					res.getClass().getSimpleName().equals(p.getRisorsa().getClass().getSimpleName())){
+				risultato.add(p);
+			}
+		}
+		return risultato;	
+	}
+
+	@Override
+	public void salva_prestito(Prestito prestito) {
+		//crea il file nel percorso se non e presente
+		IO.CreaFile(Database_file.PERCORSO_FILE_PRESTITI);
+		//carica il db e poi aggiungo il singolo utente in coda ad esso e lo salvo
+		ArrayList<Prestito> prestiti =this.carica_tutti_prestiti();
+		if (prestiti==null) {
+			prestiti=new ArrayList<Prestito>();
+		}
+		prestiti.add(prestito);
+		// Serialization  
+        try{    
+            //Saving of object in a file 
+            FileOutputStream file = new FileOutputStream(Database_file.PERCORSO_FILE_PRESTITI); 
+            ObjectOutputStream out = new ObjectOutputStream(file); 
+              
+            // Method for serialization of object 
+            out.writeObject(prestiti); 
+              
+            out.close(); 
+            file.close(); 
+              
+            //System.out.println("utente serializzato"); 
+  
+        }catch(IOException ex) { 
+            System.err.println("IOException is caught"); 
+        }
+	}
+
+	@Override
+	public ArrayList<Prestito> get_tutti_prestiti_per_fruitore(Fruitore fruitore) {
+		ArrayList<Prestito>prestiti=this.carica_tutti_prestiti();
+		ArrayList<Prestito>risultato=new ArrayList<>();
+		for(Prestito p:prestiti) {
+			if(p.getFruitore().equals(fruitore)){
+				risultato.add(p);
+			}
+		}
+		return risultato;
+	}
+
 	
+	@Override
+	public ArrayList<Prestito> carica_tutti_prestiti() {
+		//crea il file nel percorso se non e presente
+		IO.CreaFile(Database_file.PERCORSO_FILE_PRESTITI);
+		//creo arraylist per gli utenti 
+		ArrayList<Prestito> prestiti =new ArrayList<Prestito>();
+		// Deserialization 
+        try {    
+            // Reading the object from a file 
+            FileInputStream file = new FileInputStream(Database_file.PERCORSO_FILE_PRESTITI); 
+            ObjectInputStream in = new ObjectInputStream(file); 
+              
+            // Method for deserialization of object 
+            prestiti = (ArrayList<Prestito>)in.readObject(); 
+              
+            in.close(); 
+            file.close(); 
+        }catch(EOFException ex) {
+       	 	//System.out.println("EOFExceptionis caught"); // si verifica sempre qunado creo il file la prima volta ma non è fondamentale 
+        }catch(IOException ex) {
+        	System.err.println("IOException is caught"); 
+        }catch(ClassNotFoundException ex) {
+            System.err.println("ClassNotFoundException is caught"); 
+        } 	
+		return prestiti;
+	}
+
 	public static void main (String[] args) {
 		Database_file db=new Database_file();
 		
@@ -498,6 +581,4 @@ public class Database_file implements Salvataggio{
 		System.out.println(result5);
 		
 	}
-
-
 }

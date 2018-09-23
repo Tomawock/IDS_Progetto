@@ -2,6 +2,7 @@ package versione_3.controller;
 
 import java.util.ArrayList;
 
+import utilita.Costanti;
 import utilita.IO;
 import versione_3.model.*;
 import versione_3.view.*;
@@ -195,6 +196,32 @@ public class Controller {
 			}
 			else { 
 				view.scrivi("Non puoi ancora rinnovare l'iscrizione");
+			}
+			this.fruitore_loggato(fruitore);
+		}else if(scelta==3) {//aggiungi prestito
+			int id=this.view.ricerca_risorsa_id();
+			Categoria cat=db.carica_root_categorie();
+			Risorsa res=cat.get_risorsa_by_id(cat, id);
+			if(res!=null) {
+				ArrayList<Prestito> prestiti_per_fruitore=db.get_prestiti_per_fruitore_risorsa(fruitore,res);
+				//check se sforo i prestiti
+				if(res instanceof Libro && 
+						prestiti_per_fruitore.size()<Costanti.MAX_NUMERO_DI_LIBRI_FRUITORE &&
+						res.get_disponibili()>0) {
+					Prestito p= new Prestito(res, fruitore);
+					res.add_prestito();
+					db.salva_categoria_root(cat);
+					db.salva_prestito(p);
+				}else {
+					if(prestiti_per_fruitore.size()>=Costanti.MAX_NUMERO_DI_LIBRI_FRUITORE ) {
+						this.view.scrivi("Massimo numero di prestiti raggiunto");
+					}else if(res.get_disponibili()<=0) {
+						this.view.scrivi("Risorsa non disponibile");
+					}else
+						this.view.scrivi("Massimo numero di prestiti raggiunto e Risorsa non disponibile");
+				}
+			}else {
+				this.view.scrivi("Risorsa non trovata");
 			}
 			this.fruitore_loggato(fruitore);
 		}

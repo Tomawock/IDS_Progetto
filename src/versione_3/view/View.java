@@ -1,5 +1,6 @@
 package versione_3.view;
 
+import java.lang.reflect.Field;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -45,9 +46,9 @@ public class View {
 		System.out.println(Costanti.GRECA);
 		System.out.println("              MENU' FRUITORE         ");
 		System.out.println(Costanti.GRECA);
-		System.out.println("Cosa vuoi fare?\n1)Torna indietro\n2)Rinnova Iscrizione");
+		System.out.println("Cosa vuoi fare?\n1)Torna indietro\n2)Rinnova Iscrizione\n3)Effettua Prestito");
 		System.out.println(Costanti.GRECA3);
-		return IO.insert_int(1, 2);
+		return IO.insert_int(1, 3);
 	}
 	
 	public String log() {

@@ -1,10 +1,16 @@
 package versione_3.model;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 import utilita.Costanti;
 
-public class Prestito {
+public class Prestito implements Serializable {
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6L;
 	
 	private Risorsa risorsa;
 	private Fruitore fruitore;

@@ -41,6 +41,15 @@ public abstract class  Risorsa implements Serializable{
 	public String toString() {
 		return "Numero Identificativo: "+id+", Numero di Copie: " + n_licenze + ", Numero Attualmente Disponibili: " + (n_licenze-in_prestito);
 	}
+	public void add_prestito() {
+		this.in_prestito++;
+	}
+	public void remove_prestito() {
+		this.in_prestito--;	
+	}
+	public int get_disponibili() {
+		return n_licenze-in_prestito;
+	}
 	
 	
 }

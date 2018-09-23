@@ -31,4 +31,9 @@ public interface Salvataggio {
 	Categoria carica_root_categorie();
 	void salva_categoria_root(Categoria root);
 	
+	ArrayList<Prestito> get_prestiti_per_fruitore_risorsa(Fruitore fruitore,Risorsa res);
+	void salva_prestito(Prestito prestito);
+	ArrayList<Prestito> carica_tutti_prestiti();
+	ArrayList<Prestito> get_tutti_prestiti_per_fruitore(Fruitore fruitore);
+	
 }
