@@ -88,7 +88,6 @@ public class View {
 		System.out.println(Costanti.GRECA2);
 		System.out.println(" **** Inserire Numero di Pagine **** ");
 		dati.add(""+IO.insert_int(0,9999999));
-		dati.add(IO.inKeyBoard(true));
 		System.out.println(Costanti.GRECA2);
 		System.out.println(" **** Inserire Anno di pubblicazione **** ");
 		System.out.println(Costanti.GRECA2);

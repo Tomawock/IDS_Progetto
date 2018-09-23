@@ -85,7 +85,7 @@ public class IO
 	    	if (!file.exists())
 			{
 	    		file.createNewFile();
-	    		IO.out("File creato in "+percorso);
+	    		//IO.out("File creato in "+percorso);
 			}
 		} catch (IOException e)
 	    {

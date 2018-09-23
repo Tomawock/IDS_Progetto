@@ -144,18 +144,34 @@ public class Controller {
 			this.operatore_loggato(operatore);//per continuare iterazioni
 		}
 		else if(scelta == 4) {//rim desc
-			
+			int id=this.view.ricerca_risorsa_id();
+			Categoria cat=db.carica_root_categorie();
+			Risorsa res=cat.get_risorsa_by_id(cat, id);
+			if(res!=null) {
+				if(res instanceof Libro) {
+					res.rimuovi_descrizione();
+					db.salva_categoria_root(cat);
+				}
+				else if(res instanceof Film) {
+					res.aggiungi_descrizione(this.view.nuova_descrizione_film());
+				}
+			}else {
+				this.view.scrivi("Risorsa non trovata");
+			}
+			this.operatore_loggato(operatore);//per continuare iterazioni
 		}
 		else if(scelta == 5) {//visualizza tutte risorse
 			Categoria c= db.carica_root_categorie();
 			ArrayList<Risorsa> risultato=new ArrayList<>();
 			c.carica_tutte_risorse(c, risultato);
-			if(risultato!=null) {
+			if(!risultato.isEmpty()) {
 				for(Risorsa r:risultato) {
 						this.view.scrivi(r.toString());
 				}
 			}
-			else this.view.scrivi("Nulla trovato");
+			else {
+				this.view.scrivi("Nulla trovato");
+			}
 			this.operatore_loggato(operatore);//per continuare iterazioni
 		}
 		else {

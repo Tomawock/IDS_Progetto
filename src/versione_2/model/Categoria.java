@@ -70,8 +70,10 @@ public class Categoria implements Serializable{
 	
 	public Risorsa get_risorsa_by_id(Categoria base,int id) {
 		if (base.getSottocategorie()==null) {
-			for (Risorsa r: base.getRisorse()) {
-				if(r.get_id()==id) return r;
+			if(base.getRisorse()!=null) {
+				for (Risorsa r: base.getRisorse()) {
+					if(r.get_id()==id) return r;
+				}
 			}
 		}else {
 			for(Categoria c:base.getSottocategorie()){
