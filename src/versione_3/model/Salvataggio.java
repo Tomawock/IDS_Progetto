@@ -37,6 +37,8 @@ public interface Salvataggio {
 	ArrayList<Prestito> carica_tutti_prestiti();
 	ArrayList<Prestito> get_tutti_prestiti_per_fruitore(Fruitore fruitore);
 	
+	void controllo_validita_prestiti();
+	
 	void aggiorna_descrizione_prestiti();
 	
 	void aggiorna_prestito(Prestito p);

@@ -134,4 +134,11 @@ public class Prestito implements Serializable {
 		this.mai_prorogato=prestito.isMai_prorogato();
 		this.risorsa=prestito.getRisorsa();
 	}
+	
+	public boolean is_terminato() {
+		if(this.data_fine_prestito.isBefore(LocalDateTime.now())) {
+			return true;
+		}
+		return false;
+	}
 }

@@ -175,7 +175,8 @@ public class Controller {
 	}
 
 	private void fruitore_loggato(Fruitore fruitore) {
-		db.aggiorna_descrizione_prestiti();//serve per avere i prestiti con la descrizione corretta 
+		db.aggiorna_descrizione_prestiti();//serve per avere i prestiti con la descrizione corretta
+		db.controllo_validita_prestiti();// contolla ed elimina prestiti scaduti
 		if(fruitore.is_rinnovabile()) {
 			this.view.scrivi("Scadenza rinnovo vicina ti mancano " + fruitore.get_giorni_scadenza() + " giorni alla scadenza");
 		}

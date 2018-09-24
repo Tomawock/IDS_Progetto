@@ -1,6 +1,7 @@
 package versione_3.model;
 
 import java.io.*;
+import java.lang.reflect.Array;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
@@ -561,6 +562,18 @@ public class Database_file implements Salvataggio{
 			}
 		}
 		this.reset_prestiti(prestiti);
+	}
+
+	@Override
+	public void controllo_validita_prestiti() {
+		ArrayList<Prestito> prestiti=carica_tutti_prestiti();
+		ArrayList<Prestito> risultato=new ArrayList<>();
+		for(Prestito p:prestiti) {
+			if(!p.is_terminato()) {
+				risultato.add(p);
+			}
+		}
+		this.reset_prestiti(risultato);		
 	}
 
 	public static void main (String[] args) {
