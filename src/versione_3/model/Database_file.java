@@ -391,7 +391,7 @@ public class Database_file implements Salvataggio{
 	        in.close(); 
 	        file.close(); 
 	          
-		    System.out.println("operatori deserializzati"); 
+		    //System.out.println("operatori deserializzati"); 
 	    }catch(EOFException ex) {
 	   	 	//System.out.println("EOFExceptionis caught"); // si verifica sempre qunado creo il file la prima volta ma non è fondamentale 
 	    }catch(IOException ex) {
@@ -506,6 +506,47 @@ public class Database_file implements Salvataggio{
             System.err.println("ClassNotFoundException is caught"); 
         } 	
 		return prestiti;
+	}
+	
+	@Override
+	public void aggiorna_descrizione_prestiti() {
+		ArrayList<Prestito> prestiti=this.carica_tutti_prestiti();
+		Categoria cat=this.carica_root_categorie();
+		ArrayList<Risorsa> risorse_db=new ArrayList<>();
+		cat.carica_tutte_risorse(cat, risorse_db);
+		for(Prestito p:prestiti) {
+			for(Risorsa r:risorse_db) {
+				if(p.getRisorsa().equals(r)) {
+					p.setRisorsa(r);
+				}
+			}
+		}
+		this.reset_prestiti(prestiti);
+	}
+	
+	
+
+	@Override
+	public void reset_prestiti(ArrayList<Prestito> prestiti) {
+		//crea il file nel percorso se non e presente
+		IO.CreaFile(Database_file.PERCORSO_FILE_PRESTITI);
+		// Serialization  
+	    try{    
+	        //Saving of object in a file 
+	        FileOutputStream file = new FileOutputStream(Database_file.PERCORSO_FILE_PRESTITI); 
+	        ObjectOutputStream out = new ObjectOutputStream(file); 
+	          
+	        // Method for serialization of object 
+	        out.writeObject(prestiti); 
+	          
+	        out.close(); 
+	        file.close(); 
+	          
+            //System.out.println("Operatori resettati"); 
+	  
+	        }catch(IOException ex) { 
+	            System.err.println("IOException is caught"); 
+	    }	
 	}
 
 	public static void main (String[] args) {

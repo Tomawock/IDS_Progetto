@@ -33,7 +33,10 @@ public interface Salvataggio {
 	
 	ArrayList<Prestito> get_prestiti_per_fruitore_risorsa(Fruitore fruitore,Risorsa res);
 	void salva_prestito(Prestito prestito);
+	void reset_prestiti(ArrayList<Prestito> prestiti);
 	ArrayList<Prestito> carica_tutti_prestiti();
 	ArrayList<Prestito> get_tutti_prestiti_per_fruitore(Fruitore fruitore);
+	
+	void aggiorna_descrizione_prestiti();
 	
 }

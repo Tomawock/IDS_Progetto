@@ -38,6 +38,14 @@ public abstract class  Risorsa implements Serializable{
 		this.id = id;
 	}
 	@Override
+	public boolean equals(Object obj) {
+		Risorsa r=(Risorsa)obj;
+		if(this.id==r.get_id()) {
+			return true;
+		}
+		return false;
+	}
+	@Override
 	public String toString() {
 		return "Numero Identificativo: "+id+", Numero di Copie: " + n_licenze + ", Numero Attualmente Disponibili: " + (n_licenze-in_prestito);
 	}

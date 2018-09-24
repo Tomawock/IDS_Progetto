@@ -46,9 +46,9 @@ public class View {
 		System.out.println(Costanti.GRECA);
 		System.out.println("              MENU' FRUITORE         ");
 		System.out.println(Costanti.GRECA);
-		System.out.println("Cosa vuoi fare?\n1)Torna indietro\n2)Rinnova Iscrizione\n3)Effettua Prestito");
+		System.out.println("Cosa vuoi fare?\n1)Torna indietro\n2)Rinnova Iscrizione\n3)Effettua Prestito\n4)Visualizza tutti i prestiti");
 		System.out.println(Costanti.GRECA3);
-		return IO.insert_int(1, 3);
+		return IO.insert_int(1, 4);
 	}
 	
 	public String log() {

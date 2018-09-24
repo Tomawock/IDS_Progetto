@@ -181,6 +181,7 @@ public class Controller {
 	}
 
 	private void fruitore_loggato(Fruitore fruitore) {
+		db.aggiorna_descrizione_prestiti();//serve per avere i prestiti con la descrizione corretta 
 		if(fruitore.is_rinnovabile()) {
 			this.view.scrivi("Scadenza rinnovo vicina ti mancano " + fruitore.get_giorni_scadenza() + " giorni alla scadenza");
 		}
@@ -225,7 +226,21 @@ public class Controller {
 			}
 			this.fruitore_loggato(fruitore);
 		}
-		else {
+		else if(scelta==4){//visualizza tutti i prestiti
+			ArrayList<Prestito> prestiti=db.get_tutti_prestiti_per_fruitore(fruitore);
+			if(!prestiti.isEmpty()) {
+				for(Prestito p:prestiti) {
+					Risorsa r=p.getRisorsa();
+					if (r instanceof Libro) {
+						this.view.scrivi(((Libro)r).toString());
+					}
+				}
+			}else {
+				this.view.scrivi("Non hai prestiti");
+			}
+			this.fruitore_loggato(fruitore);
+			
+		}else {
 			this.user_loggato(fruitore.getUtente());
 		}
 	}

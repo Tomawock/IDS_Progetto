@@ -1,5 +1,8 @@
 package versione_3.model;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 import versione_3.controller.Controller;
 
 public class Main_v_2 {
@@ -19,11 +22,10 @@ public class Main_v_2 {
 		Risorsa r3=new Libro(3);
 		Risorsa r4=new Libro(4);
 		
-		r1.set_n_licenze(5);
+		r1.set_n_licenze(1);
 		r2.set_n_licenze(5);
 		r3.set_n_licenze(5);
 		r4.set_n_licenze(5);
-		
 		
 		fantasy.add_risorsa(r1);
 		fantasy.add_risorsa(r2);

@@ -56,6 +56,10 @@ public class Prestito implements Serializable {
 		return mai_progato;
 	}
 	
+	public void setRisorsa(Risorsa risorsa) {
+		this.risorsa = risorsa;
+	}
+
 	public boolean is_rinnovabile() {
 		if(LocalDateTime.now().isAfter(data_proroga_prestito) && this.mai_progato) {
 			return true;
