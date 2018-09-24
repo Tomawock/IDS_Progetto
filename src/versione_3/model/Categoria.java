@@ -153,32 +153,4 @@ public class Categoria implements Serializable{
 	public void setSottocategorie(ArrayList<Categoria> sottocategorie) {
 		this.sottocategorie = sottocategorie;
 	}
-
-	public static void main(String[] args) {
-		
-		Categoria risorse=new Categoria("Risorse");
-		risorse.add_sottocategoria(new Categoria("Libri"));
-		risorse.add_sottocategoria(new Categoria("Film"));
-		//cartella libri
-		risorse.getSottocategorie().get(0).add_sottocategoria(new Categoria("Horror"));
-		risorse.getSottocategorie().get(0).add_sottocategoria(new Categoria("Fantasy"));
-		//
-		risorse.getSottocategorie().get(1).add_sottocategoria(new Categoria("Documentari"));
-		risorse.getSottocategorie().get(1).add_sottocategoria(new Categoria("Animati"));
-		
-		System.out.println(risorse.get_sottocategoria_by_name(risorse.getSottocategorie().get(0),"Fantasy").toString());
-		
-		//Risorsa in horror
-		risorse.getSottocategorie().get(0).getSottocategorie().get(1).add_risorsa(new Film(1));
-		risorse.getSottocategorie().get(0).getSottocategorie().get(0).add_risorsa(new Libro(2));
-		System.out.println(risorse.get_risorsa_by_id(risorse, 1) instanceof Libro);
-		
-		ArrayList<Libro> libri=new ArrayList<>();
-		risorse.carica_tutti_libri(risorse, libri);
-		
-		for(Libro l:libri) {
-			System.out.println(l.toString());
-		}
-		
-	}
 }

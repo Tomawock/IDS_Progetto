@@ -3,6 +3,8 @@ package versione_3.model;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+import utilita.Costanti;
+
 public abstract class  Risorsa implements Serializable{
 
 	/**
@@ -13,12 +15,28 @@ public abstract class  Risorsa implements Serializable{
 	private int in_prestito;
 	private int id;
 	
-	public abstract void aggiungi_descrizione(ArrayList<String> dati);
-	public abstract void rimuovi_descrizione();
+	private ArrayList<String> dati;
 	
-	public Risorsa(int id) {
-		this.id =id;
+	public void aggiungi_descrizione(ArrayList<String> dati) {
+		this.dati=dati;
 	}
+	
+	public void rimuovi_descrizione() {
+		for(int i=0;i<this.dati.size();i++) {
+			this.dati.set(i, Costanti.NO_DESCRIZIONE);
+		}
+	}
+	
+	public Risorsa(int id, int n_licenze) {
+		this.id =id;
+		this.n_licenze=n_licenze;
+		this.dati=new ArrayList<>();
+	}
+	
+	public ArrayList<String> get_dati(){
+		return this.dati;
+	}
+	
 	public int get_n_licenze() {
 		return n_licenze;
 	}
