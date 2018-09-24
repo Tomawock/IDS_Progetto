@@ -23,6 +23,7 @@ public class Prestito implements Serializable {
 	
 	private boolean mai_progato;
 
+
 	public Prestito(Risorsa risorsa, Fruitore fruitore) {
 		this.risorsa = risorsa;
 		this.fruitore = fruitore;
@@ -60,6 +61,12 @@ public class Prestito implements Serializable {
 		this.risorsa = risorsa;
 	}
 
+	public boolean is_prorogabile() {
+		if(this.data_proroga_prestito.isBefore(LocalDateTime.now())) {
+			return true;
+		}
+		return false;
+	}
 	public boolean is_rinnovabile() {
 		if(LocalDateTime.now().isAfter(data_proroga_prestito) && this.mai_progato) {
 			return true;
@@ -68,8 +75,10 @@ public class Prestito implements Serializable {
 	}
 	
 	public void rinnova() {
-		this.mai_progato=false;
-		this.data_inizio_proroga=LocalDateTime.now();
-		this.data_fine_prestito=this.data_inizio_proroga.plusDays(Costanti.DURATA_PROROGA);
+		if(this.mai_progato && this.is_prorogabile()) {
+			this.mai_progato=false;
+			this.data_inizio_proroga=LocalDateTime.now();
+			this.data_fine_prestito=this.data_inizio_proroga.plusDays(Costanti.DURATA_PROROGA);
+		}
 	}
 }
