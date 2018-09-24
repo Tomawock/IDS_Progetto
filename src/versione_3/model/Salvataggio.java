@@ -39,4 +39,6 @@ public interface Salvataggio {
 	
 	void aggiorna_descrizione_prestiti();
 	
+	void aggiorna_prestito(Prestito p);
+	
 }

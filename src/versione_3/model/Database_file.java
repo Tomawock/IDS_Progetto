@@ -549,6 +549,20 @@ public class Database_file implements Salvataggio{
 	    }	
 	}
 
+	/**
+	 * Aggiorno il db dei prestiti con i nuovi valori corretti del prestito preso in ingresso
+	 */
+	@Override
+	public void aggiorna_prestito(Prestito prestito) {
+		ArrayList<Prestito> prestiti=this.carica_tutti_prestiti();
+		for(Prestito p:prestiti) {
+			if(p.equals(prestito)) {
+				p.reset_dati(prestito);
+			}
+		}
+		this.reset_prestiti(prestiti);
+	}
+
 	public static void main (String[] args) {
 		Database_file db=new Database_file();
 		

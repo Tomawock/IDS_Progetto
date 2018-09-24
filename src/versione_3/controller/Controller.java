@@ -240,21 +240,18 @@ public class Controller {
 			}
 			this.fruitore_loggato(fruitore);
 			
-		}else if(scelta==5){//prolunga prestito
+		}else if(scelta==5){//proroga prestito
+			String esito="Prestito non prorogato";
 			int id=this.view.ricerca_risorsa_id();
-			ArrayList<Prestito> prestiti=db.carica_tutti_prestiti();
-			String esito="Risorsa non trovata";
+			ArrayList<Prestito> prestiti=db.get_tutti_prestiti_per_fruitore(fruitore);
 			for(Prestito p:prestiti) {
-				if(p.getRisorsa().get_id()==id&& p.getFruitore().equals(fruitore)) {
-					p.rinnova();
-					esito="Prestito Prolungato";
+				if(p.getRisorsa().get_id()==id && p.rinnova()) {
+					db.aggiorna_prestito(p);
+					esito = "Prestito prorogato";
 				}
 			}
 			this.view.scrivi(esito);
-			//ricarico il db dei prestiti con i dati giusti
-			db.reset_prestiti(prestiti);
-			
-			
+						
 			this.fruitore_loggato(fruitore);
 		}else {
 			this.user_loggato(fruitore.getUtente());
