@@ -248,8 +248,23 @@ public class Controller {
 			this.view.scrivi(esito);
 						
 			this.fruitore_loggato(fruitore);
+		}else if(scelta==6){//ricerca o visualizza disponibilità Risorsa
+			this.ricerca_o_disponibilita();	
+			this.fruitore_loggato(fruitore);
 		}else {
 			this.user_loggato(fruitore.getUtente());
+		}
+	}
+
+	private void ricerca_o_disponibilita() {
+		int risultato=this.view.ricerca_o_disponibilita();
+		if(risultato==1) {//ricerca
+			
+		}else if(risultato==2) {//valutazione disponibilita
+			int id=this.view.ricerca_risorsa_id();
+			int ris=db.get_n_copie_disponibili_by_id(id);
+			this.view.scrivi("Sono disponibili "+ris+" copie");
+			
 		}
 	}
 }

@@ -26,6 +26,20 @@ public abstract class  Risorsa implements Serializable{
 			this.dati.set(i, Costanti.NO_DESCRIZIONE);
 		}
 	}
+	/**
+	 * 
+	 * @param dati che devono essre ordinai in base alla tipologia di risorsa 
+	 * @return 
+	 */
+	public boolean equals_by_descrizione(ArrayList<String> dati) {
+
+		for(int  i=0;i<this.dati.size();i++ ) {
+			if(!(dati.get(i).equals(this.dati.get(i)) ||  dati.get(i).equals(Costanti.NO_RICERCA))) {
+				return false;
+			}
+		}
+		return true;
+	}
 	
 	public Risorsa(int id, int n_licenze) {
 		this.id =id;

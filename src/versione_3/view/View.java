@@ -73,6 +73,7 @@ public class View {
 	public int ricerca_risorsa_id() {
 		System.out.println(Costanti.GRECA2);
 		System.out.println(" **** Inserire ID della Risorsa **** ");
+		System.out.println(Costanti.GRECA2);
 		return IO.insert_int(0,9999999);
 	}
 	
@@ -149,5 +150,12 @@ public class View {
 		ArrayList<String> dati= new ArrayList<>();
 		System.out.println("non ci occupiamo di questa categoria");
 		return null;
+	}
+	
+	public int ricerca_o_disponibilita() {
+		System.out.println(Costanti.GRECA2);
+		System.out.println("Cosa vuoi fare?\n1)Ricerca per descrizione\n2)Visualizza qunatità disponibili");
+		System.out.println(Costanti.GRECA2);
+		return IO.insert_int(1, 2);	
 	}
 }

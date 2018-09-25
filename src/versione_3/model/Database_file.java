@@ -576,6 +576,30 @@ public class Database_file implements Salvataggio{
 		this.reset_prestiti(risultato);		
 	}
 
+	
+	@Override
+	public ArrayList<Risorsa> ricerca_per_descrizione(ArrayList<String> parametri) {
+		Categoria root=this.carica_root_categorie();
+		ArrayList<Risorsa> risorse=new ArrayList<>();
+		ArrayList<Risorsa> risultato=new ArrayList<>();
+		root.carica_tutte_risorse(root, risorse);
+		for(Risorsa r:risorse) {
+			if(r.equals_by_descrizione(parametri)) {
+				risultato.add(r);
+			}
+		}
+		return risultato;
+	}
+
+	
+	@Override
+	public int get_n_copie_disponibili_by_id(int id) {
+		Categoria root=this.carica_root_categorie();
+		Risorsa ris=root.get_risorsa_by_id(root, id);
+		
+		return ris.get_disponibili();
+	}
+
 	public static void main (String[] args) {
 		Database_file db=new Database_file();
 		

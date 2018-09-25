@@ -16,5 +16,7 @@ public class Costanti {
 	public static final long DURATA_PROROGA = 15;
 	
 	public static final int MAX_NUMERO_DI_LIBRI_FRUITORE=3;
+
+	public static String NO_RICERCA= "*";
 	
 }
