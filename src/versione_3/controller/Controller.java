@@ -121,11 +121,11 @@ public class Controller {
 	private void operatore_loggato(Operatore operatore) {
 		int scelta = view.operatore_view(operatore);
 		if (scelta==1) {
-			this.view.stampa_fruitori(operatore.visualizza_fruitori());
-			this.operatore_loggato(operatore);
+			this.user_loggato(operatore.getUtente());
 		}
 		else if (scelta==2){
-			this.user_loggato(operatore.getUtente());
+			this.view.stampa_fruitori(operatore.visualizza_fruitori());
+			this.operatore_loggato(operatore);
 		}
 		else if(scelta == 3) {//add desc
 			int id=this.view.ricerca_risorsa_id();

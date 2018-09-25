@@ -37,7 +37,7 @@ public class View {
 		System.out.println(Costanti.GRECA);
 		System.out.println("              MENU' OPERATORE         ");
 		System.out.println(Costanti.GRECA);
-		System.out.println("Cosa vuoi fare?\n1)Stampare i fruitore presenti nel database\n2)Torna indietro\n3)Aggiungi descrizione\n4)Rimuovi Descrizione\n5)visualizza risorse");
+		System.out.println("Cosa vuoi fare?\n1)Torna indietro\n2)Stampare i fruitore presenti nel database\n3)Aggiungi descrizione\n4)Rimuovi Descrizione\n5)visualizza risorse");
 		System.out.println(Costanti.GRECA3);
 		return IO.insert_int(1, 5);
 	}
@@ -46,9 +46,9 @@ public class View {
 		System.out.println(Costanti.GRECA);
 		System.out.println("              MENU' FRUITORE         ");
 		System.out.println(Costanti.GRECA);
-		System.out.println("Cosa vuoi fare?\n1)Torna indietro\n2)Rinnova Iscrizione\n3)Effettua Prestito\n4)Visualizza tutti i prestiti\n5)Prolunga prestito");
+		System.out.println("Cosa vuoi fare?\n1)Torna indietro\n2)Rinnova Iscrizione\n3)Effettua Prestito\n4)Visualizza tutti i prestiti\n5)Prolunga prestito\n6)Ricerca o Visualizza disponibilità Risorsa");
 		System.out.println(Costanti.GRECA3);
-		return IO.insert_int(1, 5);
+		return IO.insert_int(1, 6);
 	}
 	
 	public String log() {
@@ -153,9 +153,9 @@ public class View {
 	}
 	
 	public int ricerca_o_disponibilita() {
-		System.out.println(Costanti.GRECA2);
+		System.out.println(Costanti.GRECA);
 		System.out.println("Cosa vuoi fare?\n1)Ricerca per descrizione\n2)Visualizza qunatità disponibili");
-		System.out.println(Costanti.GRECA2);
+		System.out.println(Costanti.GRECA);
 		return IO.insert_int(1, 2);	
 	}
 }
