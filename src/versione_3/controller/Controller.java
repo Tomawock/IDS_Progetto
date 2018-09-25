@@ -120,14 +120,11 @@ public class Controller {
 
 	private void operatore_loggato(Operatore operatore) {
 		int scelta = view.operatore_view(operatore);
-		if (scelta==1) {
-			this.user_loggato(operatore.getUtente());
-		}
-		else if (scelta==2){
+		if (scelta==1){
 			this.view.stampa_fruitori(operatore.visualizza_fruitori());
 			this.operatore_loggato(operatore);
 		}
-		else if(scelta == 3) {//add desc
+		else if(scelta == 2) {//add desc
 			int id=this.view.ricerca_risorsa_id();
 			Categoria cat=db.carica_root_categorie();
 			Risorsa res=cat.get_risorsa_by_id(cat, id);
@@ -141,7 +138,7 @@ public class Controller {
 			}
 			this.operatore_loggato(operatore);//per continuare iterazioni
 		}
-		else if(scelta == 4) {//rim desc
+		else if(scelta == 3) {//rim desc
 			int id=this.view.ricerca_risorsa_id();
 			Categoria cat=db.carica_root_categorie();
 			Risorsa res=cat.get_risorsa_by_id(cat, id);
@@ -155,7 +152,7 @@ public class Controller {
 			}
 			this.operatore_loggato(operatore);//per continuare iterazioni
 		}
-		else if(scelta == 5) {//visualizza tutte risorse
+		else if(scelta == 4) {//visualizza tutte risorse
 			Categoria c= db.carica_root_categorie();
 			ArrayList<Risorsa> risultato=new ArrayList<>();
 			c.carica_tutte_risorse(c, risultato);
@@ -169,9 +166,11 @@ public class Controller {
 			}
 			this.operatore_loggato(operatore);//per continuare iterazioni
 		}
-		else if(scelta == 6) {//ricerca o visualizza copie
+		else if(scelta == 5) {//ricerca o visualizza copie
 			this.ricerca_o_disponibilita();	
 			this.operatore_loggato(operatore);//per continuare iterazioni
+		}else if (scelta==6) {
+			this.user_loggato(operatore.getUtente());
 		}
 		else {
 			this.user_loggato(operatore.getUtente());
@@ -186,9 +185,6 @@ public class Controller {
 		}
 		int scelta=view.fruitore_view(fruitore);
 		if(scelta ==1) {
-			this.user_loggato(fruitore.getUtente());
-		}
-		else if(scelta ==2) {
 			if(fruitore.is_rinnovabile()) {
 				db.elimina_fruitore(fruitore);
 				fruitore.rinnova_iscrizione();//rinnova oggetto ma non il db
@@ -198,7 +194,7 @@ public class Controller {
 				view.scrivi("Non puoi ancora rinnovare l'iscrizione");
 			}
 			this.fruitore_loggato(fruitore);
-		}else if(scelta==3) {//aggiungi prestito
+		}else if(scelta==2) {//aggiungi prestito
 			int id=this.view.ricerca_risorsa_id();
 			Categoria cat=db.carica_root_categorie();
 			Risorsa res=cat.get_risorsa_by_id(cat, id);
@@ -225,7 +221,7 @@ public class Controller {
 			}
 			this.fruitore_loggato(fruitore);
 		}
-		else if(scelta==4){//visualizza tutti i prestiti
+		else if(scelta==3){//visualizza tutti i prestiti
 			ArrayList<Prestito> prestiti=db.get_tutti_prestiti_per_fruitore(fruitore);
 			if(!prestiti.isEmpty()) {
 				for(Prestito p:prestiti) {
@@ -239,7 +235,7 @@ public class Controller {
 			}
 			this.fruitore_loggato(fruitore);
 			
-		}else if(scelta==5){//proroga prestito
+		}else if(scelta==4){//proroga prestito
 			String esito="Prestito non prorogato";
 			int id=this.view.ricerca_risorsa_id();
 			ArrayList<Prestito> prestiti=db.get_tutti_prestiti_per_fruitore(fruitore);
@@ -252,9 +248,11 @@ public class Controller {
 			this.view.scrivi(esito);
 						
 			this.fruitore_loggato(fruitore);
-		}else if(scelta==6){//ricerca o visualizza disponibilità Risorsa
+		}else if(scelta==5){//ricerca o visualizza disponibilità Risorsa
 			this.ricerca_o_disponibilita();	
 			this.fruitore_loggato(fruitore);
+		}else if(scelta ==6) {
+			this.user_loggato(fruitore.getUtente());
 		}else {
 			this.user_loggato(fruitore.getUtente());
 		}

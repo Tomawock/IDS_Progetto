@@ -19,7 +19,9 @@ public class View {
 		System.out.println(Costanti.GRECA);
 		System.out.println("              MENU' PRINCIPALE         ");
 		System.out.println(Costanti.GRECA);
-		System.out.println("1)Accedere \n2)Registrazione \n3)Esci");
+		System.out.println("1)Accedere\n"
+				+ "2)Registrazione\n"
+				+ "3)Esci");
 		System.out.println(Costanti.GRECA3);
 		return IO.insert_int(1, 3);
 	}
@@ -28,7 +30,11 @@ public class View {
 		System.out.println(Costanti.GRECA);
 		System.out.println("              MENU' ACCESSO BENVENUTO "+utente.getUsername()+"                   ");
 		System.out.println(Costanti.GRECA);
-		System.out.println("1)Logga come Fruitore \n2)Logga come Operatore\n3)Diventa Fruitore\n4)Diventa Operatore\n5)Esci");
+		System.out.println("1)Logga come Fruitore\n"
+				+ "2)Logga come Operatore\n"
+				+ "3)Diventa Fruitore\n"
+				+ "4)Diventa Operatore\n"
+				+ "5)Esci");
 		System.out.println(Costanti.GRECA3);
 		return IO.insert_int(1, 5);
 	}
@@ -37,7 +43,13 @@ public class View {
 		System.out.println(Costanti.GRECA);
 		System.out.println("              MENU' OPERATORE         ");
 		System.out.println(Costanti.GRECA);
-		System.out.println("Cosa vuoi fare?\n1)Torna indietro\n2)Stampare i fruitore presenti nel database\n3)Aggiungi descrizione\n4)Rimuovi Descrizione\n5)visualizza risorse\n6)Ricerca o Visualizza disponibilità Risorsa");
+		System.out.println("Cosa vuoi fare?\n"
+				+ "1)Stampare i fruitore presenti nel database\n"
+				+ "2)Aggiungi descrizione\n"
+				+ "3)Rimuovi Descrizione\n"
+				+ "4)visualizza risorse\n"
+				+ "5)Ricerca o Visualizza disponibilità Risorsa\n"
+				+ "6)Torna indietro");
 		System.out.println(Costanti.GRECA3);
 		return IO.insert_int(1, 6);
 	}
@@ -46,7 +58,13 @@ public class View {
 		System.out.println(Costanti.GRECA);
 		System.out.println("              MENU' FRUITORE         ");
 		System.out.println(Costanti.GRECA);
-		System.out.println("Cosa vuoi fare?\n1)Torna indietro\n2)Rinnova Iscrizione\n3)Effettua Prestito\n4)Visualizza tutti i prestiti\n5)Prolunga prestito\n6)Ricerca o Visualizza disponibilità Risorsa");
+		System.out.println("Cosa vuoi fare?\n"
+				+ "1)Rinnova Iscrizione\n"
+				+ "2)Effettua Prestito\n"
+				+ "3)Visualizza tutti i prestiti\n"
+				+ "4)Prolunga prestito\n"
+				+ "5)Ricerca o Visualizza disponibilità Risorsa\n"
+				+ "6)Torna indietro\n");
 		System.out.println(Costanti.GRECA3);
 		return IO.insert_int(1, 6);
 	}
@@ -154,7 +172,9 @@ public class View {
 	
 	public int ricerca_o_disponibilita() {
 		System.out.println(Costanti.GRECA);
-		System.out.println("Cosa vuoi fare?\n1)Ricerca per descrizione\n2)Visualizza qunatità disponibili");
+		System.out.println("Cosa vuoi fare?\n"
+				+ "1)Ricerca per descrizione\n"
+				+ "2)Visualizza qunatità disponibili");
 		System.out.println(Costanti.GRECA);
 		return IO.insert_int(1, 2);	
 	}
