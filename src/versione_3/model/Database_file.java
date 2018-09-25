@@ -1,7 +1,6 @@
 package versione_3.model;
 
 import java.io.*;
-import java.lang.reflect.Array;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
@@ -565,7 +564,7 @@ public class Database_file implements Salvataggio{
 	}
 
 	@Override
-	public void controllo_validita_prestiti() {
+	public void aggiorna_validita_prestiti() {
 		ArrayList<Prestito> prestiti=carica_tutti_prestiti();
 		ArrayList<Prestito> risultato=new ArrayList<>();
 		for(Prestito p:prestiti) {
