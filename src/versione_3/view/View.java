@@ -37,9 +37,9 @@ public class View {
 		System.out.println(Costanti.GRECA);
 		System.out.println("              MENU' OPERATORE         ");
 		System.out.println(Costanti.GRECA);
-		System.out.println("Cosa vuoi fare?\n1)Torna indietro\n2)Stampare i fruitore presenti nel database\n3)Aggiungi descrizione\n4)Rimuovi Descrizione\n5)visualizza risorse");
+		System.out.println("Cosa vuoi fare?\n1)Torna indietro\n2)Stampare i fruitore presenti nel database\n3)Aggiungi descrizione\n4)Rimuovi Descrizione\n5)visualizza risorse\n6)Ricerca o Visualizza disponibilità Risorsa");
 		System.out.println(Costanti.GRECA3);
-		return IO.insert_int(1, 5);
+		return IO.insert_int(1, 6);
 	}
 	
 	public int fruitore_view(Fruitore fruitore) {
@@ -89,11 +89,11 @@ public class View {
 		dati.add(IO.inKeyBoard(true));
 		System.out.println(Costanti.GRECA2);
 		System.out.println(" **** Inserire Numero di Pagine **** ");
-		dati.add(""+IO.insert_int(0,9999999));
+		dati.add(""+IO.insert_int(0,99999999));
 		System.out.println(Costanti.GRECA2);
 		System.out.println(" **** Inserire Anno di pubblicazione **** ");
 		System.out.println(Costanti.GRECA2);
-		dati.add(""+IO.insert_int(0, LocalDate.now().getYear()));
+		dati.add(""+IO.insert_int(0,9999999));
 		System.out.println(Costanti.GRECA2);
 		System.out.println(" **** Inserire Casa Editrice **** ");
 		System.out.println(Costanti.GRECA2);
@@ -157,5 +157,23 @@ public class View {
 		System.out.println("Cosa vuoi fare?\n1)Ricerca per descrizione\n2)Visualizza qunatità disponibili");
 		System.out.println(Costanti.GRECA);
 		return IO.insert_int(1, 2);	
+	}
+
+	public int get_sottocategorie_principali() {
+		System.out.println(Costanti.GRECA2);
+		System.out.println("1)Libri");
+		System.out.println(Costanti.GRECA2);
+		return IO.insert_int(1, 1);
+		
+	}
+
+	public void stampa_risorse(ArrayList<Risorsa> risorse) {
+		if(risorse.isEmpty()) {
+			this.scrivi("Risorse non Trovate secondo la descrizione fornita");
+		}else {
+			for(Risorsa r:risorse) {
+				this.scrivi(r.toString());
+			}
+		}
 	}
 }

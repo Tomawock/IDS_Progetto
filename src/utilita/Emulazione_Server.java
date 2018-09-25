@@ -53,6 +53,14 @@ public class Emulazione_Server {
 				"Arabo",
 				"Fantasy")));
 		
+		r3.aggiungi_descrizione(new ArrayList<>(Arrays.asList("Temo",
+				"Denis Barbas",
+				"123",
+				"1900",
+				"Satana",
+				"japponese",
+				"Fantasy")));
+		
 		fantasy.add_risorsa(r1);
 		fantasy.add_risorsa(r3);
 		horror.add_risorsa(r2);

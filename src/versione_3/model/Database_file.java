@@ -578,13 +578,13 @@ public class Database_file implements Salvataggio{
 
 	
 	@Override
-	public ArrayList<Risorsa> ricerca_per_descrizione(ArrayList<String> parametri) {
+	public ArrayList<Risorsa> ricerca_per_descrizione(Risorsa risorsa) {
 		Categoria root=this.carica_root_categorie();
 		ArrayList<Risorsa> risorse=new ArrayList<>();
 		ArrayList<Risorsa> risultato=new ArrayList<>();
 		root.carica_tutte_risorse(root, risorse);
 		for(Risorsa r:risorse) {
-			if(r.equals_by_descrizione(parametri)) {
+			if(r.getClass().equals(risorsa.getClass()) && r.equals_by_descrizione(risorsa.get_dati())) {
 				risultato.add(r);
 			}
 		}
@@ -596,7 +596,8 @@ public class Database_file implements Salvataggio{
 	public int get_n_copie_disponibili_by_id(int id) {
 		Categoria root=this.carica_root_categorie();
 		Risorsa ris=root.get_risorsa_by_id(root, id);
-		
+		if(ris==null)
+			return -1;
 		return ris.get_disponibili();
 	}
 

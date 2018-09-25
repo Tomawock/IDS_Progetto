@@ -169,6 +169,10 @@ public class Controller {
 			}
 			this.operatore_loggato(operatore);//per continuare iterazioni
 		}
+		else if(scelta == 6) {//ricerca o visualizza copie
+			this.ricerca_o_disponibilita();	
+			this.operatore_loggato(operatore);//per continuare iterazioni
+		}
 		else {
 			this.user_loggato(operatore.getUtente());
 		}		
@@ -259,11 +263,24 @@ public class Controller {
 	private void ricerca_o_disponibilita() {
 		int risultato=this.view.ricerca_o_disponibilita();
 		if(risultato==1) {//ricerca
-			
+			//manca che prima venga scelta la categoria
+			int ris=this.view.get_sottocategorie_principali();
+			if(ris==1) {//caso dei libri
+				this.view.scrivi("inserire "+Costanti.NO_RICERCA+" nel caso in cui non si voglia ricercare per quel parametro\n");
+				ArrayList<String> ricerca=this.view.nuova_descrizione_libro();
+				Libro l=new Libro(0, 0);
+				l.aggiungi_descrizione(ricerca);
+				ArrayList<Risorsa>test=db.ricerca_per_descrizione(l);
+				this.view.stampa_risorse(test);
+			}	
 		}else if(risultato==2) {//valutazione disponibilita
 			int id=this.view.ricerca_risorsa_id();
 			int ris=db.get_n_copie_disponibili_by_id(id);
-			this.view.scrivi("Sono disponibili "+ris+" copie");
+			if(ris==-1) {
+				this.view.scrivi("Risorsa non trovata");
+			}else {
+				this.view.scrivi("Sono disponibili "+ris+" copie");
+			}
 			
 		}
 	}

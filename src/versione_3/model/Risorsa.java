@@ -32,7 +32,6 @@ public abstract class  Risorsa implements Serializable{
 	 * @return 
 	 */
 	public boolean equals_by_descrizione(ArrayList<String> dati) {
-
 		for(int  i=0;i<this.dati.size();i++ ) {
 			if(!(dati.get(i).equals(this.dati.get(i)) ||  dati.get(i).equals(Costanti.NO_RICERCA))) {
 				return false;

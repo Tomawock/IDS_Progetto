@@ -43,7 +43,7 @@ public interface Salvataggio {
 	
 	void aggiorna_prestito(Prestito p);
 	
-	ArrayList<Risorsa> ricerca_per_descrizione(ArrayList<String> parametri);
+	ArrayList<Risorsa> ricerca_per_descrizione(Risorsa risorsa);
 	int get_n_copie_disponibili_by_id(int id);
 	
 }
