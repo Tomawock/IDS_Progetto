@@ -6,7 +6,7 @@ import java.util.Arrays;
 import utilita.Costanti;
 
 public class Libro  extends Risorsa{	
-	
+
 	public Libro(int id, int n_licenze) {
 		super(id, n_licenze);
 		super.aggiungi_descrizione(new ArrayList<>(Arrays.asList(Costanti.NO_DESCRIZIONE,Costanti.NO_DESCRIZIONE,Costanti.NO_DESCRIZIONE,Costanti.NO_DESCRIZIONE,Costanti.NO_DESCRIZIONE,Costanti.NO_DESCRIZIONE,Costanti.NO_DESCRIZIONE)));

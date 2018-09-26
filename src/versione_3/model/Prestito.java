@@ -8,7 +8,7 @@ import utilita.Costanti;
 public class Prestito implements Serializable {
 	
 	/**
-	 * 
+	 * Numero seriale per la serializzazione dei dati su File
 	 */
 	private static final long serialVersionUID = 6L;
 	

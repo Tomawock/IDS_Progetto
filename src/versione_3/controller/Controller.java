@@ -121,7 +121,7 @@ public class Controller {
 	private void operatore_loggato(Operatore operatore) {
 		int scelta = view.operatore_view(operatore);
 		if (scelta==1){
-			this.view.stampa_fruitori(operatore.visualizza_fruitori());
+			this.view.stampa_fruitori(db.carica_tutti_fruitori());
 			this.operatore_loggato(operatore);
 		}
 		else if(scelta == 2) {//add desc
