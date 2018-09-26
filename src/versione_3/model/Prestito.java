@@ -17,13 +17,19 @@ public class Prestito implements Serializable {
 	
 	private LocalDateTime data_inizio_prestito;
 	private LocalDateTime data_fine_prestito;
-	private LocalDateTime data_proroga_prestito; //data in cui è possibile prorogare il prestito
+	private LocalDateTime data_proroga_prestito; 	//data in cui è possibile prorogare il prestito
 	
-	private LocalDateTime data_inizio_proroga;
+	private LocalDateTime data_inizio_proroga;		//data nella quale è iniziata la proroga
 	
 	private boolean mai_prorogato;
 
-
+	/**
+	 * Creo un nuovo prestito che lega una Risorsa e un Fruitore presi in ingresso
+	 * setto la data di inizio del prestito, di fine e la data dalla quale è possibile rinnovarlo
+	 * 
+	 * @param risorsa	Risorsa da associare al prestito
+	 * @param fruitore	Fruitore da associare con il prestito
+	 */
 	public Prestito(Risorsa risorsa, Fruitore fruitore) {
 		this.risorsa = risorsa;
 		this.fruitore = fruitore;
@@ -103,7 +109,10 @@ public class Prestito implements Serializable {
 		this.mai_prorogato = mai_progato;
 	}
 
-
+	/**
+	 * Due Prestiti sono uguali quando hanno la stessa data di inizio del prestito 
+	 * NB la data è espressa anche in minuti e centesimi di secondo ed è percio univoca
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		Prestito prestito=(Prestito)obj;
@@ -115,6 +124,13 @@ public class Prestito implements Serializable {
 		return false;
 	}
 
+	/**
+	 * Nel caso in cui la data dalla quale è possibile prorogare il prestito
+	 * sia passata e il prestito non sia mai stato rinnovato aggiorna la data di scdenza del prestito e 
+	 * setta la data di inizio della proroga
+	 * 
+	 * @return 	true se è stato rinnovato(Le condizioni devo essere vere) false altrimenti
+	 */
 	public boolean rinnova() {
 		if(this.data_proroga_prestito.isBefore(LocalDateTime.now()) && this.mai_prorogato) {
 			this.mai_prorogato=false;
@@ -124,7 +140,13 @@ public class Prestito implements Serializable {
 		}
 		return false;
 	}
-
+	
+	/**
+	 * Preso un prestito in ingresso resetta i dati di quello ch einvoca la 
+	 * funzione con i dati del prestitp passato in ingresso
+	 * 
+	 * @param prestito	Prestito dal quale copiare i dati
+	 */
 	public void reset_dati(Prestito prestito) {
 		this.data_fine_prestito=prestito.getData_fine_prestito();
 		this.data_inizio_prestito=prestito.getData_inizio_prestito();
@@ -135,6 +157,11 @@ public class Prestito implements Serializable {
 		this.risorsa=prestito.getRisorsa();
 	}
 	
+	/**
+	 * Controlla che un prestito non sia terminato
+	 * 
+	 * @return	true se la data di fine prestito è superiore a quella attuale false altrimenti
+	 */
 	public boolean is_terminato() {
 		if(this.data_fine_prestito.isBefore(LocalDateTime.now())) {
 			return true;

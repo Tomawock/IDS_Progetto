@@ -8,7 +8,7 @@ import java.util.ArrayList;
 public class Utente implements Serializable{
 	
 	/**
-	 * serve per la serializzazione degli oggetti 
+	 *	Numero seriale per la serializzazione dei dati su File
 	 */
 	private static final long serialVersionUID = 1L;
 	
@@ -19,6 +19,10 @@ public class Utente implements Serializable{
 	private String username;
 	private String password;
 	
+	/**
+	 * Viene creato un nuovo utente i cui dati sono salvati dell'arrayList in ingresso
+	 * @param dati	valori degli attributi del nuovo utente
+	 */
 	public Utente (ArrayList<String> dati) {
 		this.nome = dati.get(0);
 		this.cognome = dati.get(1);
@@ -32,7 +36,6 @@ public class Utente implements Serializable{
 	
 	public Utente(String nome, String cognome, String mail, LocalDateTime data_di_nascita, String c_f,
 			String username, String password) {
-		super();
 		this.nome = nome;
 		this.cognome = cognome;
 		this.mail = mail;
@@ -100,6 +103,9 @@ public class Utente implements Serializable{
 				this.data_di_nascita.getYear() +", Username= " + username + ", Password= $$$ "+ "*****";
 	}
 
+	/**
+	 * Due utenti sono uguali quando hanno lo stesso username
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		Utente u=(Utente) obj;
