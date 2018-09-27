@@ -17,6 +17,8 @@ public class Costanti {
 	
 	public static final int MAX_NUMERO_DI_LIBRI_FRUITORE=3;
 
+	public static final int MAX_NUMERO_DI_FILM_FRUITORE = 2;
+
 	public static String NO_RICERCA= "9999999";
 	
 }
