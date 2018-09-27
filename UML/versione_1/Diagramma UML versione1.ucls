@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<class-diagram version="1.2.2" icons="true" always-add-relationships="false" generalizations="true" realizations="true" 
-  associations="true" dependencies="false" nesting-relationships="true" router="FAN">  
+<class-diagram version="1.2.2" icons="true" automaticImage="PNG" always-add-relationships="false" generalizations="true" 
+  realizations="true" associations="true" dependencies="false" nesting-relationships="true" router="FAN">  
   <class id="1" language="java" name="versione_1.controller.Controller" project="IDS_Progetto" 
     file="/IDS_Progetto/src/versione_1/controller/Controller.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="109" y="97"/>    
@@ -12,7 +12,7 @@
   </class>  
   <class id="2" language="java" name="versione_1.model.Database_file" project="IDS_Progetto" 
     file="/IDS_Progetto/src/versione_1/model/Database_file.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="566" y="480"/>    
+    <position height="-1" width="-1" x="462" y="496"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -21,7 +21,7 @@
   </class>  
   <class id="3" language="java" name="versione_1.model.Main_v_1" project="IDS_Progetto" 
     file="/IDS_Progetto/src/versione_1/model/Main_v_1.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="600" y="808"/>    
+    <position height="-1" width="-1" x="658" y="546"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -30,7 +30,7 @@
   </class>  
   <class id="4" language="java" name="versione_1.model.Utente" project="IDS_Progetto" 
     file="/IDS_Progetto/src/versione_1/model/Utente.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1027" y="778"/>    
+    <position height="-1" width="-1" x="941" y="760"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -48,7 +48,7 @@
   </class>  
   <interface id="6" language="java" name="versione_1.model.Salvataggio" project="IDS_Progetto" 
     file="/IDS_Progetto/src/versione_1/model/Salvataggio.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="143" y="665"/>    
+    <position height="-1" width="-1" x="161" y="495"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -57,7 +57,7 @@
   </interface>  
   <class id="7" language="java" name="versione_1.model.Operatore" project="IDS_Progetto" 
     file="/IDS_Progetto/src/versione_1/model/Operatore.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1105" y="99"/>    
+    <position height="-1" width="-1" x="1097" y="95"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -74,39 +74,55 @@
     </display>  
   </class>  
   <association id="9">    
-    <end type="SOURCE" refId="5" navigable="false">      
-      <attribute id="10" name="utente"/>      
-      <multiplicity id="11" minimum="0" maximum="1"/>    
+    <end type="SOURCE" refId="1" navigable="false">      
+      <attribute id="10" name="view">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="11" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
     </end>    
-    <end type="TARGET" refId="4" navigable="true"/>    
+    <end type="TARGET" refId="8" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="12">    
-    <end type="SOURCE" refId="7" navigable="false">      
-      <attribute id="13" name="utente"/>      
-      <multiplicity id="14" minimum="0" maximum="1"/>    
+    <end type="SOURCE" refId="5" navigable="false">      
+      <attribute id="13" name="utente">        
+        <position height="0" width="0" x="-86" y="-18"/>      
+      </attribute>      
+      <multiplicity id="14" minimum="0" maximum="1">        
+        <position height="0" width="0" x="-86" y="-18"/>      
+      </multiplicity>    
     </end>    
     <end type="TARGET" refId="4" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="15">    
-    <end type="SOURCE" refId="1" navigable="false">      
-      <attribute id="16" name="db"/>      
-      <multiplicity id="17" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="6" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <realization id="18">    
+  <realization id="15">    
     <end type="SOURCE" refId="2"/>    
     <end type="TARGET" refId="6"/>  
   </realization>  
+  <association id="16">    
+    <end type="SOURCE" refId="7" navigable="false">      
+      <attribute id="17" name="utente">        
+        <position height="0" width="0" x="-86" y="-18"/>      
+      </attribute>      
+      <multiplicity id="18" minimum="0" maximum="1">        
+        <position height="0" width="0" x="-86" y="-18"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="4" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
   <association id="19">    
     <end type="SOURCE" refId="1" navigable="false">      
-      <attribute id="20" name="view"/>      
-      <multiplicity id="21" minimum="0" maximum="1"/>    
+      <attribute id="20" name="db">        
+        <position height="0" width="0" x="18" y="-170"/>      
+      </attribute>      
+      <multiplicity id="21" minimum="0" maximum="1">        
+        <position height="0" width="0" x="18" y="-170"/>      
+      </multiplicity>    
     </end>    
-    <end type="TARGET" refId="8" navigable="true"/>    
+    <end type="TARGET" refId="6" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
