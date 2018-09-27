@@ -9,21 +9,25 @@ import versione_3.view.*;
 
 public class Controller {
 
-	private View view;
-	private Salvataggio db;
+	private View view;		//Parte Grafica
+	private Salvataggio db;	//oggeto che consente la lettura dei dati sui file
 	
 	public Controller() {
 		view=new View();
 		db=new Database_file();
 	}
-		
+	
+	/**
+	 * Funzione principale che consente di accedere come utente o di registarrsi o di terminare l'esecuzione del programma	
+	 */
 	public void log_in(){
-		int valore=view.log_in_scelta();
+		int valore=view.log_in_scelta();//visualizza la view di log in
 		db.aggiorna_validita_fruitori();//elimina eventuali fruitori non validi
-		if (valore== 1) {
+		if (valore== 1) {//Effetto il log in come utente
 			String utente=view.log();
 			String utente_user=utente.split(IO.SEPARATORE_STRINGHE)[0];
 			String utente_psw=utente.split(IO.SEPARATORE_STRINGHE)[1];
+			//controlla che l'utente sia registrato nel Salvataggio
 			if(db.carica_utente(utente_user, utente_psw)==null) {
 				view.scrivi("Utente o passw errati");
 				this.log_in();
@@ -33,13 +37,11 @@ public class Controller {
 				this.user_loggato(db.carica_utente(utente_user, utente_psw));
 			}
 		}
-		else if(valore == 2) {
+		else if(valore == 2) {//Registro un nuovo utente
 			ArrayList<String> nuovo_utente=view.nuova_registrazione();
 			Utente user= new Utente(nuovo_utente);
-			if(!db.is_presente(user)) {
-				//salvataggio su file sempre fare in due passaggi cosi quando si cambia il codice per il db si sperca meno tempo
+			if(!db.is_presente(user)) {//controlla che l'utente non sia gia registrato(NON esistono due utenti con lo stesso username)
 				db.salva_utente(user);
-				//Messaggio coinferma iscrizione
 				this.view.scrivi("Ti sei iscritto correttamente "+user.getUsername());
 			}else {
 				this.view.scrivi("Username già utilizzato Inserirne un'altro");
@@ -47,23 +49,25 @@ public class Controller {
 			//una volta completata l'iscrizione torna al log in
 			this.log_in();
 		}
-		else if (valore ==3) {
+		else if (valore ==3) {//Caso di uscita 
 			return;
 		}
 	}
-
 	
-	
+	/**
+	 * Parte che gestisce il post log in dato un Utente
+	 * @param utente	utente che ha effettuato il log in
+	 */
 	public void user_loggato(Utente utente){
-		int valore=view.log_fruitore_operatore(utente);
-		if (valore== 1) {
+		int valore=view.log_fruitore_operatore(utente);//parte di view per le scelte
+		if (valore== 1) {//Loggare come Fruitore
 			Fruitore fruitore=db.carica_fruitore(utente.getUsername(), utente.getPassword());
 			if(fruitore==null) {
 				view.scrivi("Non sei registrato come fruitore");
 				this.user_loggato(utente);
 			}
 			else {
-				if(!fruitore.is_valido()) {
+				if(!fruitore.is_valido()) {//controlla che sia 
 					this.view.scrivi("La registrazione come fruitore e' scaduta");
 					db.elimina_fruitore(fruitore);//elimina il fruitore
 					this.user_loggato(utente);
@@ -71,7 +75,7 @@ public class Controller {
 			this.fruitore_loggato(fruitore);
 			}
 		}
-		else if(valore == 2) {
+		else if(valore == 2) {//Loggare come Operatore
 			Operatore operatore=db.carica_operatore(utente.getUsername(), utente.getPassword());
 			if(operatore==null) {
 				view.scrivi("Non sei registrato come operatore");
@@ -81,7 +85,7 @@ public class Controller {
 				this.operatore_loggato(operatore);
 			}
 		}
-		else if(valore==3) {
+		else if(valore==3) {//Registra nuovo Fruitore
 			if(db.carica_fruitore(utente.getUsername(), utente.getPassword())!=null) {
 				view.scrivi("Sei gia registrato come fruitore");
 				this.user_loggato(utente);
@@ -97,7 +101,7 @@ public class Controller {
 				this.user_loggato(utente);
 			}
 		}
-		else if(valore==4) {
+		else if(valore==4) {//Registra nuovo Operatore
 			if(db.carica_operatore(utente.getUsername(), utente.getPassword())!=null) {
 				view.scrivi("Sei gia registrato come operatore");
 				this.user_loggato(utente);
@@ -109,22 +113,26 @@ public class Controller {
 				this.user_loggato(utente);
 			}
 		}
-		else if(valore==5) {
+		else if(valore==5) {//Torna alla pagina di log in
 			this.log_in();
 		}
-		else {
+		else {//unused instruction 
 			this.view.scrivi("Errore");
 			this.user_loggato(utente);
 		}
 	}
 
+	/**
+	 * Gestione delle opzioni dell'Operatore
+	 * @param operatore	operatore selezionato sul quale vengono svolti i casi d'uso
+	 */
 	private void operatore_loggato(Operatore operatore) {
 		int scelta = view.operatore_view(operatore);
-		if (scelta==1){
+		if (scelta==1){//Visualizza tutti i fruitori presenti
 			this.view.stampa_fruitori(db.carica_tutti_fruitori());
 			this.operatore_loggato(operatore);
 		}
-		else if(scelta == 2) {//add desc
+		else if(scelta == 2) {//aggiungi descrizione ad una risorsa
 			int id=this.view.ricerca_risorsa_id();
 			Categoria cat=db.carica_root_categorie();
 			Risorsa res=cat.get_risorsa_by_id(cat, id);
@@ -138,7 +146,7 @@ public class Controller {
 			}
 			this.operatore_loggato(operatore);//per continuare iterazioni
 		}
-		else if(scelta == 3) {//rim desc
+		else if(scelta == 3) {//Rimozione descrizione ad una risorsa
 			int id=this.view.ricerca_risorsa_id();
 			Categoria cat=db.carica_root_categorie();
 			Risorsa res=cat.get_risorsa_by_id(cat, id);
@@ -176,15 +184,19 @@ public class Controller {
 			this.user_loggato(operatore.getUtente());
 		}		
 	}
-
+	
+	/**
+	 * Gestione delle opzioni di Fruitore
+	 * @param fruitore Fruitore selezionato sul quale vengono svolti i casi d'uso
+	 */
 	private void fruitore_loggato(Fruitore fruitore) {
 		db.aggiorna_descrizione_prestiti();//serve per avere i prestiti con la descrizione corretta
 		db.aggiorna_validita_prestiti();// contolla ed elimina prestiti scaduti
-		if(fruitore.is_rinnovabile()) {
+		if(fruitore.is_rinnovabile()) {//controlla se il fruitore sta per scadere
 			this.view.scrivi("Scadenza rinnovo vicina ti mancano " + fruitore.get_giorni_scadenza() + " giorni alla scadenza");
 		}
 		int scelta=view.fruitore_view(fruitore);
-		if(scelta ==1) {
+		if(scelta ==1) {//Rinnovo del fruitore
 			if(fruitore.is_rinnovabile()) {
 				db.elimina_fruitore(fruitore);
 				fruitore.rinnova_iscrizione();//rinnova oggetto ma non il db
@@ -200,7 +212,7 @@ public class Controller {
 			Risorsa res=cat.get_risorsa_by_id(cat, id);
 			if(res!=null) {
 				ArrayList<Prestito> prestiti_per_fruitore=db.get_prestiti_per_fruitore_risorsa(fruitore,res);
-				//check se sforo i prestiti
+				//check se sforo il numero massimo di prestiti o se la risorsa selezionata è disponibile
 				if(res instanceof Libro && 
 						prestiti_per_fruitore.size()<Costanti.MAX_NUMERO_DI_LIBRI_FRUITORE &&
 						res.get_disponibili()>0) {
@@ -209,19 +221,21 @@ public class Controller {
 					db.salva_categoria_root(cat);
 					db.salva_prestito(p);
 				}else {
-					if(prestiti_per_fruitore.size()>=Costanti.MAX_NUMERO_DI_LIBRI_FRUITORE ) {
-						this.view.scrivi("Massimo numero di prestiti raggiunto");
+					if(prestiti_per_fruitore.size()>=Costanti.MAX_NUMERO_DI_LIBRI_FRUITORE &&
+							res.get_disponibili()<=0) {
+						this.view.scrivi("Massimo numero di prestiti raggiunto e Risorsa non disponibile");
 					}else if(res.get_disponibili()<=0) {
 						this.view.scrivi("Risorsa non disponibile");
-					}else
-						this.view.scrivi("Massimo numero di prestiti raggiunto e Risorsa non disponibile");
+					}else if(prestiti_per_fruitore.size()>=Costanti.MAX_NUMERO_DI_LIBRI_FRUITORE) {
+						this.view.scrivi("Massimo numero di prestiti raggiunto");
+					}
 				}
 			}else {
 				this.view.scrivi("Risorsa non trovata");
 			}
 			this.fruitore_loggato(fruitore);
 		}
-		else if(scelta==3){//visualizza tutti i prestiti
+		else if(scelta==3){//visualizza tutti i prestiti del fruitore 
 			ArrayList<Prestito> prestiti=db.get_tutti_prestiti_per_fruitore(fruitore);
 			if(!prestiti.isEmpty()) {
 				for(Prestito p:prestiti) {
@@ -245,22 +259,25 @@ public class Controller {
 					esito = "Prestito prorogato";
 				}
 			}
-			this.view.scrivi(esito);
-						
+			this.view.scrivi(esito);		
 			this.fruitore_loggato(fruitore);
 		}else if(scelta==5){//ricerca o visualizza disponibilità Risorsa
 			this.ricerca_o_disponibilita();	
 			this.fruitore_loggato(fruitore);
-		}else if(scelta ==6) {
+		}else if(scelta ==6) {//Torna indietro
 			this.user_loggato(fruitore.getUtente());
 		}else {
 			this.user_loggato(fruitore.getUtente());
 		}
 	}
 
+	/**
+	 * Parte comune al Fruitore e all'Operatore che gestisce la ricerca per descrizione
+	 * o la visualizzazione di disponibilità di una certa risorsa
+	 */
 	private void ricerca_o_disponibilita() {
 		int risultato=this.view.ricerca_o_disponibilita();
-		if(risultato==1) {//ricerca
+		if(risultato==1) {//ricerca per descrizione
 			//manca che prima venga scelta la categoria
 			int ris=this.view.get_sottocategorie_principali();
 			if(ris==1) {//caso dei libri
@@ -279,7 +296,6 @@ public class Controller {
 			}else {
 				this.view.scrivi("Sono disponibili "+ris+" copie");
 			}
-			
 		}
 	}
 }

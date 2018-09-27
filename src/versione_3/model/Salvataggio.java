@@ -135,7 +135,7 @@ public interface Salvataggio {
 	boolean is_presente(Utente utente);
 	
 	/**
-	 * Vengono restituita la categoria principale del salvataggio
+	 * Viene restituita la categoria principale del salvataggio
 	 * 
 	 * @return categoria principale
 	 */
