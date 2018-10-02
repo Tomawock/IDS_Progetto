@@ -14,11 +14,10 @@ public class Categoria implements Serializable{
 		
 	ArrayList<Risorsa> risorse;				//aka dati
 	ArrayList<Categoria> sottocategorie; 	//aka figli
-	Categoria padre;
 	
 	
-	public Categoria(String nome,Categoria padre) {
-		this.padre=padre;
+	
+	public Categoria(String nome) {
 		this.nome = nome;
 	}
 	
@@ -100,7 +99,7 @@ public class Categoria implements Serializable{
 	@Override
 	public boolean equals(Object obj) {
 		Categoria c=(Categoria)obj;
-		if(c.getNome()==this.nome && c.getPadre().getNome().equals(this.getPadre().getNome())) {
+		if(c.getNome()==this.nome) {
 			return true;
 		}
 		return false;
@@ -153,13 +152,4 @@ public class Categoria implements Serializable{
 	public void setSottocategorie(ArrayList<Categoria> sottocategorie) {
 		this.sottocategorie = sottocategorie;
 	}
-
-	public Categoria getPadre() {
-		return padre;
-	}
-
-	public void setPadre(Categoria padre) {
-		this.padre = padre;
-	}
-	
 }

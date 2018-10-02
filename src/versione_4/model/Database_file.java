@@ -378,7 +378,7 @@ public class Database_file implements Salvataggio{
 		//crea il file nel percorso se non e presente
 		IO.CreaFile(Database_file.PERCORSO_FILE_CATEGORIE);
 		//creo arraylist per gli utenti 
-		Categoria root =new Categoria("",null);
+		Categoria root =new Categoria("");
 		// Deserialization 
 	    try {    
 	        // Reading the object from a file 

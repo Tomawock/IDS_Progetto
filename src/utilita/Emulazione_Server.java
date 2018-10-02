@@ -12,21 +12,19 @@ public class Emulazione_Server {
 		
 		
 		
-		Categoria risorse=new Categoria("File_multimediali",null);
+		Categoria risorse=new Categoria("File_multimediali");
 		
-		Categoria libri=new Categoria("Libri",risorse);
-		Categoria film=new Categoria("Film",risorse);
+		Categoria libri=new Categoria("Libri");
+		Categoria film=new Categoria("Film");
 		
 		risorse.add_sottocategoria(libri);
 		risorse.add_sottocategoria(film);
 		//cartella libri
-		Categoria horror=new Categoria("Horror",libri);
-		Categoria fantasy=new Categoria("Fantasy",libri);
+		Categoria horror=new Categoria("Horror");
+		Categoria fantasy=new Categoria("Fantasy");
 		
-		Categoria horror_f=new Categoria("Horror",film);
-		Categoria fantasy_f=new Categoria("Fantasy",film);
-		
-		Categoria horror_splatter=new Categoria("Horror Splatter",horror_f);
+		Categoria horror_f=new Categoria("Horror");
+		Categoria fantasy_f=new Categoria("Fantasy");
 		
 		Utente u=new Utente("test", "test", "test",  LocalDateTime.of(1999,12,12,0,0) ,"test", "test", "test");
 		Utente u2=new Utente("test2", "test2", "test2",  LocalDateTime.of(1999,12,12,0,0) ,"test2", "test2", "test2");
@@ -43,7 +41,6 @@ public class Emulazione_Server {
 		
 		film.add_sottocategoria(horror_f);
 		film.add_sottocategoria(fantasy_f);
-		horror_f.add_sottocategoria(horror_splatter);
 		
 		Risorsa r1=new Libro(1,1);
 		Risorsa r2=new Libro(2,3);
@@ -98,13 +95,10 @@ public class Emulazione_Server {
 		libri.get_sottocategoria_by_name(libri, "Fantasy").add_risorsa(r3);
 		libri.get_sottocategoria_by_name(libri, "Fantasy").add_risorsa(r4);
 		
-		
-		film.get_sottocategoria_by_name(horror_splatter, "Horror Splatter").add_risorsa(r5);
-		film.get_sottocategoria_by_name(horror_f, "Horror").add_risorsa(r6);
+		film.get_sottocategoria_by_name(film, "Horror").add_risorsa(r5);
+		film.get_sottocategoria_by_name(film, "Horror").add_risorsa(r6);
 		film.get_sottocategoria_by_name(film, "Fantasy").add_risorsa(r7);
 		film.get_sottocategoria_by_name(film, "Fantasy").add_risorsa(r8);
-		
-		
 //		fantasy.add_risorsa(r1);
 //		fantasy.add_risorsa(r3);
 //		horror.add_risorsa(r2);
@@ -121,12 +115,6 @@ public class Emulazione_Server {
 		db.reset_operatori(new ArrayList<>(Arrays.asList(o,o2)));
 		db.reset_prestiti(new ArrayList<>(Arrays.asList(p,p2)));
 		db.salva_categoria_root(risorse);
-		
-		ArrayList<Risorsa> ris=new ArrayList<>();
-		film.carica_tutte_risorse(horror_f, ris);
-		for(Risorsa r:ris) {
-			System.out.println(r.toString());
-		}
 	}
 
 }
