@@ -179,7 +179,7 @@ public class Controller {
 		else if(scelta == 5) {//ricerca o visualizza copie
 			this.ricerca_o_disponibilita();	
 			this.operatore_loggato(operatore);//per continuare iterazioni
-		}else if (scelta==6) {
+		}else if (scelta==6) {//torna indietro
 			this.user_loggato(operatore.getUtente());
 		}
 		else {
