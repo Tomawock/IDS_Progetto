@@ -36,5 +36,4 @@ public class Operatore implements Serializable{
 		}else
 			return false;
 	}
-	
 }

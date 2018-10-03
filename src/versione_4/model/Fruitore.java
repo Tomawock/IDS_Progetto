@@ -141,6 +141,7 @@ public class Fruitore implements Serializable{
 		}else
 			return false;
 	}
+	
 	/**
 	 * Funzione che aggiorna la data di iscrizione,di fine iscrizione e di rinnovo 
 	 * 		la data di iscrizione è quella odierna 
@@ -159,6 +160,4 @@ public class Fruitore implements Serializable{
 		
 		this.controllo_validia();
 	}
-	
-	
 }
