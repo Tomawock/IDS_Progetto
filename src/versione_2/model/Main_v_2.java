@@ -14,10 +14,10 @@ public class Main_v_2 {
 		libri.add_sottocategoria(horror);
 		libri.add_sottocategoria(fantasy);
 		
-		Risorsa r1=new Libro(1);
-		Risorsa r2=new Libro(2);
-		Risorsa r3=new Libro(3);
-		Risorsa r4=new Libro(4);
+		Risorsa r1=new Libro(1,1);
+		Risorsa r2=new Libro(2,3);
+		Risorsa r3=new Libro(3,4);
+		Risorsa r4=new Libro(4,4);
 		
 		
 		fantasy.add_risorsa(r1);

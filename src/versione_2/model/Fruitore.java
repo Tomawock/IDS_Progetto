@@ -9,7 +9,7 @@ import java.io.Serializable;
 public class Fruitore implements Serializable{
 
 	/**
-	 * 
+	 * Numero seriale per la serializzazione dei dati su File
 	 */
 	private static final long serialVersionUID = 2L;
 
@@ -23,11 +23,13 @@ public class Fruitore implements Serializable{
 	private boolean rinnovabile;
 	
 	
-	
-	//viene creato un nuovo fruitore con tutti i dati dell'utente in piu' :
-	//la data d'iscrizione = data attuale
-	//data fine iscrizione e' tra 5 anni, (considerando anche l'ora e i minuti)
-	//data rinnovo iscrizione e' = data fine iscrizione - 10 giorni prima della scadenza (costante)
+	/**
+	 * Viene creato un nuovo fruitore con tutti i dati dell'utente
+	 * vengono inoltre settate le date di iscrizione, fine iscrizione e di rinnovo,
+	 * vengono impostate le variabili di validità e rinnovabilità in base alla data di iscrizione
+	 * 
+	 * @param utente	Utente che diventa Fruitore
+	 */
 	public Fruitore(Utente utente) {
 		this.rinnovabile=false;
 		this.valido=false;
@@ -37,6 +39,12 @@ public class Fruitore implements Serializable{
 		
 	}
 	
+	/**
+	 * Restituisce i giorni che mancano alla scadenza dell'iscrizione
+	 * 
+	 * @return 	il numero di giorni mancanti alla data di scadenza o 
+	 * 			-1 nel caso in cui il fruitore non possa ancora rinnovare la sua iscizione
+	 */
 	public int get_giorni_scadenza() {
 		if(!this.rinnovabile) {
 			return -1;//caso in cui non sei nel periodo di rinnovabilità
@@ -45,6 +53,10 @@ public class Fruitore implements Serializable{
 		}
 	}
 	
+	/**
+	 * Funzione che controlla la validità e la rinnovabilità di un fruitore
+	 * e aggiorna le variabili di controllo di validità e rinnovabilità
+	 */
 	public void controllo_validia() {
 		if (this.data_fine_iscrizione.isAfter(LocalDateTime.now())) {
 			this.valido=true;
@@ -95,18 +107,31 @@ public class Fruitore implements Serializable{
 				", Data di Fine Iscrizione: "+ data_fine_iscrizione.getDayOfMonth()+"/"+data_fine_iscrizione.getMonth().getValue()+"/"+data_fine_iscrizione.getYear()+
 				", Data di Rinnovo Iscrizione: " + data_rinnovo_iscrizione.getDayOfMonth()+"/"+data_rinnovo_iscrizione.getMonth().getValue()+"/"+data_rinnovo_iscrizione.getYear());
 	}
-		
+	
+	/**
+	 * Controlla che il fruitore sia valido e ne restituisce il valore
+	 * 	
+	 * @return true se è valido false altrimenti
+	 */
 	public boolean is_valido() {
 		this.controllo_validia();
 		return valido;
 	}
 
+	/**
+	 * Controlla che il fruitore sia rinnovabile e ne restituisce il valore
+	 * 	
+	 * @return true se è rinnovabile false altrimenti
+	 */
 	public boolean is_rinnovabile() {
 		this.controllo_validia();
 		return rinnovabile;
 	}
 
-	
+	/**
+	 * Due fruitori sono uguali quando hanno lo stesso username 
+	 * il quale è legato all'utente con cui sono stati creati
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		Fruitore f=(Fruitore) obj;
@@ -116,23 +141,18 @@ public class Fruitore implements Serializable{
 		}else
 			return false;
 	}
-
-	public static void main(String[] args) {
-		String nome = "NomeTest";
-		String cognome = "COgnomeTest";
-		String mail = "MAILTEST";
-		LocalDateTime data_di_nascita = LocalDateTime.now();
-		String c_f = "CODICEFISCALETEST";
-		String username = "USERNAMETEST";
-		String password = "PASSWORDTEST";
-		
-		Utente u = new Utente(nome,cognome,mail,data_di_nascita,c_f,username,password);
-		Fruitore f = new Fruitore(u);
-		System.out.print(f.toString());	
-		
-	}
-
+	
+	/**
+	 * Funzione che aggiorna la data di iscrizione,di fine iscrizione e di rinnovo 
+	 * 		la data di iscrizione è quella odierna 
+	 * 		la data di fine iscrizione è quella odierna piu una costante definita a priori
+	 * 		la data di rinnovo è quella di fine iscrizione meno una costante definita a priori
+	 * 
+	 * NON EFFETTA CONTROLLI SUL FATTO CHE UN FRUITORE SIA RINNOVABILE
+	 * 
+	 */
 	public void rinnova_iscrizione() {
+		
 		this.data_iscrizione = LocalDateTime.now();
 		this.data_fine_iscrizione = this.data_iscrizione.plusYears(Costanti.SCADENZA_TERMINE_FRUITORE);
 		
@@ -140,6 +160,4 @@ public class Fruitore implements Serializable{
 		
 		this.controllo_validia();
 	}
-	
-	
 }

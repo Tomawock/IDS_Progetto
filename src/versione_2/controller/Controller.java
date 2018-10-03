@@ -120,7 +120,7 @@ public class Controller {
 	private void operatore_loggato(Operatore operatore) {
 		int scelta = view.operatore_view(operatore);
 		if (scelta==1) {
-			this.view.stampa_fruitori(operatore.visualizza_fruitori());
+			this.view.stampa_fruitori(db.carica_tutti_fruitori());
 			this.operatore_loggato(operatore);
 		}
 		else if (scelta==2){
@@ -135,9 +135,6 @@ public class Controller {
 					res.aggiungi_descrizione(this.view.nuova_descrizione_libro());
 					db.salva_categoria_root(cat);
 				}
-				else if(res instanceof Film) {
-					res.aggiungi_descrizione(this.view.nuova_descrizione_film());
-				}
 			}else {
 				this.view.scrivi("Risorsa non trovata");
 			}
@@ -151,9 +148,6 @@ public class Controller {
 				if(res instanceof Libro) {
 					res.rimuovi_descrizione();
 					db.salva_categoria_root(cat);
-				}
-				else if(res instanceof Film) {
-					res.aggiungi_descrizione(this.view.nuova_descrizione_film());
 				}
 			}else {
 				this.view.scrivi("Risorsa non trovata");

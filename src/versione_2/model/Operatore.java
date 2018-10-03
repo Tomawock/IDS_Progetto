@@ -1,14 +1,14 @@
 package versione_2.model;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 
 public class Operatore implements Serializable{
 
 	/**
-	 * 
+	 * Numero seriale per la serializzazione dei dati su File
 	 */
 	private static final long serialVersionUID = 3L;
+	
 	private Utente utente;
 	
 	public Operatore(Utente utente) {
@@ -19,21 +19,14 @@ public class Operatore implements Serializable{
 	public Utente getUtente() {
 		return utente;
 	}
-	/**
-	 * Legge dal database locale tutti i fruitori 
-	 * @return insieme di tutti i Fruitori nel DB
-	 */
-	public ArrayList<Fruitore> visualizza_fruitori(){
-		//nel caso in cui si cambi il salvataggio cambiare il costruttore con quello desiterato dall'interfaccia
-		Salvataggio db= new Database_file();
-		return db.carica_tutti_fruitori();
-	}
 
 	@Override
 	public String toString() {
-		return "Operatore + " + this.utente.getUsername();
+		return "Operatore " + this.utente.getUsername();
 	}
-	
+	/**
+	 * Due operatori sono ugali quando il loro utente associato ha lo stesso username
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		Operatore o=(Operatore) obj;
@@ -43,5 +36,4 @@ public class Operatore implements Serializable{
 		}else
 			return false;
 	}
-	
 }

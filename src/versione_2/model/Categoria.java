@@ -6,14 +6,14 @@ import java.util.ArrayList;
 public class Categoria implements Serializable{
 	
 	/**
-	 * 
+	 * Numero seriale per la serializzazione dei dati su File
 	 */
 	private static final long serialVersionUID = 4L;
 
 	private String nome;
 		
-	ArrayList<Risorsa> risorse;
-	ArrayList<Categoria> sottocategorie; 
+	ArrayList<Risorsa> risorse;				//aka dati
+	ArrayList<Categoria> sottocategorie; 	//aka figli
 	
 	
 	
@@ -21,6 +21,10 @@ public class Categoria implements Serializable{
 		this.nome = nome;
 	}
 	
+	/**
+	 * Viene agginta una risorsa in questa categoria
+	 * @param risorsa nel caso sia null, viene creato anche l'array lists che la contiene
+	 */
 	public void add_risorsa(Risorsa risorsa) {
 		if(risorse==null) {
 			this.risorse=new ArrayList<Risorsa>();
@@ -29,6 +33,10 @@ public class Categoria implements Serializable{
 			this.risorse.add(risorsa);
 	}
 	
+	/**
+	 * Viene agginta una sottocategoria in questa categoria(sottocategria= sottocartella sul server)
+	 * @param categoria nel caso sia null, viene creato anche l'array lists che la contiene
+	 */
 	public void add_sottocategoria(Categoria categoria) {
 		if(sottocategorie==null) {
 			this.sottocategorie=new ArrayList<Categoria>();
@@ -39,13 +47,8 @@ public class Categoria implements Serializable{
 	
 	/**
 	 * La funzione è ricorsiva se ci sono due categorie uguali mi ritorna la prima occorrenza
-	 * 
-	 * 
-	 * 
 	 * si puo migliorare
-	 * 
-	 * 
-	 * 
+
 	 * @param nome nome della sottocategoria
 	 * @return null nel caso non ci siano sottocategorie o non sia stata trovata, 
 	 * 			altrimenti riorna la categoria con il nome preso come input 
@@ -65,9 +68,13 @@ public class Categoria implements Serializable{
 		return null;
 	}
 	
-	
-	
-	
+	/**
+	 * Cerca la risorsa in base al suo ID
+	 * 
+	 * @param base 	Categoria dalla quale incomincia la ricerca della risorsa
+	 * @param id 	id della risorsa da cercare
+	 * @return null nel caso in cui non sia stata trovata la Risorsa corrispondente all'ID preso in ingresso
+	 */
 	public Risorsa get_risorsa_by_id(Categoria base,int id) {
 		if (base.getSottocategorie()==null) {
 			if(base.getRisorse()!=null) {
@@ -86,7 +93,9 @@ public class Categoria implements Serializable{
 		return null;
 	}
 	
-	
+	/**
+	 * Due categorie sono uguali quando hanno lo stesso Nome
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		Categoria c=(Categoria)obj;
@@ -95,7 +104,14 @@ public class Categoria implements Serializable{
 		}
 		return false;
 	}
-
+	
+	/**
+	 * Data una certa categoria riempie risultato con  tutte le risorse presenti nella categoria e nelle sue sotto
+	 * categorie in modo RICORSIVO
+	 * 
+	 * @param root		Categoria dalla quale incomincia la ricerca delle risorse
+	 * @param risultato	Parametro che contiene tutte le risorse della categoria root e sottocategorie di essa
+	 */
 	public void carica_tutte_risorse(Categoria root,ArrayList<Risorsa> risultato) {
 		if (root.getRisorse()!=null && risultato!=null) {
 			risultato.addAll(root.getRisorse());
@@ -107,7 +123,6 @@ public class Categoria implements Serializable{
 			}
 		}
 	}
-
 
 	@Override
 	public String toString() {
@@ -122,7 +137,6 @@ public class Categoria implements Serializable{
 		this.nome = nome;
 	}
 
-	//Serve come visualizza risorse
 	public ArrayList<Risorsa> getRisorse() {
 		return risorse;
 	}
@@ -137,25 +151,5 @@ public class Categoria implements Serializable{
 
 	public void setSottocategorie(ArrayList<Categoria> sottocategorie) {
 		this.sottocategorie = sottocategorie;
-	}
-
-	public static void main(String[] args) {
-		Categoria risorse=new Categoria("Risorse");
-		risorse.add_sottocategoria(new Categoria("Libri"));
-		risorse.add_sottocategoria(new Categoria("Film"));
-		//cartella libri
-		risorse.getSottocategorie().get(0).add_sottocategoria(new Categoria("Horror"));
-		risorse.getSottocategorie().get(0).add_sottocategoria(new Categoria("Fantasy"));
-		//
-		risorse.getSottocategorie().get(1).add_sottocategoria(new Categoria("Documentari"));
-		risorse.getSottocategorie().get(1).add_sottocategoria(new Categoria("Animati"));
-		
-		System.out.println(risorse.get_sottocategoria_by_name(risorse.getSottocategorie().get(0),"Fantasy").toString());
-		
-		//Risorsa in horror
-		risorse.getSottocategorie().get(0).getSottocategorie().get(1).add_risorsa(new Film(1));
-		risorse.getSottocategorie().get(0).getSottocategorie().get(0).add_risorsa(new Libro(2));
-		System.out.println(risorse.get_risorsa_by_id(risorse, 1) instanceof Libro);
-		
 	}
 }
