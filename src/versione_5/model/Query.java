@@ -12,8 +12,6 @@ public class Query {
 	 */
 	Salvataggio db;
 	
-	
-	
 	public Query(Salvataggio db) {
 		this.db = db;
 	}
@@ -31,10 +29,8 @@ public class Query {
 			 if(p.getData_inizio_prestito().getYear()==anno.getYear()) {
 				 res++;
 			 }
-		 }
-		 
+		 } 
 		return res;
-		 
 	 }
 	 
 	 /**
@@ -50,11 +46,9 @@ public class Query {
 			 if(p.getData_inizio_proroga()!=null) {
 				 if(p.getData_inizio_proroga().getYear()==anno.getYear()) {
 					 res++;
-				 }
-				 
+				 } 
 			 }
 		 }
-		 
 		return res; 
 	 }
 	 
@@ -64,38 +58,60 @@ public class Query {
 	  * @param anno solare dentro cui cercare
 	  * @return	la risorsa con il massimo numero di prestiti associati o null altrimenti,
 	  * 		nel caso di parità di massimo ne viene restituito uno solo
-	  *			//TODO una o piu??
+	  *			
 	  */
 	 public Risorsa select_risorsa_con_max_numero_prestiti(LocalDateTime anno) {
 		ArrayList<Prestito> prestiti_archiviati=db.carica_tutti_prestiti();
 		HashMap<Risorsa, Integer> risultato= new HashMap<Risorsa, Integer>();
 		 for(Prestito p:prestiti_archiviati) {//prende tutti i prestiti
-			Risorsa risorsa=p.getRisorsa();//seleziona unarisrsa
+			Risorsa risorsa=p.getRisorsa();//seleziona una risorsa
 			Integer num_ripetizioni_risorsa=0;//valore del conteggio delle ripetizioni della risorsa
 			if(!risultato.containsKey(risorsa)) {//se non contiene la chiave allora è una nuova risorsa altrimenti calcolo gia fatto
 				risultato.put(risorsa, num_ripetizioni_risorsa);
 				for(Prestito p1:prestiti_archiviati){
-					if(p1.getRisorsa().equals(risorsa)) {
+					if(p1.getRisorsa().equals(risorsa) && p1.getData_inizio_prestito().getYear()== anno.getYear()) {
 						num_ripetizioni_risorsa++;
 					}
 				}
 				risultato.put(risorsa, num_ripetizioni_risorsa);//aggiorna l'hash map con il valore delle ripetizioni corretto
 			}
 		 }
-		 //ricerco il massimo nelle coppie risorsa ripetiziine
-		 
-		return risultato;
-		 
+		 //ricerco il massimo nelle coppie risorsa
+		 Map.Entry<Risorsa, Integer> massimo = null;
+
+		 for (Map.Entry<Risorsa, Integer> e : risultato.entrySet())
+		 {
+		     if (massimo == null || e.getValue().compareTo(massimo.getValue()) > 0)
+		     {
+		         massimo = e;
+		     }
+		 }
+		return massimo.getKey();
 	 }
 	 
 	 /**
-	  * Seleziona per ogni fruitore che ha dei prestiti il quantitativo di prestiti effettuati in un anno solare passato in ingresso
+	  * Seleziona per ogni fruitore il quantitativo di prestiti effettuati in un anno solare passato in ingresso
 	  * 
 	  * @param anno solare dentro il cui cercare
 	  * @return un'associazione fra un Fruitore e il numero di prestiti ad esso relativo
 	  */
 	 public HashMap<Fruitore, Integer> select_count_numero_di_prestiti_perogni_fruitore(LocalDateTime anno) {
-		return null;
+		 ArrayList<Prestito> prestiti_archiviati=db.carica_tutti_prestiti();
 		 
+		 HashMap<Fruitore, Integer> risultato= new HashMap<Fruitore, Integer>();
+		 for(Prestito p:prestiti_archiviati) {//prende tutti i prestiti
+			Fruitore fruitore=p.getFruitore();//seleziona un fruitore
+			Integer num_ripetizioni_prestiti=0;//valore del conteggio delle ripetizioni della risorsa
+			if(!risultato.containsKey(fruitore)) {//se non contiene la chiave allora è una nuova risorsa altrimenti calcolo gia fatto
+				risultato.put(fruitore, num_ripetizioni_prestiti);
+				for(Prestito p1:prestiti_archiviati){
+					if(p1.getFruitore().equals(fruitore) && p1.getData_inizio_prestito().getYear()== anno.getYear()) {
+						num_ripetizioni_prestiti++;
+					}
+				}
+				risultato.put(fruitore, num_ripetizioni_prestiti);//aggiorna l'hash map con il valore delle ripetizioni corretto
+			}
+		 }
+		 return risultato;
 	 }
 }

@@ -1,9 +1,13 @@
 package versione_5.model;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public interface Salvataggio {
+	/**
+	 * NB: 	Tutte le classi che implemantano questa interfaccia di salvataggio devono essere
+	 * 		in grado anche di archivare in modo permanenete I FRUITORI, I PRESTITI e LE RISORSE
+	 */
+	
 	
 	/**
 	 * Dato un utente lo salva sul file locale degli utenti

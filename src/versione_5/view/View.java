@@ -47,9 +47,13 @@ public class View {
 				+ "3)Rimuovi Descrizione\n"
 				+ "4)visualizza risorse\n"
 				+ "5)Ricerca o Visualizza disponibilità Risorsa\n"
-				+ "6)Torna indietro");
+				+ "6)Numero di prestiti per anno solare\n"
+				+ "7)Numero di proroghe per anno solare\n"
+				+ "8)Risorsa con il maggior numero di prestiti\n"
+				+ "9)Numero di prestiti per Fruitore\n"
+				+ "10)Torna indietro\n");
 		System.out.println(Costanti.GRECA3);
-		return IO.insert_int(1, 6);
+		return IO.insert_int(1, 10);
 	}
 	
 	public int fruitore_view(Fruitore fruitore) {

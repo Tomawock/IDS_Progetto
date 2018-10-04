@@ -1,6 +1,9 @@
 package versione_5.controller;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import utilita.Costanti;
 import utilita.IO;
@@ -11,10 +14,12 @@ public class Controller {
 
 	private View view;		//Parte Grafica
 	private Salvataggio db;	//oggeto che consente la lettura dei dati sui file
+	private Query query;	//parte delle query
 	
 	public Controller() {
 		view=new View();
 		db=new Database_file();
+		query= new Query(db);
 	}
 	
 	/**
@@ -179,7 +184,22 @@ public class Controller {
 		else if(scelta == 5) {//ricerca o visualizza copie
 			this.ricerca_o_disponibilita();	
 			this.operatore_loggato(operatore);//per continuare iterazioni
-		}else if (scelta==6) {//torna indietro
+		}else if(scelta == 6) {//Numero di prestiti per anno solare 
+			this.view.scrivi("Il numero di prestiti per questo anno solare è di: "+query.count_numero_di_prestiti_per_anno_solare(LocalDateTime.now()));
+			this.operatore_loggato(operatore);//per continuare iterazioni
+		}else if(scelta == 7) {//Numero di proroghe per anno solare
+			this.view.scrivi("Il numero di proroghe effettuate per quest'anno solare è di: "+query.count_numero_di_proroghe_per_anno_solare(LocalDateTime.now()));
+			this.operatore_loggato(operatore);//per continuare iterazioni
+		}else if(scelta == 8) {//Risorsa con il maggior numero di prestiti
+			this.view.scrivi("La risorsa con piu Prestiti per quest'anno solare è:\n"+query.select_risorsa_con_max_numero_prestiti(LocalDateTime.now()).toString());
+			this.operatore_loggato(operatore);//per continuare iterazioni
+		}else if(scelta == 9) {//fruitore e prestiti
+			HashMap<Fruitore, Integer> risultato=query.select_count_numero_di_prestiti_perogni_fruitore(LocalDateTime.now());
+			for (Map.Entry<Fruitore, Integer> e : risultato.entrySet()) {
+				this.view.scrivi("Il fruitore: "+e.getKey().getUtente().getUsername()+" ha effettuato "+e.getValue()+" prestiti");
+			}
+			this.operatore_loggato(operatore);//per continuare iterazioni
+		}else if (scelta==10) {//torna indietro
 			this.user_loggato(operatore.getUtente());
 		}
 		else {

@@ -7,12 +7,18 @@ import java.util.ArrayList;
 import utilita.IO;
 
 public class Database_file implements Salvataggio{
-	
+	//VERSIONE LOCALE DEI DATI
 	public static final String PERCORSO_FILE_UTENTE="src/Local_database/db_utenti";
 	public static final String PERCORSO_FILE_FRUITORE="src/Local_database/db_fruitori";
 	public static final String PERCORSO_FILE_OPERATORE="src/Local_database/db_operatore";
 	public static final String PERCORSO_FILE_CATEGORIE="src/Local_database/db_categorie";
 	public static final String PERCORSO_FILE_PRESTITI="src/Local_database/db_prestiti";
+	//VERSIONE DI ARCHIVIO DEI DATI
+	public static final String PERCORSO_FILE_UTENTE_ARCHIVIO="src/Local_database/db_archivio_utenti";
+	public static final String PERCORSO_FILE_FRUITORE_ARCHIVIO="src/Local_database/db_archivio_fruitori";
+	public static final String PERCORSO_FILE_OPERATORE_ARCHIVIO="src/Local_database/db_archivio_operatore";
+	public static final String PERCORSO_FILE_CATEGORIE_ARCHIVIO="src/Local_database/db_archivio_categorie";
+	public static final String PERCORSO_FILE_PRESTITI_ARCHIVIO="src/Local_database/db_archivio_prestiti";
 
 	@Override
 	public void salva_utente(Utente utente) {
@@ -101,9 +107,6 @@ public class Database_file implements Salvataggio{
         }
 	}
 
-	/**
-	 * @return utente corrispondente o null in caso in cui non è presente 
-	 */
 	@Override
 	public Utente carica_utente(String username, String psw) {
 		ArrayList<Utente> utenti= new ArrayList<Utente>();
@@ -120,9 +123,6 @@ public class Database_file implements Salvataggio{
 		}
 	}
 
-	/**
-	 * @return utente corrispondente o null in caso in cui non è presente 
-	 */
 	@Override
 	public Fruitore carica_fruitore(String username, String psw) {
 		ArrayList<Fruitore> fruitori= new ArrayList<Fruitore>();
@@ -140,9 +140,6 @@ public class Database_file implements Salvataggio{
 		}
 	}
 	
-	/**
-	 * @return utente corrispondente o null in caso in cui non è presente 
-	 */
 	@Override
 	public Operatore carica_operatore(String username, String psw) {
 		ArrayList<Operatore> operatori= new ArrayList<Operatore>();
@@ -479,7 +476,6 @@ public class Database_file implements Salvataggio{
 		}
 		return risultato;
 	}
-
 	
 	@Override
 	public ArrayList<Prestito> carica_tutti_prestiti() {
@@ -524,8 +520,6 @@ public class Database_file implements Salvataggio{
 		this.reset_prestiti(prestiti);
 	}
 	
-	
-
 	@Override
 	public void reset_prestiti(ArrayList<Prestito> prestiti) {
 		//crea il file nel percorso se non e presente
@@ -549,9 +543,6 @@ public class Database_file implements Salvataggio{
 	    }	
 	}
 
-	/**
-	 * Aggiorno il db dei prestiti con i nuovi valori corretti del prestito preso in ingresso
-	 */
 	@Override
 	public void aggiorna_prestito(Prestito prestito) {
 		ArrayList<Prestito> prestiti=this.carica_tutti_prestiti();
@@ -575,7 +566,6 @@ public class Database_file implements Salvataggio{
 		this.reset_prestiti(risultato);		
 	}
 
-	
 	@Override
 	public ArrayList<Risorsa> ricerca_per_descrizione(Risorsa risorsa) {
 		Categoria root=this.carica_root_categorie();
@@ -590,7 +580,6 @@ public class Database_file implements Salvataggio{
 		return risultato;
 	}
 
-	
 	@Override
 	public int get_n_copie_disponibili_by_id(int id) {
 		Categoria root=this.carica_root_categorie();
