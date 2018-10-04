@@ -263,6 +263,8 @@ public class Controller {
 					Risorsa r=p.getRisorsa();
 					if (r instanceof Libro) {
 						this.view.scrivi(((Libro)r).toString());
+					}else if (r instanceof Film) {
+						this.view.scrivi(((Film)r).toString());
 					}
 				}
 			}else {

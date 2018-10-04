@@ -242,6 +242,7 @@ public class Controller {
 						res.add_prestito();
 						db.salva_categoria_root(cat);
 						db.salva_prestito(p);
+						this.view.scrivi("Libro Aggiunto con successo");
 					}else {
 						if(prestiti_per_fruitore.size()>=Costanti.MAX_NUMERO_DI_LIBRI_FRUITORE &&
 								res.get_disponibili()<=0) {
@@ -260,6 +261,7 @@ public class Controller {
 						res.add_prestito();
 						db.salva_categoria_root(cat);
 						db.salva_prestito(p);
+						this.view.scrivi("Film Aggiunto con successo");
 					}else {
 						if(prestiti_per_fruitore.size()>=Costanti.MAX_NUMERO_DI_FILM_FRUITORE &&
 								res.get_disponibili()<=0) {
@@ -283,6 +285,8 @@ public class Controller {
 					Risorsa r=p.getRisorsa();
 					if (r instanceof Libro) {
 						this.view.scrivi(((Libro)r).toString());
+					}else if (r instanceof Film) {
+						this.view.scrivi(((Film)r).toString());
 					}
 				}
 			}else {
