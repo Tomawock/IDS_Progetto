@@ -1,23 +1,29 @@
-package versione_4.model;
+package versione_5.model;
 
-import java.io.*;
+import java.io.EOFException;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 import utilita.IO;
 
-public class Database_file implements Salvataggio{
-	
-	public static final String PERCORSO_FILE_UTENTE="src/Local_database/db_utenti";
-	public static final String PERCORSO_FILE_FRUITORE="src/Local_database/db_fruitori";
-	public static final String PERCORSO_FILE_OPERATORE="src/Local_database/db_operatore";
-	public static final String PERCORSO_FILE_CATEGORIE="src/Local_database/db_categorie";
-	public static final String PERCORSO_FILE_PRESTITI="src/Local_database/db_prestiti";
+public class Archivio implements Salvataggio{
 
+	//VERSIONE DI ARCHIVIO DEI DATI
+	public static final String PERCORSO_FILE_UTENTE_ARCHIVIO="src/Archivio/db_archivio_utenti";
+	public static final String PERCORSO_FILE_FRUITORE_ARCHIVIO="src/Archivio/db_archivio_fruitori";
+	public static final String PERCORSO_FILE_OPERATORE_ARCHIVIO="src/Archivio/db_archivio_operatore";
+	public static final String PERCORSO_FILE_CATEGORIE_ARCHIVIO="src/Archivio/db_archivio_categorie";
+	public static final String PERCORSO_FILE_PRESTITI_ARCHIVIO="src/Archivio/db_archivio_prestiti";
+	
 	@Override
 	public void salva_utente(Utente utente) {
 		//crea il file nel percorso se non e presente
-		IO.CreaFile(Database_file.PERCORSO_FILE_UTENTE);
+		IO.CreaFile(Archivio.PERCORSO_FILE_UTENTE_ARCHIVIO);
 		//carica il db e poi aggiungo il singolo utente in coda ad esso e lo salvo
 		ArrayList<Utente> utenti =this.carica_tutti_utenti();
 		if (utenti==null) {
@@ -27,17 +33,13 @@ public class Database_file implements Salvataggio{
 		// Serialization  
         try{    
             //Saving of object in a file 
-            FileOutputStream file = new FileOutputStream(Database_file.PERCORSO_FILE_UTENTE); 
+            FileOutputStream file = new FileOutputStream(Archivio.PERCORSO_FILE_UTENTE_ARCHIVIO); 
             ObjectOutputStream out = new ObjectOutputStream(file); 
               
-            // Method for serialization of object 
             out.writeObject(utenti); 
               
             out.close(); 
             file.close(); 
-              
-            //System.out.println("utente serializzato"); 
-  
         }catch(IOException ex) { 
             System.err.println("IOException is caught"); 
         } 
@@ -46,7 +48,7 @@ public class Database_file implements Salvataggio{
 	@Override
 	public void salva_fruitore(Fruitore fruitore) {
 		//crea il file nel percorso se non e presente
-		IO.CreaFile(Database_file.PERCORSO_FILE_FRUITORE);
+		IO.CreaFile(Archivio.PERCORSO_FILE_FRUITORE_ARCHIVIO);
 		//carica il db e poi aggiungo il singolo utente in coda ad esso e lo salvo
 		ArrayList<Fruitore> fruitori =this.carica_tutti_fruitori();
 		if (fruitori==null) {
@@ -56,7 +58,7 @@ public class Database_file implements Salvataggio{
 		// Serialization  
         try{    
             //Saving of object in a file 
-            FileOutputStream file = new FileOutputStream(Database_file.PERCORSO_FILE_FRUITORE); 
+            FileOutputStream file = new FileOutputStream(Archivio.PERCORSO_FILE_FRUITORE_ARCHIVIO); 
             ObjectOutputStream out = new ObjectOutputStream(file); 
               
             // Method for serialization of object 
@@ -75,7 +77,7 @@ public class Database_file implements Salvataggio{
 	@Override
 	public void salva_operatore(Operatore operatore) {
 		//crea il file nel percorso se non e presente
-		IO.CreaFile(Database_file.PERCORSO_FILE_OPERATORE);
+		IO.CreaFile(Archivio.PERCORSO_FILE_OPERATORE_ARCHIVIO);
 		//carica il db e poi aggiungo il singolo utente in coda ad esso e lo salvo
 		ArrayList<Operatore> operatori =this.carica_tutti_operatori();
 		if (operatori==null) {
@@ -85,7 +87,7 @@ public class Database_file implements Salvataggio{
 		// Serialization  
         try{    
             //Saving of object in a file 
-            FileOutputStream file = new FileOutputStream(Database_file.PERCORSO_FILE_OPERATORE); 
+            FileOutputStream file = new FileOutputStream(Archivio.PERCORSO_FILE_OPERATORE_ARCHIVIO); 
             ObjectOutputStream out = new ObjectOutputStream(file); 
               
             // Method for serialization of object 
@@ -100,11 +102,7 @@ public class Database_file implements Salvataggio{
             System.err.println("IOException is caught1"); 
         }
 	}
-	
-	
-	/**
-	 * @return utente corrispondente o null in caso in cui non è presente 
-	 */
+
 	@Override
 	public Utente carica_utente(String username, String psw) {
 		ArrayList<Utente> utenti= new ArrayList<Utente>();
@@ -121,9 +119,6 @@ public class Database_file implements Salvataggio{
 		}
 	}
 
-	/**
-	 * @return utente corrispondente o null in caso in cui non è presente 
-	 */
 	@Override
 	public Fruitore carica_fruitore(String username, String psw) {
 		ArrayList<Fruitore> fruitori= new ArrayList<Fruitore>();
@@ -141,9 +136,6 @@ public class Database_file implements Salvataggio{
 		}
 	}
 	
-	/**
-	 * @return utente corrispondente o null in caso in cui non è presente 
-	 */
 	@Override
 	public Operatore carica_operatore(String username, String psw) {
 		ArrayList<Operatore> operatori= new ArrayList<Operatore>();
@@ -164,13 +156,13 @@ public class Database_file implements Salvataggio{
 	@Override
 	public ArrayList<Utente> carica_tutti_utenti() {
 		//crea il file nel percorso se non e presente
-		IO.CreaFile(Database_file.PERCORSO_FILE_UTENTE);
+		IO.CreaFile(Archivio.PERCORSO_FILE_UTENTE_ARCHIVIO);
 		//creo arraylist per gli utenti 
 		ArrayList<Utente> utenti =new ArrayList<Utente>();
 		// Deserialization 
         try {    
             // Reading the object from a file 
-            FileInputStream file = new FileInputStream(Database_file.PERCORSO_FILE_UTENTE); 
+            FileInputStream file = new FileInputStream(Archivio.PERCORSO_FILE_UTENTE_ARCHIVIO); 
             ObjectInputStream in = new ObjectInputStream(file); 
               
             // Method for deserialization of object 
@@ -193,13 +185,13 @@ public class Database_file implements Salvataggio{
 	@Override
 	public ArrayList<Fruitore> carica_tutti_fruitori() {
 		//crea il file nel percorso se non e presente
-		IO.CreaFile(Database_file.PERCORSO_FILE_FRUITORE);
+		IO.CreaFile(Archivio.PERCORSO_FILE_FRUITORE_ARCHIVIO);
 		//creo arraylist per gli utenti 
 		ArrayList<Fruitore> fruitori =new ArrayList<Fruitore>();
 		// Deserialization 
         try {    
             // Reading the object from a file 
-            FileInputStream file = new FileInputStream(Database_file.PERCORSO_FILE_FRUITORE); 
+            FileInputStream file = new FileInputStream(Archivio.PERCORSO_FILE_FRUITORE_ARCHIVIO); 
             ObjectInputStream in = new ObjectInputStream(file); 
               
             // Method for deserialization of object 
@@ -222,13 +214,13 @@ public class Database_file implements Salvataggio{
 	@Override
 	public ArrayList<Operatore> carica_tutti_operatori() {
 		//crea il file nel percorso se non e presente
-		IO.CreaFile(Database_file.PERCORSO_FILE_OPERATORE);
+		IO.CreaFile(Archivio.PERCORSO_FILE_OPERATORE_ARCHIVIO);
 		//creo arraylist per gli utenti 
 		ArrayList<Operatore> operatori =new ArrayList<Operatore>();
 		// Deserialization 
         try {    
             // Reading the object from a file 
-            FileInputStream file = new FileInputStream(Database_file.PERCORSO_FILE_OPERATORE); 
+            FileInputStream file = new FileInputStream(Archivio.PERCORSO_FILE_OPERATORE_ARCHIVIO); 
             ObjectInputStream in = new ObjectInputStream(file); 
               
             // Method for deserialization of object 
@@ -288,11 +280,11 @@ public class Database_file implements Salvataggio{
 	@Override
 	public void reset_utenti(ArrayList<Utente> utenti) {
 		//crea il file nel percorso se non e presente
-		IO.CreaFile(Database_file.PERCORSO_FILE_UTENTE);
+		IO.CreaFile(Archivio.PERCORSO_FILE_UTENTE_ARCHIVIO);
 		// Serialization  
         try{    
             //Saving of object in a file 
-            FileOutputStream file = new FileOutputStream(Database_file.PERCORSO_FILE_UTENTE); 
+            FileOutputStream file = new FileOutputStream(Archivio.PERCORSO_FILE_UTENTE_ARCHIVIO); 
             ObjectOutputStream out = new ObjectOutputStream(file); 
               
             // Method for serialization of object 
@@ -311,11 +303,11 @@ public class Database_file implements Salvataggio{
 	@Override
 	public void reset_fruitori(ArrayList<Fruitore> fruitori) {
 		//crea il file nel percorso se non e presente
-		IO.CreaFile(Database_file.PERCORSO_FILE_FRUITORE);
+		IO.CreaFile(Archivio.PERCORSO_FILE_FRUITORE_ARCHIVIO);
 		// Serialization  
         try{    
             //Saving of object in a file 
-            FileOutputStream file = new FileOutputStream(Database_file.PERCORSO_FILE_FRUITORE); 
+            FileOutputStream file = new FileOutputStream(Archivio.PERCORSO_FILE_FRUITORE_ARCHIVIO); 
             ObjectOutputStream out = new ObjectOutputStream(file); 
               
             // Method for serialization of object 
@@ -335,11 +327,11 @@ public class Database_file implements Salvataggio{
 	@Override
 	public void reset_operatori(ArrayList<Operatore> operatori) {
 		//crea il file nel percorso se non e presente
-		IO.CreaFile(Database_file.PERCORSO_FILE_OPERATORE);
+		IO.CreaFile(Archivio.PERCORSO_FILE_OPERATORE_ARCHIVIO);
 		// Serialization  
         try{    
             //Saving of object in a file 
-            FileOutputStream file = new FileOutputStream(Database_file.PERCORSO_FILE_OPERATORE); 
+            FileOutputStream file = new FileOutputStream(Archivio.PERCORSO_FILE_OPERATORE_ARCHIVIO); 
             ObjectOutputStream out = new ObjectOutputStream(file); 
               
             // Method for serialization of object 
@@ -355,7 +347,7 @@ public class Database_file implements Salvataggio{
         }
 		
 	}
-	
+
 	@Override
 	public void aggiorna_validita_fruitori() {
 		ArrayList<Fruitore> fruitori=this.carica_tutti_fruitori();
@@ -377,13 +369,13 @@ public class Database_file implements Salvataggio{
 	@Override
 	public Categoria carica_root_categorie() {
 		//crea il file nel percorso se non e presente
-		IO.CreaFile(Database_file.PERCORSO_FILE_CATEGORIE);
+		IO.CreaFile(Archivio.PERCORSO_FILE_CATEGORIE_ARCHIVIO);
 		//creo arraylist per gli utenti 
 		Categoria root =new Categoria("");
 		// Deserialization 
 	    try {    
 	        // Reading the object from a file 
-	        FileInputStream file = new FileInputStream(Database_file.PERCORSO_FILE_CATEGORIE); 
+	        FileInputStream file = new FileInputStream(Archivio.PERCORSO_FILE_CATEGORIE_ARCHIVIO); 
 	        ObjectInputStream in = new ObjectInputStream(file); 
 	          
 	        // root for deserialization of object 
@@ -406,11 +398,11 @@ public class Database_file implements Salvataggio{
 	@Override
 	public void salva_categoria_root(Categoria root) {
 		//crea il file nel percorso se non e presente
-		IO.CreaFile(Database_file.PERCORSO_FILE_CATEGORIE);
+		IO.CreaFile(Archivio.PERCORSO_FILE_CATEGORIE_ARCHIVIO);
 		// Serialization  
         try{    
             //Saving of object in a file 
-            FileOutputStream file = new FileOutputStream(Database_file.PERCORSO_FILE_CATEGORIE); 
+            FileOutputStream file = new FileOutputStream(Archivio.PERCORSO_FILE_CATEGORIE_ARCHIVIO); 
             ObjectOutputStream out = new ObjectOutputStream(file); 
               
             // Method for serialization of object 
@@ -443,7 +435,7 @@ public class Database_file implements Salvataggio{
 	@Override
 	public void salva_prestito(Prestito prestito) {
 		//crea il file nel percorso se non e presente
-		IO.CreaFile(Database_file.PERCORSO_FILE_PRESTITI);
+		IO.CreaFile(Archivio.PERCORSO_FILE_PRESTITI_ARCHIVIO);
 		//carica il db e poi aggiungo il singolo utente in coda ad esso e lo salvo
 		ArrayList<Prestito> prestiti =this.carica_tutti_prestiti();
 		if (prestiti==null) {
@@ -453,7 +445,7 @@ public class Database_file implements Salvataggio{
 		// Serialization  
         try{    
             //Saving of object in a file 
-            FileOutputStream file = new FileOutputStream(Database_file.PERCORSO_FILE_PRESTITI); 
+            FileOutputStream file = new FileOutputStream(Archivio.PERCORSO_FILE_PRESTITI_ARCHIVIO); 
             ObjectOutputStream out = new ObjectOutputStream(file); 
               
             // Method for serialization of object 
@@ -480,18 +472,17 @@ public class Database_file implements Salvataggio{
 		}
 		return risultato;
 	}
-
 	
 	@Override
 	public ArrayList<Prestito> carica_tutti_prestiti() {
 		//crea il file nel percorso se non e presente
-		IO.CreaFile(Database_file.PERCORSO_FILE_PRESTITI);
+		IO.CreaFile(Archivio.PERCORSO_FILE_PRESTITI_ARCHIVIO);
 		//creo arraylist per gli utenti 
 		ArrayList<Prestito> prestiti =new ArrayList<Prestito>();
 		// Deserialization 
         try {    
             // Reading the object from a file 
-            FileInputStream file = new FileInputStream(Database_file.PERCORSO_FILE_PRESTITI); 
+            FileInputStream file = new FileInputStream(Archivio.PERCORSO_FILE_PRESTITI_ARCHIVIO); 
             ObjectInputStream in = new ObjectInputStream(file); 
               
             // Method for deserialization of object 
@@ -525,16 +516,14 @@ public class Database_file implements Salvataggio{
 		this.reset_prestiti(prestiti);
 	}
 	
-	
-
 	@Override
 	public void reset_prestiti(ArrayList<Prestito> prestiti) {
 		//crea il file nel percorso se non e presente
-		IO.CreaFile(Database_file.PERCORSO_FILE_PRESTITI);
+		IO.CreaFile(Archivio.PERCORSO_FILE_PRESTITI_ARCHIVIO);
 		// Serialization  
 	    try{    
 	        //Saving of object in a file 
-	        FileOutputStream file = new FileOutputStream(Database_file.PERCORSO_FILE_PRESTITI); 
+	        FileOutputStream file = new FileOutputStream(Archivio.PERCORSO_FILE_PRESTITI_ARCHIVIO); 
 	        ObjectOutputStream out = new ObjectOutputStream(file); 
 	          
 	        // Method for serialization of object 
@@ -550,9 +539,6 @@ public class Database_file implements Salvataggio{
 	    }	
 	}
 
-	/**
-	 * Aggiorno il db dei prestiti con i nuovi valori corretti del prestito preso in ingresso
-	 */
 	@Override
 	public void aggiorna_prestito(Prestito prestito) {
 		ArrayList<Prestito> prestiti=this.carica_tutti_prestiti();
@@ -565,6 +551,17 @@ public class Database_file implements Salvataggio{
 	}
 
 	@Override
+	public void aggiorna_fruitore(Fruitore fruitore) {
+		ArrayList<Fruitore> fruitori=this.carica_tutti_fruitori();
+		for(Fruitore p:fruitori) {
+			if(p.equals(fruitore)) {
+				p.reset_dati(fruitore);
+			}
+		}
+		this.reset_fruitori(fruitori);
+	}
+	
+	@Override
 	public void aggiorna_validita_prestiti() {
 		ArrayList<Prestito> prestiti=carica_tutti_prestiti();
 		ArrayList<Prestito> risultato=new ArrayList<>();
@@ -576,7 +573,6 @@ public class Database_file implements Salvataggio{
 		this.reset_prestiti(risultato);		
 	}
 
-	
 	@Override
 	public ArrayList<Risorsa> ricerca_per_descrizione(Risorsa risorsa) {
 		Categoria root=this.carica_root_categorie();
@@ -591,7 +587,6 @@ public class Database_file implements Salvataggio{
 		return risultato;
 	}
 
-	
 	@Override
 	public int get_n_copie_disponibili_by_id(int id) {
 		Categoria root=this.carica_root_categorie();
@@ -602,7 +597,7 @@ public class Database_file implements Salvataggio{
 	}
 
 	public static void main (String[] args) {
-		Database_file db=new Database_file();
+		Archivio db=new Archivio();
 		
 		Utente u=new Utente("test", "test", "test",  LocalDateTime.of(2012,12,12,0,0) ,"test", "test", "test");
 		Utente u2=new Utente("test2", "test2", "test2",  LocalDateTime.of(2012,12,12,0,0) ,"test2", "test2", "test2");

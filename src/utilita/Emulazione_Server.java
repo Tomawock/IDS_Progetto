@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import versione_5.model.*;
+import versione_5.model.Archivio;
 
 public class Emulazione_Server {
 	
@@ -28,9 +29,15 @@ public class Emulazione_Server {
 		
 		Utente u=new Utente("test", "test", "test",  LocalDateTime.of(1999,12,12,0,0) ,"test", "test", "test");
 		Utente u2=new Utente("test2", "test2", "test2",  LocalDateTime.of(1999,12,12,0,0) ,"test2", "test2", "test2");
+		Utente u3=new Utente("test3", "test3", "test3",  LocalDateTime.of(1999,12,12,0,0) ,"test3", "test3", "test3");
+		Utente u4=new Utente("test4", "test4", "test4",  LocalDateTime.of(1999,12,12,0,0) ,"test4", "test4", "test4");
 		
 		Fruitore f=new Fruitore(u);
 		Fruitore f2=new Fruitore(u2);
+		Fruitore f3=new Fruitore(u3);
+		Fruitore f4=new Fruitore(u4);
+		
+		f2.setData_fine_iscrizione(LocalDateTime.now());
 		
 		Operatore o=new Operatore(u);
 		Operatore o2=new Operatore(u2);
@@ -99,21 +106,30 @@ public class Emulazione_Server {
 		film.get_sottocategoria_by_name(film, "Horror").add_risorsa(r6);
 		film.get_sottocategoria_by_name(film, "Fantasy").add_risorsa(r7);
 		film.get_sottocategoria_by_name(film, "Fantasy").add_risorsa(r8);
-//		fantasy.add_risorsa(r1);
-//		fantasy.add_risorsa(r3);
-//		horror.add_risorsa(r2);
-//		horror.add_risorsa(r4);
 		
 		Prestito p=new Prestito(r1, f);
 		Prestito p2=new Prestito(r2, f);
+		Prestito p3=new Prestito(r1, f2);
+		Prestito p4=new Prestito(r7, f3);
+		
+		p3.setData_proroga_prestito(LocalDateTime.now());
+		p4.setData_inizio_proroga(LocalDateTime.now());
 		
 		p.setData_fine_prestito(LocalDateTime.now());
 		
 		Database_file db= new Database_file();
-		db.reset_utenti(new ArrayList<>(Arrays.asList(u,u2)));
-		db.reset_fruitori(new ArrayList<>(Arrays.asList(f,f2)));
+		Archivio ar=new Archivio();
+		//archivio
+		ar.reset_utenti(new ArrayList<>(Arrays.asList(u,u2,u3,u4)));
+		ar.reset_fruitori(new ArrayList<>(Arrays.asList(f,f2,f3,f4)));
+		ar.reset_operatori(new ArrayList<>(Arrays.asList(o,o2)));
+		ar.reset_prestiti(new ArrayList<>(Arrays.asList(p,p2,p3,p4)));
+		ar.salva_categoria_root(risorse);
+		
+		db.reset_utenti(new ArrayList<>(Arrays.asList(u,u2,u3,u4)));
+		db.reset_fruitori(new ArrayList<>(Arrays.asList(f,f2,f3,f4)));
 		db.reset_operatori(new ArrayList<>(Arrays.asList(o,o2)));
-		db.reset_prestiti(new ArrayList<>(Arrays.asList(p,p2)));
+		db.reset_prestiti(new ArrayList<>(Arrays.asList(p,p2,p3,p4)));
 		db.salva_categoria_root(risorse);
 	}
 

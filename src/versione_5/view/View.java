@@ -51,7 +51,7 @@ public class View {
 				+ "7)Numero di proroghe per anno solare\n"
 				+ "8)Risorsa con il maggior numero di prestiti\n"
 				+ "9)Numero di prestiti per Fruitore\n"
-				+ "10)Torna indietro\n");
+				+ "10)Torna indietro");
 		System.out.println(Costanti.GRECA3);
 		return IO.insert_int(1, 10);
 	}
@@ -75,11 +75,11 @@ public class View {
 		System.out.println(Costanti.GRECA2);
 		System.out.println(" **** Inserire Username **** ");
 		System.out.println(Costanti.GRECA2);
-		String user=IO.inKeyBoard(true);
+		String user=IO.insertString();
 		System.out.println(Costanti.GRECA2);
 		System.out.println(" **** Inserire Password **** ");
 		System.out.println(Costanti.GRECA2);
-		String password=IO.inKeyBoard(true);
+		String password=IO.insertString();
 		return user+ IO.SEPARATORE_STRINGHE +password;
 	}
 
@@ -102,11 +102,11 @@ public class View {
 		System.out.println(Costanti.GRECA2);
 		System.out.println(" **** Inserire Titolo **** ");
 		System.out.println(Costanti.GRECA2);
-		dati.add(IO.inKeyBoard(true));
+		dati.add(IO.insertString());
 		System.out.println(Costanti.GRECA2);
 		System.out.println(" **** Inserire Autore **** ");
 		System.out.println(Costanti.GRECA2);
-		dati.add(IO.inKeyBoard(true));
+		dati.add(IO.insertString());
 		System.out.println(Costanti.GRECA2);
 		System.out.println(" **** Inserire Numero di Pagine **** ");
 		dati.add(""+IO.insert_int(0,99999999));
@@ -117,15 +117,15 @@ public class View {
 		System.out.println(Costanti.GRECA2);
 		System.out.println(" **** Inserire Casa Editrice **** ");
 		System.out.println(Costanti.GRECA2);
-		dati.add(IO.inKeyBoard(true));
+		dati.add(IO.insertString());
 		System.out.println(Costanti.GRECA2);
 		System.out.println(" **** Inserire Lingua **** ");
 		System.out.println(Costanti.GRECA2);
-		dati.add(IO.inKeyBoard(true));
+		dati.add(IO.insertString());
 		System.out.println(Costanti.GRECA2);
 		System.out.println(" **** Inserire Genere **** ");
 		System.out.println(Costanti.GRECA2);
-		dati.add(IO.inKeyBoard(true));
+		dati.add(IO.insertString());
 		return dati;
 	}
 	
@@ -134,11 +134,11 @@ public class View {
 		System.out.println(Costanti.GRECA2);
 		System.out.println(" **** Inserire Titolo **** ");
 		System.out.println(Costanti.GRECA2);
-		dati.add(IO.inKeyBoard(true));
+		dati.add(IO.insertString());
 		System.out.println(Costanti.GRECA2);
 		System.out.println(" **** Inserire Regista **** ");
 		System.out.println(Costanti.GRECA2);
-		dati.add(IO.inKeyBoard(true));
+		dati.add(IO.insertString());
 		System.out.println(Costanti.GRECA2);
 		System.out.println(" **** Inserire Durata in minuti **** ");
 		dati.add(""+IO.insert_int(0,99999999));
@@ -149,7 +149,7 @@ public class View {
 		System.out.println(Costanti.GRECA2);
 		System.out.println(" **** Inserire Genere **** ");
 		System.out.println(Costanti.GRECA2);
-		dati.add(IO.inKeyBoard(true));
+		dati.add(IO.insertString());
 		return dati;
 	}
 	
@@ -158,15 +158,15 @@ public class View {
 		System.out.println(Costanti.GRECA2);
 		System.out.println(" **** Inserire Nome **** ");
 		System.out.println(Costanti.GRECA2);
-		dati.add(IO.inKeyBoard(true));
+		dati.add(IO.insertString());
 		System.out.println(Costanti.GRECA2);
 		System.out.println(" **** Inserire Cognome **** ");
 		System.out.println(Costanti.GRECA2);
-		dati.add(IO.inKeyBoard(true));
+		dati.add(IO.insertString());
 		System.out.println(Costanti.GRECA2);
 		System.out.println(" **** Inserire Mail **** ");
 		System.out.println(Costanti.GRECA2);
-		dati.add(IO.inKeyBoard(true));
+		dati.add(IO.insertString());
 		System.out.println(Costanti.GRECA2);
 		System.out.println(" **** Inserire Data di Nascita (compresa fra 1 e 31) **** ");
 		System.out.println(Costanti.GRECA2);
@@ -182,11 +182,11 @@ public class View {
 		System.out.println(Costanti.GRECA2);
 		System.out.println(" **** Inserire Username **** ");
 		System.out.println(Costanti.GRECA2);
-		dati.add(IO.inKeyBoard(true));
+		dati.add(IO.insertString());
 		System.out.println(Costanti.GRECA2);
 		System.out.println(" **** Inserire Password **** ");
 		System.out.println(Costanti.GRECA2);
-		dati.add(IO.inKeyBoard(true));
+		dati.add(IO.insertString());
 		return dati;
 	}
 

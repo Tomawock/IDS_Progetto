@@ -31,6 +31,14 @@ public interface Salvataggio {
 	void salva_operatore(Operatore operatore);
 	
 	/**
+	 * Aggiorna il fruitore presente in locale con i valori del fruitore passato in ingresso 
+	 * nel caso in cui non sia presente non effettua variazioni
+	 * 
+	 * @param fruitore a cui bisogna aggiornare i valori
+	 */
+	void aggiorna_fruitore(Fruitore fruitore);
+	
+	/**
 	 * Dato un insieme di Utenti sovrascrive tutti i dati locali con quelli passati in ingresso
 	 * 
 	 * @param utenti	Insieme di utenti che saranno presenti in locale alla terminazione della funzione
@@ -227,6 +235,5 @@ public interface Salvataggio {
 	 * @param id	risorsa su cui verificare in numero di copie disponibili
 	 * @return		numero copie disponibili risorsa, -1 in caso l'id non sia presente 
 	 */
-	int get_n_copie_disponibili_by_id(int id);
-	
+	int get_n_copie_disponibili_by_id(int id);	
 }
