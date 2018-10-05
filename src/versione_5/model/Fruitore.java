@@ -160,4 +160,18 @@ public class Fruitore implements Serializable{
 		
 		this.controllo_validia();
 	}
+
+	/**
+	 * Aggiorn i dati dell'oggetto con i dati passati in ingresso provenienti da un' altro oggetto
+	 * @param fruitore
+	 */
+	public void reset_dati(Fruitore fruitore) {
+		this.data_fine_iscrizione=fruitore.getData_fine_iscrizione();
+		this.data_iscrizione=fruitore.getData_iscrizione();
+		this.data_rinnovo_iscrizione=fruitore.getData_rinnovo_iscrizione();
+		this.rinnovabile=fruitore.is_rinnovabile();
+		this.utente=fruitore.getUtente();
+		this.valido=fruitore.is_valido();		
+	}
+	
 }
