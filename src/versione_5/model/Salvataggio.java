@@ -31,6 +31,14 @@ public interface Salvataggio {
 	void salva_operatore(Operatore operatore);
 	
 	/**
+	 * Aggiorna il fruitore presente in locale con i valori del fruitore passato in ingresso 
+	 * nel caso in cui non sia presente non effettua variazioni
+	 * 
+	 * @param fruitore a cui bisogna aggiornare i valori
+	 */
+	void aggiorna_fruitore(Fruitore fruitore);
+	
+	/**
 	 * Dato un insieme di Utenti sovrascrive tutti i dati locali con quelli passati in ingresso
 	 * 
 	 * @param utenti	Insieme di utenti che saranno presenti in locale alla terminazione della funzione

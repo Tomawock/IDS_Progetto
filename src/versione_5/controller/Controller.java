@@ -11,14 +11,16 @@ import versione_5.view.*;
 
 public class Controller {
 
-	private View view;		//Parte Grafica
-	private Salvataggio db;	//oggeto che consente la lettura dei dati sui file
-	private Query query;	//parte delle query
+	private View view;				//Parte Grafica
+	private Salvataggio db;			//database locale
+	private Salvataggio archivio;	//parte dell'archivio
+	private Query query;			//parte delle query
 	
 	public Controller() {
 		view=new View();
 		db=new Database_file();
-		query= new Query(db);
+		archivio = new Archivio();
+		query= new Query(archivio);	// le query si basano sull'archivio e non sui dati locali
 	}
 	
 	/**
@@ -46,6 +48,7 @@ public class Controller {
 			Utente user= new Utente(nuovo_utente);
 			if(!db.is_presente(user)) {//controlla che l'utente non sia gia registrato(NON esistono due utenti con lo stesso username)
 				db.salva_utente(user);
+				archivio.salva_utente(user);//Aggiungo l'utente nell'archivio 
 				this.view.scrivi("Ti sei iscritto correttamente "+user.getUsername());
 			}else {
 				this.view.scrivi("Username già utilizzato Inserirne un'altro");
@@ -98,6 +101,7 @@ public class Controller {
 				this.view.scrivi(utente.getUsername()+" sei diventato fruitore");
 				//new Database_file().salva_fruitore(new Fruitore(utente));
 				db.salva_fruitore(new Fruitore(utente));
+				archivio.salva_fruitore(new Fruitore(utente));//salvo nell'archivio
 				this.user_loggato(utente);
 			}
 			else {
@@ -114,6 +118,7 @@ public class Controller {
 				this.view.scrivi(utente.getUsername()+" sei diventato operatore");
 				//new Database_file().salva_operatore(new Operatore(utente));		
 				db.salva_operatore(new Operatore(utente));
+				archivio.salva_operatore(new Operatore(utente));//salvo l'operatore nell'archivio
 				this.user_loggato(utente);
 			}
 		}
@@ -132,7 +137,7 @@ public class Controller {
 	 */
 	private void operatore_loggato(Operatore operatore) {
 		int scelta = view.operatore_view(operatore);
-		if (scelta==1){//Visualizza tutti i fruitori presenti
+		if (scelta==1){//Visualizza tutti i fruitori presenti in locale
 			this.view.stampa_fruitori(db.carica_tutti_fruitori());
 			this.operatore_loggato(operatore);
 		}
@@ -144,10 +149,12 @@ public class Controller {
 				if(res instanceof Libro) {
 					res.aggiungi_descrizione(this.view.nuova_descrizione_libro());
 					db.salva_categoria_root(cat);
+					archivio.salva_categoria_root(cat);//archivia le risorse
 				}
 				if(res instanceof Film) {
 					res.aggiungi_descrizione(this.view.nuova_descrizione_film());
 					db.salva_categoria_root(cat);
+					archivio.salva_categoria_root(cat);//archivia le risorse
 				}
 			}else {
 				this.view.scrivi("Risorsa non trovata");
@@ -160,7 +167,8 @@ public class Controller {
 			Risorsa res=cat.get_risorsa_by_id(cat, id);
 			if(res!=null) {
 				res.rimuovi_descrizione();
-				db.salva_categoria_root(cat);		
+				db.salva_categoria_root(cat);
+				archivio.salva_categoria_root(cat);//aggiona la descrizione in modo corretto anche sull archivio
 			}else {
 				this.view.scrivi("Risorsa non trovata");
 			}
@@ -219,9 +227,10 @@ public class Controller {
 		int scelta=view.fruitore_view(fruitore);
 		if(scelta ==1) {//Rinnovo del fruitore
 			if(fruitore.is_rinnovabile()) {
-				db.elimina_fruitore(fruitore);
+				 
 				fruitore.rinnova_iscrizione();//rinnova oggetto ma non il db
-				db.salva_fruitore(fruitore);
+				archivio.aggiorna_fruitore(fruitore);
+				db.aggiorna_fruitore(fruitore);
 			}
 			else { 
 				view.scrivi("Non puoi ancora rinnovare l'iscrizione");
@@ -240,7 +249,9 @@ public class Controller {
 						Prestito p= new Prestito(res, fruitore);
 						res.add_prestito();
 						db.salva_categoria_root(cat);
-						db.salva_prestito(p);
+						db.salva_prestito(p);//TODO
+						archivio.salva_categoria_root(cat);//salvo nell'archivio le risorse e i l prestito
+						archivio.salva_prestito(p);
 						this.view.scrivi("Libro Aggiunto con successo");
 					}else {
 						if(prestiti_per_fruitore.size()>=Costanti.MAX_NUMERO_DI_LIBRI_FRUITORE &&
@@ -260,6 +271,8 @@ public class Controller {
 						res.add_prestito();
 						db.salva_categoria_root(cat);
 						db.salva_prestito(p);
+						archivio.salva_categoria_root(cat);//salvo nell'archivio le risorse e i l prestito
+						archivio.salva_prestito(p);
 						this.view.scrivi("Film Aggiunto con successo");
 					}else {
 						if(prestiti_per_fruitore.size()>=Costanti.MAX_NUMERO_DI_FILM_FRUITORE &&
@@ -300,6 +313,7 @@ public class Controller {
 			for(Prestito p:prestiti) {
 				if(p.getRisorsa().get_id()==id && p.rinnova()) {
 					db.aggiorna_prestito(p);
+					archivio.aggiorna_prestito(p);
 					esito = "Prestito prorogato";
 				}
 			}
