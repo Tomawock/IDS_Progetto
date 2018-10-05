@@ -2,6 +2,7 @@ package versione_5.model;
 
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
+import java.util.Objects;
 
 import utilita.Costanti;
 import java.io.Serializable;
@@ -141,7 +142,12 @@ public class Fruitore implements Serializable{
 		}else
 			return false;
 	}
-	
+		
+	@Override
+    public int hashCode() {
+        return Objects.hash(this.utente.getUsername());
+    }
+
 	/**
 	 * Funzione che aggiorna la data di iscrizione,di fine iscrizione e di rinnovo 
 	 * 		la data di iscrizione è quella odierna 

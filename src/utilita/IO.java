@@ -163,7 +163,10 @@ public class IO
 	
 	public static String insertString(){
 		String input=inKeyBoard(true);
-		if(input==null) insertString();
+		if(input==null || input.equals("")) {
+			System.out.println("Il valore inserito non è consentito");
+			insertString();
+		}
 		return input;
 	}
 	
