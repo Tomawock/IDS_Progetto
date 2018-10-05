@@ -227,6 +227,5 @@ public interface Salvataggio {
 	 * @param id	risorsa su cui verificare in numero di copie disponibili
 	 * @return		numero copie disponibili risorsa, -1 in caso l'id non sia presente 
 	 */
-	int get_n_copie_disponibili_by_id(int id);
-	
+	int get_n_copie_disponibili_by_id(int id);	
 }

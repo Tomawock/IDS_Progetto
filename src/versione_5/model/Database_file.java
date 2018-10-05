@@ -13,12 +13,6 @@ public class Database_file implements Salvataggio{
 	public static final String PERCORSO_FILE_OPERATORE="src/Local_database/db_operatore";
 	public static final String PERCORSO_FILE_CATEGORIE="src/Local_database/db_categorie";
 	public static final String PERCORSO_FILE_PRESTITI="src/Local_database/db_prestiti";
-	//VERSIONE DI ARCHIVIO DEI DATI
-	public static final String PERCORSO_FILE_UTENTE_ARCHIVIO="src/Local_database/db_archivio_utenti";
-	public static final String PERCORSO_FILE_FRUITORE_ARCHIVIO="src/Local_database/db_archivio_fruitori";
-	public static final String PERCORSO_FILE_OPERATORE_ARCHIVIO="src/Local_database/db_archivio_operatore";
-	public static final String PERCORSO_FILE_CATEGORIE_ARCHIVIO="src/Local_database/db_archivio_categorie";
-	public static final String PERCORSO_FILE_PRESTITI_ARCHIVIO="src/Local_database/db_archivio_prestiti";
 
 	@Override
 	public void salva_utente(Utente utente) {
@@ -47,6 +41,8 @@ public class Database_file implements Salvataggio{
         }catch(IOException ex) { 
             System.err.println("IOException is caught"); 
         } 
+        
+        //Salva l'utente anche sull'archivio
 	}
 
 	@Override
@@ -351,7 +347,7 @@ public class Database_file implements Salvataggio{
         }
 		
 	}
-	
+
 	@Override
 	public void aggiorna_validita_fruitori() {
 		ArrayList<Fruitore> fruitori=this.carica_tutti_fruitori();

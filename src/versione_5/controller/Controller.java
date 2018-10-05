@@ -5,8 +5,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import utilita.Costanti;
-import utilita.IO;
+import utilita.*;
 import versione_5.model.*;
 import versione_5.view.*;
 
