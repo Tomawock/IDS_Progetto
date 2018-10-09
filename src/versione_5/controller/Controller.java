@@ -180,7 +180,7 @@ public class Controller {
 			c.carica_tutte_risorse(c, risultato);
 			if(!risultato.isEmpty()) {
 				for(Risorsa r:risultato) {
-						this.view.scrivi(r.toString());
+						this.view.scrivi(r.toString()+"\n");
 				}
 			}
 			else {
@@ -308,13 +308,15 @@ public class Controller {
 			
 		}else if(scelta==4){//proroga prestito
 			String esito="Prestito non prorogato";
-			int id=this.view.ricerca_risorsa_id();
 			ArrayList<Prestito> prestiti=db.get_tutti_prestiti_per_fruitore(fruitore);
-			for(Prestito p:prestiti) {
-				if(p.getRisorsa().get_id()==id && p.rinnova()) {
-					db.aggiorna_prestito(p);
-					archivio.aggiorna_prestito(p);
+			int num_prestito=this.view.seleziona_prestito_da_prorogare(prestiti);
+			num_prestito--;
+			for(int i=0;i<prestiti.size();i++) {
+				if(i==num_prestito && prestiti.get(i).rinnova()) {
+					db.aggiorna_prestito(prestiti.get(i));
+					archivio.aggiorna_prestito(prestiti.get(i));
 					esito = "Prestito prorogato";
+					this.view.scrivi(esito);
 				}
 			}
 			this.view.scrivi(esito);		
@@ -339,7 +341,8 @@ public class Controller {
 			//manca che prima venga scelta la categoria
 			int ris=this.view.get_sottocategorie_principali();
 			if(ris==1) {//caso dei libri
-				this.view.scrivi("inserire "+Costanti.NO_RICERCA+" nel caso in cui non si voglia ricercare per quel parametro\n");
+				this.view.scrivi("inserire "+Costanti.NO_RICERCA+" nel caso in cui non si voglia ricercare per quel parametro\n"
+						+ "I valori inseriti nella ricerca sono case sensitive\n");
 				ArrayList<String> ricerca=this.view.nuova_descrizione_libro();
 				Libro l=new Libro(0, 0);
 				l.aggiungi_descrizione(ricerca);
@@ -347,7 +350,8 @@ public class Controller {
 				this.view.stampa_risorse(test);
 			}	
 			if(ris==2) {//caso dei film
-				this.view.scrivi("inserire "+Costanti.NO_RICERCA+" nel caso in cui non si voglia ricercare per quel parametro\n");
+				this.view.scrivi("inserire "+Costanti.NO_RICERCA+" nel caso in cui non si voglia ricercare per quel parametro\n"
+						+ "I valori inseriti nella ricerca sono case sensitive\n");
 				ArrayList<String> ricerca=this.view.nuova_descrizione_film();
 				Film f=new Film(0, 0);
 				f.aggiungi_descrizione(ricerca);

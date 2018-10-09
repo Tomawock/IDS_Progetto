@@ -43,7 +43,7 @@ public class Query {
 		 ArrayList<Prestito> prestiti_archiviati=db.carica_tutti_prestiti();//sono tutti i prestiti ? perchè questi sarebbero quelli "locali e non dell'archivio COME DIO CANE LA FAMO STA COSA"
 		 int res=0;
 		 for(Prestito p:prestiti_archiviati) {
-			 if(p.getData_inizio_proroga()!=null) {
+			 if(!p.isMai_prorogato()) {//TODO
 				 if(p.getData_inizio_proroga().getYear()==anno.getYear()) {
 					 res++;
 				 } 

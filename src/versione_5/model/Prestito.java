@@ -168,4 +168,13 @@ public class Prestito implements Serializable {
 		}
 		return false;
 	}
+
+
+	@Override
+	public String toString() {
+		return "Username: "+this.fruitore.getUtente().getUsername()+"\nRisorsa: "+this.risorsa.toString()+"\nData di inizio: "+this.data_inizio_prestito.toString()+"\nE' Rinnovabile? "+String.valueOf(mai_prorogato)+ "\n" ;
+	}
+	
+	
 }
+

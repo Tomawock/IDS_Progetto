@@ -45,8 +45,8 @@ public class View {
 				+ "1)Stampare i fruitore presenti nel database\n"
 				+ "2)Aggiungi descrizione\n"
 				+ "3)Rimuovi Descrizione\n"
-				+ "4)visualizza risorse\n"
-				+ "5)Ricerca o Visualizza disponibilità Risorsa\n"
+				+ "4)Visualizza risorse\n"
+				+ "5)Ricerca o Visualizza disponibilita Risorsa\n"
 				+ "6)Numero di prestiti per anno solare\n"
 				+ "7)Numero di proroghe per anno solare\n"
 				+ "8)Risorsa con il maggior numero di prestiti\n"
@@ -65,7 +65,7 @@ public class View {
 				+ "2)Effettua Prestito\n"
 				+ "3)Visualizza tutti i prestiti\n"
 				+ "4)Prolunga prestito\n"
-				+ "5)Ricerca o Visualizza disponibilità Risorsa\n"
+				+ "5)Ricerca o Visualizza disponibilita Risorsa\n"
 				+ "6)Torna indietro\n");
 		System.out.println(Costanti.GRECA3);
 		return IO.insert_int(1, 6);
@@ -168,7 +168,7 @@ public class View {
 		System.out.println(Costanti.GRECA2);
 		dati.add(IO.insertString());
 		System.out.println(Costanti.GRECA2);
-		System.out.println(" **** Inserire Data di Nascita (compresa fra 1 e 31) **** ");
+		System.out.println(" **** Inserire Giorno di Nascita (compresa fra 1 e 31) **** ");
 		System.out.println(Costanti.GRECA2);
 		dati.add(""+IO.insert_int(1, 31));
 		System.out.println(Costanti.GRECA2);
@@ -195,7 +195,7 @@ public class View {
 		System.out.println(Costanti.GRECA);
 		System.out.println("Cosa vuoi fare?\n"
 				+ "1)Ricerca per descrizione\n"
-				+ "2)Visualizza qunatità disponibili");
+				+ "2)Visualizza quatità disponibili");
 		System.out.println(Costanti.GRECA);
 		return IO.insert_int(1, 2);	
 	}
@@ -215,5 +215,16 @@ public class View {
 				this.scrivi(r.toString());
 			}
 		}
+	}
+
+	public int seleziona_prestito_da_prorogare(ArrayList<Prestito> prestiti) {
+		System.out.println(Costanti.GRECA2);
+		System.out.println(" **** Inserire numero del prestito da prorogare **** ");
+		System.out.println(Costanti.GRECA2);
+		for(int i=0;i< prestiti.size();i++) {
+			int temp=i+1;
+			System.out.println(temp+")"+prestiti.get(i).toString());
+		}
+		return IO.insert_int(1,prestiti.size());
 	}
 }
