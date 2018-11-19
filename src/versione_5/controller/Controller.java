@@ -295,6 +295,9 @@ public class Controller {
 			if(!prestiti.isEmpty()) {
 				for(Prestito p:prestiti) {
 					Risorsa r=p.getRisorsa();
+					//Si puo usare OPC e percio tutto diventa 
+					//this.view.scrivi(r.toString());
+					//al posto di tutti gli instace of
 					if (r instanceof Libro) {
 						this.view.scrivi(((Libro)r).toString());
 					}else if (r instanceof Film) {
