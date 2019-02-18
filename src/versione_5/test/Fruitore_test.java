@@ -16,6 +16,8 @@ class Fruitore_test {
 	private Utente user_diverso;
 	private Utente user_uguale;
 	private Fruitore fruitore;
+	private Fruitore fruitore_uguale;
+	private Fruitore fruitore_diverso;
 	
 	/**
 	 * inizzializzo oggetti per i test
@@ -45,6 +47,8 @@ class Fruitore_test {
 				"password");
 		
 		fruitore =new Fruitore(user);
+		fruitore_uguale =new Fruitore(user_uguale);
+		fruitore_diverso =new Fruitore(user_diverso);
 	}
 	/**
 	 * Test Coverange
@@ -56,7 +60,7 @@ class Fruitore_test {
 	}
 	
 	@Test
-	public void get_giorni_scadenza_dovrebbe_ritornare_uno_se_fruitore_rinnovabile() {
+	public void get_giorni_scadenza_dovrebbe_ritornare_intero_se_fruitore_rinnovabile() {
 		fruitore.setRinnovabile(true);//vuol dire che non si è nel periodo in cui si puo rinnovare la scadenza
 		fruitore.setData_fine_iscrizione(LocalDateTime.now().plusDays(1));
 		assertEquals(1, fruitore.get_giorni_scadenza(),"Fruitore rinnvovabile, implica che posso sapere i giorni alla scdenza");
@@ -85,6 +89,26 @@ class Fruitore_test {
 		assertFalse(fruitore.is_rinnovabile(),"Fruitore con rinnovabilia a false");	
 	}
 
+	@Test
+	public void vero_se_due_fruitori_sono_uguali() {
+		assertTrue(fruitore.equals(fruitore_uguale),"I due Fruitori sono uguali");
+	}
 	
+	@Test
+	public void vero_se_due_fruitori_non_sono_uguali() {
+		assertFalse(fruitore.equals(fruitore_diverso),"I due Fruitori sono diversi");
+	}
+	
+	@Test
+	public void vero_se_reset_dei_dati_con_nuovo_fruitore_corretto() {
+		fruitore.reset_dati(fruitore_diverso);
+		assertTrue(fruitore.getData_fine_iscrizione().equals(fruitore_diverso.getData_fine_iscrizione()),"Il Fruitore è resettato in modo corretto,Data fine iscrizione coincidenti");
+		assertTrue(fruitore.getData_iscrizione().equals(fruitore_diverso.getData_iscrizione()),"Il Fruitore è resettato in modo corretto,Data Iscrizione coincidente");
+		assertTrue(fruitore.getData_rinnovo_iscrizione().equals(fruitore_diverso.getData_rinnovo_iscrizione()),"Il Fruitore è resettato in modo corretto,Data rinnovo coincidente");
+		assertTrue(fruitore.is_rinnovabile()==fruitore_diverso.is_rinnovabile(),"Il Fruitore è resettato in modo corretto,rinnovabilità coincidente");
+		assertTrue(fruitore.getUtente().equals(fruitore_diverso.getUtente()),"Il Fruitore è resettato in modo corretto,Utente coincidente");
+		assertTrue(fruitore.is_valido()==fruitore_diverso.is_valido(),"Il Fruitore è resettato in modo corretto,validità coincidente");
+	}
 
+	
 }
