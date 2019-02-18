@@ -13,7 +13,7 @@ class Operatore_test {
 	 * Test Per cammini di base
 	 */
 	@Test
-	public void true_if_two_operatori_are_the_same() {
+	public void vero_se_due_operatori_sono_uguali() {
 		Utente u_pass= new Utente("test", 
 									"test_c", 
 									"mail",
@@ -39,7 +39,7 @@ class Operatore_test {
 	}
 	
 	@Test
-	public void true_if_two_operatori_are_not_the_same() {
+	public void vero_se_due_operatori_non_sono_uguali() {
 		Utente u_pass= new Utente("test", 
 									"test_c", 
 									"mail",
@@ -66,7 +66,7 @@ class Operatore_test {
 	 * Test boundary value analysis
 	 */
 	@Test
-	public void execute_equals_on_null_constuctor_should_throw_NullPointerException() {
+	public void equals_con_oggetto_nullo_genera_NullPointerException() {
 		Operatore op = new Operatore(null);
 		assertThrows(NullPointerException.class,
 	            ()->{
