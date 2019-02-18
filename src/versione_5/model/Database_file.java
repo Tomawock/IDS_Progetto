@@ -581,7 +581,7 @@ public class Database_file implements Salvataggio{
 		ArrayList<Risorsa> risultato=new ArrayList<>();
 		root.carica_tutte_risorse(root, risorse);
 		for(Risorsa r:risorse) {
-			if(r.getClass().equals(risorsa.getClass()) && r.equals_by_descrizione(risorsa.get_dati())) {
+			if(r.getClass().equals(risorsa.getClass()) && r.equals_by_descrizione(risorsa.get_descrizione())) {
 				risultato.add(r);
 			}
 		}

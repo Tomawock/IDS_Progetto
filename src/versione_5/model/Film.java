@@ -27,9 +27,9 @@ public class Film extends Risorsa{
 
 	@Override
 	public String toString() {
-		return " ***** Titolo Film: " + super.get_dati().get(0) + ", Regista: " + super.get_dati().get(1) + 
-				", Durata in minuti: " + super.get_dati().get(2) + ", Anno di Pubblicazione: " + super.get_dati().get(3)+ 
-				", Genere: " + super.get_dati().get(4)+", "+ super.toString()+"  ***** ";
+		return " ***** Titolo Film: " + super.get_descrizione().get(0) + ", Regista: " + super.get_descrizione().get(1) + 
+				", Durata in minuti: " + super.get_descrizione().get(2) + ", Anno di Pubblicazione: " + super.get_descrizione().get(3)+ 
+				", Genere: " + super.get_descrizione().get(4)+", "+ super.toString()+"  ***** ";
 	}
 
 

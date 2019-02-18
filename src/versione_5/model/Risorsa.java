@@ -64,7 +64,7 @@ public abstract class  Risorsa implements Serializable{
 		this.descrizione=new ArrayList<>();
 	}
 	
-	public ArrayList<String> get_dati(){
+	public ArrayList<String> get_descrizione(){
 		return this.descrizione;
 	}
 	

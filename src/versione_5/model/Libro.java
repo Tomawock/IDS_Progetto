@@ -26,10 +26,10 @@ public class Libro  extends Risorsa{
 	
 	@Override
 	public String toString() {
-		return " ***** Titolo Libro: " + super.get_dati().get(0) + ", Autore: " + super.get_dati().get(1) + 
-				", Numero di Pagine: " + super.get_dati().get(2) + ", Anno di Pubblicazione: " + super.get_dati().get(3)+ 
-				", Casa Editrice: " + super.get_dati().get(4)+ ", Lingua: "	+ super.get_dati().get(5) + 
-				", Genere: " + super.get_dati().get(6) +", "+ super.toString()+"  ***** ";
+		return " ***** Titolo Libro: " + super.get_descrizione().get(0) + ", Autore: " + super.get_descrizione().get(1) + 
+				", Numero di Pagine: " + super.get_descrizione().get(2) + ", Anno di Pubblicazione: " + super.get_descrizione().get(3)+ 
+				", Casa Editrice: " + super.get_descrizione().get(4)+ ", Lingua: "	+ super.get_descrizione().get(5) + 
+				", Genere: " + super.get_descrizione().get(6) +", "+ super.toString()+"  ***** ";
 	}
 
 }
