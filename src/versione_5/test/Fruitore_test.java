@@ -7,6 +7,7 @@ import java.time.LocalDateTime;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import utilita.Costanti;
 import versione_5.model.*;
 
 
@@ -110,5 +111,13 @@ class Fruitore_test {
 		assertTrue(fruitore.is_valido()==fruitore_diverso.is_valido(),"Il Fruitore è resettato in modo corretto,validità coincidente");
 	}
 
+	@Test
+	public void vero_se_rinnova_iscrizione_rinnova_iscrizione_del_fruitore() {
+		LocalDateTime oggi= LocalDateTime.now();
+		fruitore.rinnova_iscrizione();
+		assertTrue(fruitore.getData_iscrizione().getDayOfYear()==oggi.getDayOfYear(),"Data Iscrizione Fissata Correttamente");
+		assertTrue(fruitore.getData_fine_iscrizione().equals(oggi.plusYears(Costanti.SCADENZA_TERMINE_FRUITORE)),"Scadenza fissata Correttamente");
+		assertTrue(fruitore.getData_rinnovo_iscrizione().equals(oggi.plusYears(Costanti.SCADENZA_TERMINE_FRUITORE).minusDays(Costanti.GIORNI_RINNOVO_ISCRIZIONE)),"Inizio periodo rinnovabilita fissato Correttamente");
+	}
 	
 }
