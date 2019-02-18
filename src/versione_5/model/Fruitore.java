@@ -135,7 +135,7 @@ public class Fruitore implements Serializable{
 	 * @return true se è valido false altrimenti
 	 */
 	public boolean is_valido() {
-		this.controllo_validia();
+		this.controllo_validia();// controllo lo stato della valida prima di restituirla
 		return valido;
 	}
 
@@ -145,7 +145,7 @@ public class Fruitore implements Serializable{
 	 * @return true se è rinnovabile false altrimenti
 	 */
 	public boolean is_rinnovabile() {
-		this.controllo_validia();
+		this.controllo_validia();// controllo lo stato della rinnovabilià prima di restituirla
 		return rinnovabile;
 	}
 

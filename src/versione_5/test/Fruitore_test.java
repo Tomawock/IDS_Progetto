@@ -61,5 +61,30 @@ class Fruitore_test {
 		fruitore.setData_fine_iscrizione(LocalDateTime.now().plusDays(1));
 		assertEquals(1, fruitore.get_giorni_scadenza(),"Fruitore rinnvovabile, implica che posso sapere i giorni alla scdenza");
 	}
+	
+	@Test
+	public void controllo_validia_dovrebbe_settare_valido_e_rinnovabile_true_se_data_fine_iscrizione_successiva_ad_oggi_e_se_data_rinnovo_iscrizione_precedente_ad_oggi() {
+		fruitore.setData_fine_iscrizione(LocalDateTime.now().plusDays(1));
+		fruitore.setData_rinnovo_iscrizione(LocalDateTime.now().minusDays(1));
+		assertTrue(fruitore.is_valido(),"Fruitore con validita a true");
+		assertTrue(fruitore.is_rinnovabile(),"Fruitore con rinnovabilia a true");
+	}
+	
+	@Test
+	public void controllo_validia_dovrebbe_settare_valido_true_se_data_fine_iscrizione_successiva_ad_oggi_e_settarerinnovabile_false_se_data_rinnovo_iscrizione_successiva_ad_oggi() {
+		fruitore.setData_fine_iscrizione(LocalDateTime.now().plusDays(1));
+		fruitore.setData_rinnovo_iscrizione(LocalDateTime.now().plusDays(1));
+		assertTrue(fruitore.is_valido(),"Fruitore con validita a true");
+		assertFalse(fruitore.is_rinnovabile(),"Fruitore con rinnovabilia a false");	
+	}
+	
+	@Test
+	public void controllo_validia_dovrebbe_settare_valido_e_rinnovabile_false_se_data_fine_iscrizione_precedente_ad_oggi() {
+		fruitore.setData_fine_iscrizione(LocalDateTime.now().minusDays(1));
+		assertFalse(fruitore.is_valido(),"Fruitore con validita a false");
+		assertFalse(fruitore.is_rinnovabile(),"Fruitore con rinnovabilia a false");	
+	}
+
+	
 
 }
