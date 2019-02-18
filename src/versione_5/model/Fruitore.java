@@ -100,6 +100,26 @@ public class Fruitore implements Serializable{
 	public void setData_rinnovo_iscrizione(LocalDateTime data_rinnovo_iscrizione) {
 		this.data_rinnovo_iscrizione = data_rinnovo_iscrizione;
 	}
+	
+	public boolean isValido() {
+		return valido;
+	}
+
+	public void setValido(boolean valido) {
+		this.valido = valido;
+	}
+
+	public boolean isRinnovabile() {
+		return rinnovabile;
+	}
+
+	public void setRinnovabile(boolean rinnovabile) {
+		this.rinnovabile = rinnovabile;
+	}
+
+	public void setUtente(Utente utente) {
+		this.utente = utente;
+	}
 
 	@Override
 	public String toString() {

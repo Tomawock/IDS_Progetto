@@ -9,11 +9,13 @@ import org.junit.jupiter.api.Test;
 
 import versione_5.model.*;
 
-class Utente_test {
-	
+
+class Fruitore_test {
+
 	private Utente user;
 	private Utente user_diverso;
 	private Utente user_uguale;
+	private Fruitore fruitore;
 	
 	/**
 	 * inizzializzo oggetti per i test
@@ -41,29 +43,23 @@ class Utente_test {
 				"CodiceFiscale",
 				"Username", 
 				"password");
-	}
-	
-	/**
-	 * Test di copertura del codice delle funzioni principali
-	 */
-	@Test
-	public void vero_se_due_utenti_sono_uguali() {
-		assertTrue(user.equals(user_uguale),"I due utenti sono uguali");
-	}
-	
-	@Test
-	public void vero_se_due_utenti_non_sono_uguali() {
-		assertFalse(user.equals(user_diverso),"I due utenti sono diversi");
+		
+		fruitore =new Fruitore(user);
 	}
 	/**
-	 * FIXARE DURANTE REFACTORING 
-	 * creare una funzione di set up non all'interno del costruttore per gli array list
+	 * Test Coverange
 	 */
 	@Test
-	public void costruttore_nullo_genera_NullPointerException() {
-		assertThrows(NullPointerException.class,
-	            ()->{
-	            Utente u =new Utente(null);
-            	});
+	public void get_giorni_scadenza_dovrebbe_ritornare_meno_uno_se_fruitore_non_rinnovabile() {
+		fruitore.setRinnovabile(false);//vuol dire che non si è nel periodo in cui si puo rinnovare la scadenza
+		assertEquals(-1, fruitore.get_giorni_scadenza(),"Fruitore non rinnvovabile, implica che non posso sapere i giorni alla scdenza");
 	}
+	
+	@Test
+	public void get_giorni_scadenza_dovrebbe_ritornare_uno_se_fruitore_rinnovabile() {
+		fruitore.setRinnovabile(true);//vuol dire che non si è nel periodo in cui si puo rinnovare la scadenza
+		fruitore.setData_fine_iscrizione(LocalDateTime.now().plusDays(1));
+		assertEquals(1, fruitore.get_giorni_scadenza(),"Fruitore rinnvovabile, implica che posso sapere i giorni alla scdenza");
+	}
+
 }
