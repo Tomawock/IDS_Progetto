@@ -12,10 +12,12 @@ import versione_5.model.*;
 
 class Categoria_test {
 	
-	Risorsa ris,ris2;
-	Categoria categoria,sotto_categoria;
-	ArrayList<Risorsa> risorse;
-	ArrayList<Categoria> sotto_categorie;
+	private static final String NOT_FOUND="NON trovato";
+	
+	private Risorsa risorsa,risorsa2;
+	private Categoria categoria,sotto_categoria,categoria_match,categoria_uguale,categoria_diversa;
+	private ArrayList<Risorsa> risorse,risorse_con_elementi;
+	private ArrayList<Categoria> sotto_categorie,sottocategorie_con_elementi;
 	
 	/**
 	 * inizzializzo oggetti per i test
@@ -23,14 +25,25 @@ class Categoria_test {
 	@BeforeEach
 	public void setup() {
 		//per i test di code coverange uso Film come classe concreta
-		ris=new Film(1,1);
-		ris2=new Film(2,1);
+		risorsa=new Film(1,1);
+		risorsa2=new Film(2,1);
 		
 		categoria= new Categoria("Test");
+		categoria_match= new Categoria("match");
+		categoria_uguale =new Categoria("Test");
+		categoria_diversa =new Categoria("Diverso");
+		
 		sotto_categoria= new Categoria("Test_sottocategoria");
 		
 		risorse=new ArrayList<>();
 		sotto_categorie = new ArrayList<>();
+		
+		risorse_con_elementi= new ArrayList<>();
+		risorse_con_elementi.add(risorsa);
+		risorse_con_elementi.add(risorsa2);
+		
+		sottocategorie_con_elementi= new ArrayList<>();
+		sottocategorie_con_elementi.add(categoria_match);
 	}
 	
 	/**
@@ -39,14 +52,14 @@ class Categoria_test {
 	@Test
 	public void vero_se_add_risorsa_aggiunge_una_risorsa_arraylist_era_null() {
 		categoria.setRisorse(null);
-		categoria.add_risorsa(ris);
+		categoria.add_risorsa(risorsa);
 		assertFalse(categoria.getRisorse().isEmpty(),"Aggiunta una risorsa alla Categoria, il vettore di base era nullo");
 	}
 	
 	@Test
 	public void vero_se_add_risorsa_aggiunge_una_risorsa_arraylist_non_era_null() {
 		categoria.setRisorse(risorse);
-		categoria.add_risorsa(ris);
+		categoria.add_risorsa(risorsa);
 		assertFalse(categoria.getRisorse().isEmpty(),"Aggiunta una risorsa alla Categoria, il vettore di base non era nullo");
 	}
 	
@@ -64,4 +77,72 @@ class Categoria_test {
 		assertFalse(categoria.getSottocategorie().isEmpty(),"Aggiunge una sottocategoria, il vettore di base non era nullo");
 	}
 	
+	@Test
+	public void vero_se_data_una_categoria_e_se_stessa_get_sottocategoria_by_name_tova_se_stessa(){
+		Categoria risultato=categoria.get_sottocategoria_by_name(categoria, categoria.getNome());
+		assertTrue(risultato.equals(categoria), "Sottocategoria trovata, la categoria cercata era quella base della ricerca");
+	}
+	
+	@Test
+	public void vero_se_categoria_non_ha_sottocategorie_e_non_viene_trovato_match_in_get_sottocategoria_by_name_(){
+		categoria.setSottocategorie(null);
+		Categoria risultato=categoria.get_sottocategoria_by_name(categoria,Categoria_test.NOT_FOUND );
+		assertEquals(null,risultato,"Sottocategoria non trovata perchè non ha sottocategorie");
+	}
+	
+	@Test
+	public void vero_se_data_una_categoria_e_una_presente_nelle_sue_sottocategorie_trova_il_match_in_get_sottocategoria_by_name(){
+		categoria.setSottocategorie(sottocategorie_con_elementi);
+		Categoria risultato=categoria.get_sottocategoria_by_name(categoria, categoria_match.getNome());
+		assertEquals(categoria_match,risultato,"Sottocategoria trovata all'interno delle sotto categorie");
+	}
+	
+	@Test
+	public void vero_se_categoria_ha_sottocategorie_e_non_viene_trovato_match_in_get_sottocategoria_by_name_(){
+		categoria.setSottocategorie(sottocategorie_con_elementi);
+		Categoria risultato=categoria.get_sottocategoria_by_name(categoria, Categoria_test.NOT_FOUND);
+		assertEquals(null,risultato,"Sottocategoria non trovata all'interno delle sotto categorie");
+	}
+	
+	@Test
+	public void vero_se_due_categorie_sono_uguali() {
+		assertTrue(categoria.equals(categoria_uguale),"Due categorie con lo stesso nome sono uguali");
+	}
+	
+	@Test
+	public void vero_se_due_categorie_non_sono_uguali() {
+		assertFalse(categoria.equals(categoria_diversa),"Due categorie con nomi diversi sono diverse");
+	}
+	
+	@Test
+	public void vero_se_carica_tutte_risorse_trova_le_risorse_direttamente_nella_categoria_di_base() {
+		ArrayList<Risorsa> risultato= new ArrayList<>();
+		categoria.add_risorsa(risorsa);
+		categoria.add_risorsa(risorsa2);
+		categoria.carica_tutte_risorse(categoria, risultato);
+		assertEquals(risultato,risorse_con_elementi,"Trovati tutte le risorse nella categoria di base");
+	}
+	
+	@Test
+	public void vero_se_carica_tutte_risorse_trova_le_risorse_nelle_sottocategorie_nella_categoria_di_base() {
+		ArrayList<Risorsa> risultato= new ArrayList<>();
+		categoria.setRisorse(null);
+		categoria.add_sottocategoria(sotto_categoria);
+		sotto_categoria.add_risorsa(risorsa);
+		sotto_categoria.add_risorsa(risorsa2);
+		categoria.carica_tutte_risorse(categoria, risultato);
+		assertEquals(risultato,risorse_con_elementi,"Trovati tutte le risorse nella sottocategoria");
+	}
+	
+	@Test
+	public void vero_se_carica_tutte_risorse_non_carica_risorse_in_qunato_non_presenti_ne_nelle_sottocategorie_ne_nella_categoria_di_base() {
+		ArrayList<Risorsa> risultato= new ArrayList<>();
+		categoria.setRisorse(null);
+		categoria.add_sottocategoria(sotto_categoria);
+		sotto_categoria.setRisorse(null);
+		categoria.carica_tutte_risorse(categoria, risultato);
+		assertTrue(risultato.isEmpty(),"Non sono presenti Risorse nelle categorie");
+	}
+	
+	//5 test per get_risorsa_by_id	
 }

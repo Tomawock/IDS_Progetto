@@ -113,7 +113,7 @@ public class Categoria implements Serializable{
 	 * @param risultato	Parametro che contiene tutte le risorse della categoria root e sottocategorie di essa
 	 */
 	public void carica_tutte_risorse(Categoria root,ArrayList<Risorsa> risultato) {
-		if (root.getRisorse()!=null && risultato!=null) {
+		if (root.getRisorse()!=null && risultato!=null) {//perche risultato != null a che serve ??
 			risultato.addAll(root.getRisorse());
 		}else {
 			if(root.getSottocategorie()!=null) {
