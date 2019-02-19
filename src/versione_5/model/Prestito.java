@@ -142,8 +142,8 @@ public class Prestito implements Serializable {
 	}
 	
 	/**
-	 * Preso un prestito in ingresso resetta i dati di quello ch einvoca la 
-	 * funzione con i dati del prestitp passato in ingresso
+	 * Preso un prestito in ingresso resetta i dati di quello che invoca la 
+	 * funzione con i dati del prestito passato in ingresso
 	 * 
 	 * @param prestito	Prestito dal quale copiare i dati
 	 */
