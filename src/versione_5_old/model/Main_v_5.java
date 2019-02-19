@@ -1,4 +1,4 @@
-package versione_5_refactored.model;
+package versione_5_old.model;
 
 import utilita.Emulazione_Server;
 import versione_5.controller.Controller;
