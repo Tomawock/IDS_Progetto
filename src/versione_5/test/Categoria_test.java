@@ -144,5 +144,43 @@ class Categoria_test {
 		assertTrue(risultato.isEmpty(),"Non sono presenti Risorse nelle categorie");
 	}
 	
-	//5 test per get_risorsa_by_id	
+	@Test
+	public void vero_se_get_risorsa_by_id_trova_la_risorsa_corrispondente_dentro_categoria_base_non_avendo_sottocategorie() {
+		categoria.setSottocategorie(null);
+		categoria.add_risorsa(risorsa);
+		Risorsa risultato= categoria.get_risorsa_by_id(categoria, risorsa.get_id());
+		assertEquals(risorsa,risultato,"TRovata la risorsa corrispondente all'id dentro la categoria di base");
+	}
+	
+	@Test
+	public void vero_se_get_risorsa_by_id_non_trova_la_risorsa_corrispondente_dentro_categoria_base_non_avendo_sottocategorie() {
+		categoria.setSottocategorie(null);
+		categoria.add_risorsa(risorsa);
+		Risorsa risultato= categoria.get_risorsa_by_id(categoria, risorsa2.get_id());
+		assertEquals(null,risultato,"Risorsa non trovata in base all'id dentro la categoria di base");
+	}
+	
+	@Test
+	public void vero_se_get_risorsa_by_id_non_trova_la_risorsa_poiche_risorse_sono_null_dentro_categoria_base_non_avendo_sottocategorie() {
+		categoria.setSottocategorie(null);
+		categoria.setRisorse(null);
+		Risorsa risultato= categoria.get_risorsa_by_id(categoria, risorsa2.get_id());
+		assertEquals(null,risultato,"Risorsa non trovata perche risorse erano nulle nella categoria base");
+	}
+	
+	@Test
+	public void vero_se_get_risorsa_by_id_trova_la_risorsa_dentro_sotto_categoria() {
+		categoria.add_sottocategoria(sotto_categoria);
+		sotto_categoria.add_risorsa(risorsa);
+		Risorsa risultato= categoria.get_risorsa_by_id(categoria, risorsa.get_id());
+		assertEquals(risorsa,risultato,"Risorsa trovata nelle sotto categorie");
+	}
+	
+	@Test
+	public void vero_se_get_risorsa_by_id_non_trova_la_risorsa_dentro_sotto_categoria() {
+		categoria.add_sottocategoria(sotto_categoria);
+		sotto_categoria.add_risorsa(risorsa);
+		Risorsa risultato= categoria.get_risorsa_by_id(categoria, risorsa2.get_id());
+		assertEquals(null,risultato,"Risorsa non trovata nelle sotto categorie");
+	}
 }
