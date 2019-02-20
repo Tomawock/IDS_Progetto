@@ -550,7 +550,6 @@ public class Database_file implements Salvataggio{
 		this.reset_prestiti(prestiti);
 	}
 
-	
 	@Override
 	public void aggiorna_fruitore(Fruitore fruitore) {
 		ArrayList<Fruitore> fruitori=this.carica_tutti_fruitori();
