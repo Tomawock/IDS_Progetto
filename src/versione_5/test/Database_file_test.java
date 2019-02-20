@@ -476,4 +476,178 @@ class Database_file_test {
 		assertEquals(resettato, db.carica_tutti_operatori(),"Il file è stato resettato con gli operatori desiderati");
 	}
 
+	@Test
+	public void vero_se_elimina_utente_non_modifica_il_file_se_non_trova_utente_da_eliminare() {
+		File file_eliminato= new File(Database_file.PERCORSO_FILE_UTENTE);
+		file_eliminato.delete();
+		
+		IO.CreaFile(Database_file.PERCORSO_FILE_UTENTE);
+		
+		db.salva_utente(utente);
+		ArrayList<Utente> prima= new ArrayList<>();
+		prima =db.carica_tutti_utenti();
+		
+		db.elimina_utente(utente_2);
+		ArrayList<Utente> dopo= new ArrayList<>();
+		dopo=db.carica_tutti_utenti();
+		
+		assertEquals(prima,dopo,"Il File non è stato modificato in qunato l'utente da elimanre non era presente");
+	}
+	
+	@Test
+	public void vero_se_elimina_utente_elimina_utente_selezionato() {
+		File file_eliminato= new File(Database_file.PERCORSO_FILE_UTENTE);
+		file_eliminato.delete();
+		
+		IO.CreaFile(Database_file.PERCORSO_FILE_UTENTE);
+		
+		db.salva_utente(utente);
+		
+		db.elimina_utente(utente);
+		ArrayList<Utente> dopo= new ArrayList<>();
+		dopo=db.carica_tutti_utenti();
+		
+		assertTrue(dopo.isEmpty(),"Il File è stato modificato eliminado l'utente selezionato");
+	}
+	
+	@Test
+	public void vero_se_elimina_fruitore_non_modifica_il_file_se_non_trova_fruitore_da_eliminare() {
+		File file_eliminato= new File(Database_file.PERCORSO_FILE_FRUITORE);
+		file_eliminato.delete();
+		
+		IO.CreaFile(Database_file.PERCORSO_FILE_FRUITORE);
+		
+		db.salva_utente(utente);
+		ArrayList<Fruitore> prima= new ArrayList<>();
+		prima =db.carica_tutti_fruitori();
+		
+		db.elimina_fruitore(fruitore_2);
+		ArrayList<Fruitore> dopo= new ArrayList<>();
+		dopo=db.carica_tutti_fruitori();
+		
+		assertEquals(prima,dopo,"Il File non è stato modificato in qunato il fruitore da elimanre non era presente");
+	}
+	
+	@Test
+	public void vero_se_elimina_fruitore_elimina_fruitore_selezionato() {
+		File file_eliminato= new File(Database_file.PERCORSO_FILE_FRUITORE);
+		file_eliminato.delete();
+		
+		IO.CreaFile(Database_file.PERCORSO_FILE_FRUITORE);
+		
+		db.salva_fruitore(fruitore);
+		
+		db.elimina_fruitore(fruitore);
+		ArrayList<Fruitore> dopo= new ArrayList<>();
+		dopo=db.carica_tutti_fruitori();
+		
+		assertTrue(dopo.isEmpty(),"Il File è stato modificato eliminado il fruitore selezionato");
+	}
+	
+	@Test
+	public void vero_se_elimina_operatore_non_modifica_il_file_se_non_trova_fruitore_da_eliminare() {
+		File file_eliminato= new File(Database_file.PERCORSO_FILE_OPERATORE);
+		file_eliminato.delete();
+		
+		IO.CreaFile(Database_file.PERCORSO_FILE_OPERATORE);
+		
+		db.salva_operatore(operatore);
+		ArrayList<Operatore> prima= new ArrayList<>();
+		prima =db.carica_tutti_operatori();
+		
+		db.elimina_operatore(operatore_2);
+		ArrayList<Operatore> dopo= new ArrayList<>();
+		dopo=db.carica_tutti_operatori();
+		
+		assertEquals(prima,dopo,"Il File non è stato modificato in qunato l'operatore da elimanre non era presente");
+	}
+	
+	@Test
+	public void vero_se_elimina_operatore_elimina_operatore_selezionato() {
+		File file_eliminato= new File(Database_file.PERCORSO_FILE_OPERATORE);
+		file_eliminato.delete();
+		
+		IO.CreaFile(Database_file.PERCORSO_FILE_OPERATORE);
+		
+		db.salva_operatore(operatore);
+		
+		db.elimina_operatore(operatore);
+		ArrayList<Operatore> dopo= new ArrayList<>();
+		dopo=db.carica_tutti_operatori();
+		
+		assertTrue(dopo.isEmpty(),"Il File è stato modificato eliminado l'operatore selezionato");
+	}
+	
+	@Test
+	public void vero_se_aggiorna_validita_fruitori_non_elimina_fruitori_non_piu_validi_poiche_non_vi_sono_fruitori_sul_file() {
+		File file_eliminato= new File(Database_file.PERCORSO_FILE_FRUITORE);
+		file_eliminato.delete();
+		
+		IO.CreaFile(Database_file.PERCORSO_FILE_FRUITORE);
+		
+		db.aggiorna_validita_fruitori();
+		
+		assertTrue(db.carica_tutti_fruitori().isEmpty(),"Aggiornare la valida dei fruitori non modifica il file in qunato non vi erano fruitori gia presenti sul file");
+	}
+	
+	@Test
+	public void vero_se_aggiorna_validita_fruitori_non_elimina_fruitori_non_piu_validi_poiche_sono_tutti_validi() {
+		File file_eliminato= new File(Database_file.PERCORSO_FILE_FRUITORE);
+		file_eliminato.delete();
+		
+		IO.CreaFile(Database_file.PERCORSO_FILE_FRUITORE);
+		
+		fruitore.setData_fine_iscrizione(LocalDateTime.now().plusDays(1));
+			
+		db.salva_fruitore(fruitore);
+		ArrayList<Fruitore> prima= new ArrayList<>();
+		prima.add(fruitore);
+		
+		db.aggiorna_validita_fruitori();
+		
+		assertEquals(prima,db.carica_tutti_fruitori(),"Aggiornare la valida dei fruitori non modifica il file in qunato i fruitoti presenti erano tutti validi");
+	}
+	
+	@Test
+	public void vero_se_aggiorna_validita_fruitori_elimina_fruitori_non_piu_validi() {
+		File file_eliminato= new File(Database_file.PERCORSO_FILE_FRUITORE);
+		file_eliminato.delete();
+		
+		IO.CreaFile(Database_file.PERCORSO_FILE_FRUITORE);
+		
+		fruitore.setData_fine_iscrizione(LocalDateTime.now().minusDays(1));//se si mette solo il setvalidita il codice lo ripristina al valore corretto secondo la logica, quindi bisogna avere un oggetto effetivamnete scaduto 
+		
+		db.salva_fruitore(fruitore);
+		ArrayList<Fruitore> prima= new ArrayList<>();
+		prima.add(fruitore);
+		
+		db.aggiorna_validita_fruitori();
+		
+		assertTrue(db.carica_tutti_fruitori().isEmpty(),"Aggiornare la valida dei fruitori modifica il file eliminando i fruitori non piu validi");
+	}
+
+	@Test
+	public void vero_se_is_presente_trova_utente() {
+		File file_eliminato= new File(Database_file.PERCORSO_FILE_UTENTE);
+		file_eliminato.delete();
+		
+		IO.CreaFile(Database_file.PERCORSO_FILE_UTENTE);
+		
+		db.salva_utente(utente);
+		
+		assertTrue(db.is_presente(utente));
+	}
+
+	@Test
+	public void vero_se_is_presente_non_trova_utente() {
+		File file_eliminato= new File(Database_file.PERCORSO_FILE_UTENTE);
+		file_eliminato.delete();
+		
+		IO.CreaFile(Database_file.PERCORSO_FILE_UTENTE);
+		
+		db.salva_utente(utente);
+		
+		assertFalse(db.is_presente(utente_2));
+	}
+
 }
