@@ -650,4 +650,5 @@ class Database_file_test {
 		assertFalse(db.is_presente(utente_2));
 	}
 
+	//mancano 13 funzioni da testare
 }
