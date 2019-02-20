@@ -112,7 +112,7 @@ public class Archivio implements Salvataggio{
 		}
 		else{
 			for(Utente u:utenti) {
-				if (u.getUsername().equals(username)&& u.getPassword().equals(psw))
+				if (u.get_username().equals(username)&& u.get_password().equals(psw))
 					return u;
 			}
 			return null;
@@ -128,8 +128,8 @@ public class Archivio implements Salvataggio{
 		}
 		else{
 			for(Fruitore f:fruitori) {
-				Utente u=f.getUtente();
-				if (u.getUsername().equals(username)&& u.getPassword().equals(psw))
+				Utente u=f.get_utente();
+				if (u.get_username().equals(username)&& u.get_password().equals(psw))
 					return f;
 			}
 			return null;
@@ -145,8 +145,8 @@ public class Archivio implements Salvataggio{
 		}
 		else{
 			for(Operatore o:operatori) {
-				Utente u=o.getUtente();
-				if (u.getUsername().equals(username)&& u.getPassword().equals(psw))
+				Utente u=o.get_utente();
+				if (u.get_username().equals(username)&& u.get_password().equals(psw))
 					return o;
 			}
 			return null;
@@ -424,8 +424,8 @@ public class Archivio implements Salvataggio{
 		ArrayList<Prestito>prestiti=this.carica_tutti_prestiti();
 		ArrayList<Prestito>risultato=new ArrayList<>();
 		for(Prestito p:prestiti) {
-			if(p.getFruitore().equals(fruitore) && 
-					res.getClass().getSimpleName().equals(p.getRisorsa().getClass().getSimpleName())){
+			if(p.get_fruitore().equals(fruitore) && 
+					res.getClass().getSimpleName().equals(p.get_risorsa().getClass().getSimpleName())){
 				risultato.add(p);
 			}
 		}
@@ -466,7 +466,7 @@ public class Archivio implements Salvataggio{
 		ArrayList<Prestito>prestiti=this.carica_tutti_prestiti();
 		ArrayList<Prestito>risultato=new ArrayList<>();
 		for(Prestito p:prestiti) {
-			if(p.getFruitore().equals(fruitore)){
+			if(p.get_fruitore().equals(fruitore)){
 				risultato.add(p);
 			}
 		}
@@ -508,8 +508,8 @@ public class Archivio implements Salvataggio{
 		cat.carica_tutte_risorse(cat, risorse_db);
 		for(Prestito p:prestiti) {
 			for(Risorsa r:risorse_db) {
-				if(p.getRisorsa().equals(r)) {
-					p.setRisorsa(r);
+				if(p.get_risorsa().equals(r)) {
+					p.set_risorsa(r);
 				}
 			}
 		}
@@ -655,17 +655,17 @@ public class Archivio implements Salvataggio{
 		
 		System.out.println("ELIMINA UTENTE TRUE");
 		db.elimina_utente(u);
-		String result3=(db.carica_utente(u.getUsername(),u.getPassword())==null)?"Utente Eliminato":"OK";
+		String result3=(db.carica_utente(u.get_username(),u.get_password())==null)?"Utente Eliminato":"OK";
 		System.out.println(result3);
 		
 		System.out.println("ELIMINA FRUITORE TRUE");
 		db.elimina_fruitore(f);
-		String result4=(db.carica_fruitore(f.getUtente().getUsername(),f.getUtente().getPassword())==null)?"Fruitore Eliminato":"OK";
+		String result4=(db.carica_fruitore(f.get_utente().get_username(),f.get_utente().get_password())==null)?"Fruitore Eliminato":"OK";
 		System.out.println(result4);
 		
 		System.out.println("ELIMINA OPERATORE TRUE");
 		db.elimina_operatore(o);
-		String result5=(db.carica_operatore(o.getUtente().getUsername(),o.getUtente().getPassword())==null)?"Operatore Eliminato":"OK";
+		String result5=(db.carica_operatore(o.get_utente().get_username(),o.get_utente().get_password())==null)?"Operatore Eliminato":"OK";
 		System.out.println(result5);
 		
 	}

@@ -16,13 +16,13 @@ public class Operatore implements Serializable{
 		
 	}
 	
-	public Utente getUtente() {
+	public Utente get_utente() {
 		return utente;
 	}
 
 	@Override
 	public String toString() {
-		return "Operatore " + this.utente.getUsername();
+		return "Operatore " + this.utente.get_username();
 	}
 	/**
 	 * Due operatori sono ugali quando il loro utente associato ha lo stesso username
@@ -30,7 +30,7 @@ public class Operatore implements Serializable{
 	@Override
 	public boolean equals(Object obj) {
 		Operatore o=(Operatore) obj;
-		if(this.getUtente().getUsername().equals(o.getUtente().getUsername()))
+		if(this.get_utente().get_username().equals(o.get_utente().get_username()))
 		{
 			return true;
 		}else

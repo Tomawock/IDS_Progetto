@@ -26,7 +26,7 @@ public class Query {
 		 ArrayList<Prestito> prestiti_archiviati=db.carica_tutti_prestiti();//sono tutti i prestiti ? perchè questi sarebbero quelli "locali e non dell'archivio COME DIO CANE LA FAMO STA COSA"
 		 int res=0;
 		 for(Prestito p:prestiti_archiviati) {
-			 if(p.getData_inizio_prestito().getYear()==anno.getYear()) {
+			 if(p.get_data_inizio_prestito().getYear()==anno.getYear()) {
 				 res++;
 			 }
 		 } 
@@ -43,8 +43,8 @@ public class Query {
 		 ArrayList<Prestito> prestiti_archiviati=db.carica_tutti_prestiti();//sono tutti i prestiti ? perchè questi sarebbero quelli "locali e non dell'archivio COME DIO CANE LA FAMO STA COSA"
 		 int res=0;
 		 for(Prestito p:prestiti_archiviati) {
-			 if(!p.isMai_prorogato()) {//TODO
-				 if(p.getData_inizio_proroga().getYear()==anno.getYear()) {
+			 if(!p.is_mai_prorogato()) {//TODO
+				 if(p.get_data_inizio_proroga().getYear()==anno.getYear()) {
 					 res++;
 				 } 
 			 }
@@ -64,12 +64,12 @@ public class Query {
 		ArrayList<Prestito> prestiti_archiviati=db.carica_tutti_prestiti();
 		HashMap<Risorsa, Integer> risultato= new HashMap<Risorsa, Integer>();
 		 for(Prestito p:prestiti_archiviati) {//prende tutti i prestiti
-			Risorsa risorsa=p.getRisorsa();//seleziona una risorsa
+			Risorsa risorsa=p.get_risorsa();//seleziona una risorsa
 			Integer num_ripetizioni_risorsa=0;//valore del conteggio delle ripetizioni della risorsa
 			if(!risultato.containsKey(risorsa)) {//se non contiene la chiave allora è una nuova risorsa altrimenti calcolo gia fatto
 				risultato.put(risorsa, num_ripetizioni_risorsa);
 				for(Prestito p1:prestiti_archiviati){
-					if(p1.getRisorsa().equals(risorsa) && p1.getData_inizio_prestito().getYear()== anno.getYear()) {
+					if(p1.get_risorsa().equals(risorsa) && p1.get_data_inizio_prestito().getYear()== anno.getYear()) {
 						num_ripetizioni_risorsa++;
 					}
 				}
@@ -100,12 +100,12 @@ public class Query {
 		 
 		 HashMap<Fruitore, Integer> risultato= new HashMap<Fruitore, Integer>();
 		 for(Prestito p:prestiti_archiviati) {//prende tutti i prestiti
-			Fruitore fruitore=p.getFruitore();//seleziona un fruitore
+			Fruitore fruitore=p.get_fruitore();//seleziona un fruitore
 			Integer num_ripetizioni_prestiti=0;//valore del conteggio delle ripetizioni della risorsa
 			if(!risultato.containsKey(fruitore)) {//se non contiene la chiave allora è una nuova risorsa altrimenti calcolo gia fatto
 				risultato.put(fruitore, num_ripetizioni_prestiti);
 				for(Prestito p1:prestiti_archiviati){
-					if(p1.getFruitore().equals(fruitore) && p1.getData_inizio_prestito().getYear()== anno.getYear()) {
+					if(p1.get_fruitore().equals(fruitore) && p1.get_data_inizio_prestito().getYear()== anno.getYear()) {
 						num_ripetizioni_prestiti++;
 					}
 				}

@@ -73,51 +73,43 @@ public class Fruitore implements Serializable{
 		//System.out.println("RINNOVABILE_CICLO::"+this.rinnovabile);
 	}
 
-	public Utente getUtente() {
+	public Utente get_utente() {
 		return utente;
 	}
 
-	public LocalDateTime getData_iscrizione() {
+	public LocalDateTime get_data_iscrizione() {
 		return data_iscrizione;
 	}
 
-	public void setData_iscrizione(LocalDateTime data_iscrizione) {
+	public void set_data_iscrizione(LocalDateTime data_iscrizione) {
 		this.data_iscrizione = data_iscrizione;
 	}
 
-	public LocalDateTime getData_fine_iscrizione() {
+	public LocalDateTime get_data_fine_iscrizione() {
 		return data_fine_iscrizione;
 	}
 
-	public void setData_fine_iscrizione(LocalDateTime data_fine_iscrizione) {
+	public void set_data_fine_iscrizione(LocalDateTime data_fine_iscrizione) {
 		this.data_fine_iscrizione = data_fine_iscrizione;
 	}
 
-	public LocalDateTime getData_rinnovo_iscrizione() {
+	public LocalDateTime get_data_rinnovo_iscrizione() {
 		return data_rinnovo_iscrizione;
 	}
 
-	public void setData_rinnovo_iscrizione(LocalDateTime data_rinnovo_iscrizione) {
+	public void set_data_rinnovo_iscrizione(LocalDateTime data_rinnovo_iscrizione) {
 		this.data_rinnovo_iscrizione = data_rinnovo_iscrizione;
 	}
 	
-	public boolean isValido() {
-		return valido;
-	}
-
-	public void setValido(boolean valido) {
+	public void set_valido(boolean valido) {
 		this.valido = valido;
 	}
 
-	public boolean isRinnovabile() {
-		return rinnovabile;
-	}
-
-	public void setRinnovabile(boolean rinnovabile) {
+	public void set_rinnovabile(boolean rinnovabile) {
 		this.rinnovabile = rinnovabile;
 	}
 
-	public void setUtente(Utente utente) {
+	public void set_utente(Utente utente) {
 		this.utente = utente;
 	}
 
@@ -156,7 +148,7 @@ public class Fruitore implements Serializable{
 	@Override
 	public boolean equals(Object obj) {
 		Fruitore f=(Fruitore) obj;
-		if(this.getUtente().getUsername().equals(f.getUtente().getUsername()))
+		if(this.get_utente().get_username().equals(f.get_utente().get_username()))
 		{
 			return true;
 		}else
@@ -165,7 +157,7 @@ public class Fruitore implements Serializable{
 		
 	@Override
     public int hashCode() {
-        return Objects.hash(this.utente.getUsername());
+        return Objects.hash(this.utente.get_username());
     }
 
 	/**
@@ -192,11 +184,11 @@ public class Fruitore implements Serializable{
 	 * @param fruitore
 	 */
 	public void reset_dati(Fruitore fruitore) {
-		this.data_fine_iscrizione=fruitore.getData_fine_iscrizione();
-		this.data_iscrizione=fruitore.getData_iscrizione();
-		this.data_rinnovo_iscrizione=fruitore.getData_rinnovo_iscrizione();
+		this.data_fine_iscrizione=fruitore.get_data_fine_iscrizione();
+		this.data_iscrizione=fruitore.get_data_iscrizione();
+		this.data_rinnovo_iscrizione=fruitore.get_data_rinnovo_iscrizione();
 		this.rinnovabile=fruitore.is_rinnovabile();
-		this.utente=fruitore.getUtente();
+		this.utente=fruitore.get_utente();
 		this.valido=fruitore.is_valido();		
 	}
 	

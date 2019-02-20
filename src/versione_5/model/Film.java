@@ -21,15 +21,21 @@ public class Film extends Risorsa{
 	 */
 	public Film(int id, int n_licenze) {
 		super(id, n_licenze);
-		// TODO Auto-generated constructor stub
-		super.aggiungi_descrizione(new ArrayList<>(Arrays.asList(Costanti.NO_DESCRIZIONE,Costanti.NO_DESCRIZIONE,Costanti.NO_DESCRIZIONE,Costanti.NO_DESCRIZIONE,Costanti.NO_DESCRIZIONE)));
+		super.aggiungi_descrizione(new ArrayList<>(Arrays.asList(Costanti.NO_DESCRIZIONE,Costanti.NO_DESCRIZIONE,
+				Costanti.NO_DESCRIZIONE,Costanti.NO_DESCRIZIONE,Costanti.NO_DESCRIZIONE)));
 	}
 
 	@Override
 	public String toString() {
 		return " ***** Titolo Film: " + super.get_descrizione().get(0) + ", Regista: " + super.get_descrizione().get(1) + 
 				", Durata in minuti: " + super.get_descrizione().get(2) + ", Anno di Pubblicazione: " + super.get_descrizione().get(3)+ 
-				", Genere: " + super.get_descrizione().get(4)+", "+ super.toString()+"  ***** ";
+				", Genere: " + super.get_descrizione().get(4)+", "+ ", Numero Identificativo: "+ super.get_id() +", Numero di Copie: "+ super.get_n_licenze()
+				+ ", Numero Attualmente Disponibili: " + (super.get_n_licenze() - super.get_in_prestito()) + "  ***** ";
+	}
+
+	@Override
+	public void inizialize_max_n_prestiti() {
+		super.set_max_n_prestiti(Costanti.MAX_NUMERO_DI_FILM_FRUITORE);		
 	}
 
 

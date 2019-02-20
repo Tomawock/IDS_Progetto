@@ -14,6 +14,7 @@ public abstract class  Risorsa implements Serializable{
 	private int n_licenze;
 	private int in_prestito;
 	private int id;
+	private int max_n_prestiti;
 	
 	private ArrayList<String> descrizione;
 	
@@ -62,6 +63,17 @@ public abstract class  Risorsa implements Serializable{
 		this.id =id;
 		this.n_licenze=n_licenze;
 		this.descrizione=new ArrayList<>();
+		this.inizialize_max_n_prestiti();
+	}
+	
+	public abstract void inizialize_max_n_prestiti();
+	
+	public void set_max_n_prestiti(int n_max_prestiti) {
+		this.max_n_prestiti=n_max_prestiti;
+	}
+
+	public int get_max_n_prestiti() {
+		return this.max_n_prestiti;
 	}
 	
 	public ArrayList<String> get_descrizione(){
@@ -102,9 +114,7 @@ public abstract class  Risorsa implements Serializable{
 	}
 	
 	@Override
-	public String toString() {
-		return "Numero Identificativo: "+id+", Numero di Copie: " + n_licenze + ", Numero Attualmente Disponibili: " + (n_licenze-in_prestito);
-	}
+	abstract public String toString();
 	
 	/**
 	 * Aggiunge un prestito dalla risorsa ovvero modifica il numero di copie in Prestito

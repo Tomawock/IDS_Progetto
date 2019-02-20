@@ -49,7 +49,7 @@ public class Controller {
 			if(!db.is_presente(user)) {//controlla che l'utente non sia gia registrato(NON esistono due utenti con lo stesso username)
 				db.salva_utente(user);
 				archivio.salva_utente(user);//Aggiungo l'utente nell'archivio 
-				this.view.scrivi("Ti sei iscritto correttamente "+user.getUsername());
+				this.view.scrivi("Ti sei iscritto correttamente "+user.get_username());
 			}else {
 				this.view.scrivi("Username già utilizzato Inserirne un'altro");
 			}
@@ -68,7 +68,7 @@ public class Controller {
 	public void user_loggato(Utente utente){
 		int valore=view.log_fruitore_operatore(utente);//parte di view per le scelte
 		if (valore== 1) {//Loggare come Fruitore
-			Fruitore fruitore=db.carica_fruitore(utente.getUsername(), utente.getPassword());
+			Fruitore fruitore=db.carica_fruitore(utente.get_username(), utente.get_password());
 			if(fruitore==null) {
 				view.scrivi("Non sei registrato come fruitore");
 				this.user_loggato(utente);
@@ -83,7 +83,7 @@ public class Controller {
 			}
 		}
 		else if(valore == 2) {//Loggare come Operatore
-			Operatore operatore=db.carica_operatore(utente.getUsername(), utente.getPassword());
+			Operatore operatore=db.carica_operatore(utente.get_username(), utente.get_password());
 			if(operatore==null) {
 				view.scrivi("Non sei registrato come operatore");
 				this.user_loggato(utente);
@@ -93,12 +93,12 @@ public class Controller {
 			}
 		}
 		else if(valore==3) {//Registra nuovo Fruitore
-			if(db.carica_fruitore(utente.getUsername(), utente.getPassword())!=null) {
+			if(db.carica_fruitore(utente.get_username(), utente.get_password())!=null) {
 				view.scrivi("Sei gia registrato come fruitore");
 				this.user_loggato(utente);
 			}
-			else if(utente.getEta()>=18) {
-				this.view.scrivi(utente.getUsername()+" sei diventato fruitore");
+			else if(utente.get_eta()>=18) {
+				this.view.scrivi(utente.get_username()+" sei diventato fruitore");
 				//new Database_file().salva_fruitore(new Fruitore(utente));
 				db.salva_fruitore(new Fruitore(utente));
 				archivio.salva_fruitore(new Fruitore(utente));//salvo nell'archivio
@@ -110,12 +110,12 @@ public class Controller {
 			}
 		}
 		else if(valore==4) {//Registra nuovo Operatore
-			if(db.carica_operatore(utente.getUsername(), utente.getPassword())!=null) {
+			if(db.carica_operatore(utente.get_username(), utente.get_password())!=null) {
 				view.scrivi("Sei gia registrato come operatore");
 				this.user_loggato(utente);
 			}
 			else {
-				this.view.scrivi(utente.getUsername()+" sei diventato operatore");
+				this.view.scrivi(utente.get_username()+" sei diventato operatore");
 				//new Database_file().salva_operatore(new Operatore(utente));		
 				db.salva_operatore(new Operatore(utente));
 				archivio.salva_operatore(new Operatore(utente));//salvo l'operatore nell'archivio
@@ -203,14 +203,14 @@ public class Controller {
 		}else if(scelta == 9) {//fruitore e prestiti
 			HashMap<Fruitore, Integer> risultato=query.select_count_numero_di_prestiti_perogni_fruitore(LocalDateTime.now());
 			for (Map.Entry<Fruitore, Integer> e : risultato.entrySet()) {
-				this.view.scrivi("Il fruitore: "+e.getKey().getUtente().getUsername()+" ha effettuato "+e.getValue()+" prestiti");
+				this.view.scrivi("Il fruitore: "+e.getKey().get_utente().get_username()+" ha effettuato "+e.getValue()+" prestiti");
 			}
 			this.operatore_loggato(operatore);//per continuare iterazioni
 		}else if (scelta==10) {//torna indietro
-			this.user_loggato(operatore.getUtente());
+			this.user_loggato(operatore.get_utente());
 		}
 		else {
-			this.user_loggato(operatore.getUtente());
+			this.user_loggato(operatore.get_utente());
 		}		
 	}
 	
@@ -294,7 +294,7 @@ public class Controller {
 			ArrayList<Prestito> prestiti=db.get_tutti_prestiti_per_fruitore(fruitore);
 			if(!prestiti.isEmpty()) {
 				for(Prestito p:prestiti) {
-					Risorsa r=p.getRisorsa();
+					Risorsa r=p.get_risorsa();
 					//Si puo usare OPC e percio tutto diventa 
 					//this.view.scrivi(r.toString());
 					//al posto di tutti gli instace of
@@ -328,9 +328,9 @@ public class Controller {
 			this.ricerca_o_disponibilita();	
 			this.fruitore_loggato(fruitore);
 		}else if(scelta ==6) {//Torna indietro
-			this.user_loggato(fruitore.getUtente());
+			this.user_loggato(fruitore.get_utente());
 		}else {
-			this.user_loggato(fruitore.getUtente());
+			this.user_loggato(fruitore.get_utente());
 		}
 	}
 

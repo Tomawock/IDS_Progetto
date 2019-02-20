@@ -54,11 +54,11 @@ public class Categoria implements Serializable{
 	 * 			altrimenti riorna la categoria con il nome preso come input 
 	 */
 	public Categoria get_sottocategoria_by_name(Categoria base,String nome) {
-		if (base.getNome().equals(nome)) {
+		if (base.get_nome().equals(nome)) {
 			return base;
 		}else {
-			if(base.getSottocategorie()!=null) {
-				for(Categoria c:base.getSottocategorie()) {
+			if(base.get_sottocategorie()!=null) {
+				for(Categoria c:base.get_sottocategorie()) {
 					Categoria risultato=c.get_sottocategoria_by_name(c, nome);
 						if( risultato!=null)
 							return risultato;
@@ -76,14 +76,14 @@ public class Categoria implements Serializable{
 	 * @return null nel caso in cui non sia stata trovata la Risorsa corrispondente all'ID preso in ingresso
 	 */
 	public Risorsa get_risorsa_by_id(Categoria base,int id) {
-		if (base.getSottocategorie()==null) {
-			if(base.getRisorse()!=null) {
-				for (Risorsa r: base.getRisorse()) {
+		if (base.get_sottocategorie()==null) {
+			if(base.get_risorse()!=null) {
+				for (Risorsa r: base.get_risorse()) {
 					if(r.get_id()==id) return r;
 				}
 			}
 		}else {
-			for(Categoria c:base.getSottocategorie()){
+			for(Categoria c:base.get_sottocategorie()){
 				Risorsa risultato=c.get_risorsa_by_id(c, id);
 				if( risultato!=null)
 					return risultato;
@@ -99,7 +99,7 @@ public class Categoria implements Serializable{
 	@Override
 	public boolean equals(Object obj) {
 		Categoria c=(Categoria)obj;
-		if(c.getNome()==this.nome) {
+		if(c.get_nome()==this.nome) {
 			return true;
 		}
 		return false;
@@ -113,11 +113,11 @@ public class Categoria implements Serializable{
 	 * @param risultato	Parametro che contiene tutte le risorse della categoria root e sottocategorie di essa
 	 */
 	public void carica_tutte_risorse(Categoria root,ArrayList<Risorsa> risultato) {
-		if (root.getRisorse()!=null && risultato!=null) {//perche risultato != null a che serve ??
-			risultato.addAll(root.getRisorse());
+		if (root.get_risorse()!=null && risultato!=null) {//perche risultato != null a che serve ??
+			risultato.addAll(root.get_risorse());
 		}else {
-			if(root.getSottocategorie()!=null) {
-				for(Categoria c: root.getSottocategorie() ){
+			if(root.get_sottocategorie()!=null) {
+				for(Categoria c: root.get_sottocategorie() ){
 					c.carica_tutte_risorse(c, risultato);
 				}
 			}
@@ -129,27 +129,27 @@ public class Categoria implements Serializable{
 		return "Categoria " + nome;
 	}
 
-	public String getNome() {
+	public String get_nome() {
 		return nome;
 	}
 
-	public void setNome(String nome) {
+	public void set_nome(String nome) {
 		this.nome = nome;
 	}
 
-	public ArrayList<Risorsa> getRisorse() {
+	public ArrayList<Risorsa> get_risorse() {
 		return risorse;
 	}
 
-	public void setRisorse(ArrayList<Risorsa> risorse) {
+	public void set_risorse(ArrayList<Risorsa> risorse) {
 		this.risorse = risorse;
 	}
 
-	public ArrayList<Categoria> getSottocategorie() {
+	public ArrayList<Categoria> get_sottocategorie() {
 		return sottocategorie;
 	}
 
-	public void setSottocategorie(ArrayList<Categoria> sottocategorie) {
+	public void set_sottocategorie(ArrayList<Categoria> sottocategorie) {
 		this.sottocategorie = sottocategorie;
 	}
 }

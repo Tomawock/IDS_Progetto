@@ -44,55 +44,55 @@ public class Utente implements Serializable{
 		this.password = password;
 	}
 	
-	public void setNome(String nome) {
+	public void set_nome(String nome) {
 		this.nome = nome;
 	}
 	
-	public void setCognome(String cognome) {
+	public void set_cognome(String cognome) {
 		this.cognome = cognome;
 	}
 	
-	public void setMail(String mail) {
+	public void set_mail(String mail) {
 		this.mail = mail;
 	}
 	
-	public void setData_di_nascita(LocalDateTime data_di_nascita) {
+	public void set_data_di_nascita(LocalDateTime data_di_nascita) {
 		this.data_di_nascita = data_di_nascita;
 	}
 		
-	public void setUsername(String username) {
+	public void set_username(String username) {
 		this.username = username;
 	}
 	
-	public void setPassword(String password) {
+	public void set_password(String password) {
 		this.password = password;
 	}
 	
-	public String getPassword() {
+	public String get_password() {
 		return this.password;
 	}
 
-	public String getNome() {
+	public String get_nome() {
 		return nome;
 	}
 
-	public String getCognome() {
+	public String get_cognome() {
 		return cognome;
 	}
 
-	public String getMail() {
+	public String get_mail() {
 		return mail;
 	}
 
-	public LocalDateTime getData_di_nascita() {
+	public LocalDateTime get_data_di_nascita() {
 		return data_di_nascita;
 	}
 
-	public int getEta() {
+	public int get_eta() {
 		return (LocalDate.now().getYear() - this.data_di_nascita.getYear());
 	}
 	
-	public String getUsername() {
+	public String get_username() {
 		return username;
 	}
 
@@ -109,7 +109,7 @@ public class Utente implements Serializable{
 	@Override
 	public boolean equals(Object obj) {
 		Utente u=(Utente) obj;
-		if(this.username.equals(u.getUsername()))
+		if(this.username.equals(u.get_username()))
 		{
 			return true;
 		}else

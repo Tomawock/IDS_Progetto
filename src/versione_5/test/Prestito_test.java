@@ -53,53 +53,53 @@ class Prestito_test {
 	@Test
 	public void vero_se_data_di_proroga_passata_e_mai_stato_prorogato() {
 		LocalDateTime ieri = LocalDateTime.now().minusDays(1);
-		prestito.setData_proroga_prestito(ieri);
-		prestito.setMai_prorogato(true);
+		prestito.set_data_proroga_prestito(ieri);
+		prestito.set_mai_prorogato(true);
 		assertTrue(prestito.rinnova(),"Il prestito è stato rinnovato");
-		assertFalse(prestito.isMai_prorogato(),"Il prestito viene settato come mai prorogato");
-		assertEquals(LocalDateTime.now().getDayOfYear(), prestito.getData_inizio_proroga().getDayOfYear(),"Il prestito prorogato viene settato con la data di inizio proroga corretta");
-		assertEquals(LocalDateTime.now().plusDays(Costanti.DURATA_PROROGA).getDayOfYear(),prestito.getData_fine_prestito().getDayOfYear(),"Il prestito prorogato viene settato con la data di fine prestito corretta");
+		assertFalse(prestito.is_mai_prorogato(),"Il prestito viene settato come mai prorogato");
+		assertEquals(LocalDateTime.now().getDayOfYear(), prestito.get_data_inizio_proroga().getDayOfYear(),"Il prestito prorogato viene settato con la data di inizio proroga corretta");
+		assertEquals(LocalDateTime.now().plusDays(Costanti.DURATA_PROROGA).getDayOfYear(),prestito.get_data_fine_prestito().getDayOfYear(),"Il prestito prorogato viene settato con la data di fine prestito corretta");
 	}
 
 	@Test
 	public void vero_se_data_di_proroga_non_passata() {
 		LocalDateTime domani = LocalDateTime.now().plusDays(1);
-		prestito.setData_proroga_prestito(domani);
-		prestito.setMai_prorogato(true);
+		prestito.set_data_proroga_prestito(domani);
+		prestito.set_mai_prorogato(true);
 		assertFalse(prestito.rinnova(),"Il prestito non è stato rinnovato");
 	}
 	
 	@Test
 	public void vero_se_prestito_gia_prorogato() {
 		LocalDateTime ieri = LocalDateTime.now().minusDays(1);
-		prestito.setData_proroga_prestito(ieri);
-		prestito.setMai_prorogato(false);
+		prestito.set_data_proroga_prestito(ieri);
+		prestito.set_mai_prorogato(false);
 		assertFalse(prestito.rinnova(),"Il prestito non è stato rinnovato");
 	}
 	
 	@Test
 	public void vero_i_dati_dei_prestito_vengono_resettati() {
 		prestito.reset_dati(prestito_diverso);
-		assertEquals(prestito_diverso.getData_fine_prestito(), prestito.getData_fine_prestito(),"La data fine prestito dei prestiti coindice");
-		assertEquals(prestito_diverso.getData_inizio_prestito(), prestito.getData_inizio_prestito(),"La data inizio prestito dei prestiti coincide");
-		assertEquals(prestito_diverso.getData_inizio_proroga(), prestito.getData_inizio_proroga(),"La data inizio proroga prestito dei prestiti coincide");
-		assertEquals(prestito_diverso.getData_proroga_prestito(), prestito.getData_proroga_prestito(),"La data proroga prestito dei prestiti coincide");
-		assertEquals(prestito_diverso.getFruitore(), prestito.getFruitore(),"Il fruitore del prestito dei prestiti coincide");
-		assertEquals(prestito_diverso.isMai_prorogato(), prestito.isMai_prorogato(),"La possibilità di essere prorogato del prestito dei prestiti coincide");
-		assertEquals(prestito_diverso.getRisorsa(), prestito.getRisorsa(),"La risorsa del prestito dei prestiti coincide");
+		assertEquals(prestito_diverso.get_data_fine_prestito(), prestito.get_data_fine_prestito(),"La data fine prestito dei prestiti coindice");
+		assertEquals(prestito_diverso.get_data_inizio_prestito(), prestito.get_data_inizio_prestito(),"La data inizio prestito dei prestiti coincide");
+		assertEquals(prestito_diverso.get_data_inizio_proroga(), prestito.get_data_inizio_proroga(),"La data inizio proroga prestito dei prestiti coincide");
+		assertEquals(prestito_diverso.get_data_proroga_prestito(), prestito.get_data_proroga_prestito(),"La data proroga prestito dei prestiti coincide");
+		assertEquals(prestito_diverso.get_fruitore(), prestito.get_fruitore(),"Il fruitore del prestito dei prestiti coincide");
+		assertEquals(prestito_diverso.is_mai_prorogato(), prestito.is_mai_prorogato(),"La possibilità di essere prorogato del prestito dei prestiti coincide");
+		assertEquals(prestito_diverso.get_risorsa(), prestito.get_risorsa(),"La risorsa del prestito dei prestiti coincide");
 	}
 	
 	@Test
 	public void vero_se_il_prestito_termina() {
 		LocalDateTime ieri = LocalDateTime.now().minusDays(1);
-		prestito.setData_fine_prestito(ieri);
+		prestito.set_data_fine_prestito(ieri);
 		assertTrue(prestito.is_terminato(), "Il prestito e stato terminato");		
 	}
 		
 	@Test
 	public void vero_se_il_prestito_non_termina() {
 		LocalDateTime domani = LocalDateTime.now().plusDays(1);
-		prestito.setData_fine_prestito(domani);
+		prestito.set_data_fine_prestito(domani);
 		assertFalse(prestito.is_terminato(), "Il prestito non e stato terminato");		
 	}
 	

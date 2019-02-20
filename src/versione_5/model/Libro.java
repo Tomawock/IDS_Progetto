@@ -21,7 +21,8 @@ public class Libro  extends Risorsa{
 	 */
 	public Libro(int id, int n_licenze) {
 		super(id, n_licenze);
-		super.aggiungi_descrizione(new ArrayList<>(Arrays.asList(Costanti.NO_DESCRIZIONE,Costanti.NO_DESCRIZIONE,Costanti.NO_DESCRIZIONE,Costanti.NO_DESCRIZIONE,Costanti.NO_DESCRIZIONE,Costanti.NO_DESCRIZIONE,Costanti.NO_DESCRIZIONE)));
+		super.aggiungi_descrizione(new ArrayList<>(Arrays.asList(Costanti.NO_DESCRIZIONE,Costanti.NO_DESCRIZIONE,
+				Costanti.NO_DESCRIZIONE,Costanti.NO_DESCRIZIONE,Costanti.NO_DESCRIZIONE,Costanti.NO_DESCRIZIONE,Costanti.NO_DESCRIZIONE)));
 	}
 	
 	@Override
@@ -29,7 +30,13 @@ public class Libro  extends Risorsa{
 		return " ***** Titolo Libro: " + super.get_descrizione().get(0) + ", Autore: " + super.get_descrizione().get(1) + 
 				", Numero di Pagine: " + super.get_descrizione().get(2) + ", Anno di Pubblicazione: " + super.get_descrizione().get(3)+ 
 				", Casa Editrice: " + super.get_descrizione().get(4)+ ", Lingua: "	+ super.get_descrizione().get(5) + 
-				", Genere: " + super.get_descrizione().get(6) +", "+ super.toString()+"  ***** ";
+				", Genere: " + super.get_descrizione().get(6) +", Numero Identificativo: "+ super.get_id() +", Numero di Copie: "+ super.get_n_licenze()
+				+ ", Numero Attualmente Disponibili: " + (super.get_n_licenze() - super.get_in_prestito()) + "  ***** ";
+	}
+
+	@Override
+	public void inizialize_max_n_prestiti() {
+		super.set_max_n_prestiti(Costanti.MAX_NUMERO_DI_LIBRI_FRUITORE);		
 	}
 
 }

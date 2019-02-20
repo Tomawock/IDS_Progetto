@@ -26,7 +26,7 @@ public class View {
 
 	public int log_fruitore_operatore (Utente utente){
 		System.out.println(Costanti.GRECA);
-		System.out.println("              MENU' ACCESSO BENVENUTO "+utente.getUsername()+"                   ");
+		System.out.println("              MENU' ACCESSO BENVENUTO "+utente.get_username()+"                   ");
 		System.out.println(Costanti.GRECA);
 		System.out.println("1)Logga come Fruitore\n"
 				+ "2)Logga come Operatore\n"

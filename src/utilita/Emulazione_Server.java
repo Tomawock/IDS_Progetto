@@ -37,7 +37,7 @@ public class Emulazione_Server {
 		Fruitore f3=new Fruitore(u3);
 		Fruitore f4=new Fruitore(u4);
 		
-		f2.setData_fine_iscrizione(LocalDateTime.now());
+		f2.set_data_fine_iscrizione(LocalDateTime.now());
 		
 		Operatore o=new Operatore(u);
 		Operatore o2=new Operatore(u2);
@@ -112,10 +112,10 @@ public class Emulazione_Server {
 		Prestito p3=new Prestito(r1, f2);
 		Prestito p4=new Prestito(r7, f3);
 		
-		p3.setData_proroga_prestito(LocalDateTime.now());
-		p4.setData_inizio_proroga(LocalDateTime.now());
+		p3.set_data_proroga_prestito(LocalDateTime.now());
+		p4.set_data_inizio_proroga(LocalDateTime.now());
 		
-		p.setData_fine_prestito(LocalDateTime.now());
+		p.set_data_fine_prestito(LocalDateTime.now());
 		
 		Database_file db= new Database_file();
 		Archivio ar=new Archivio();

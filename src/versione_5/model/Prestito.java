@@ -40,72 +40,59 @@ public class Prestito implements Serializable {
 	}
 	
 	
-	public Risorsa getRisorsa() {
+	public Risorsa get_risorsa() {
 		return risorsa;
 	}
 
-
-	public void setRisorsa(Risorsa risorsa) {
+	public void set_risorsa(Risorsa risorsa) {
 		this.risorsa = risorsa;
 	}
 
-
-	public Fruitore getFruitore() {
+	public Fruitore get_fruitore() {
 		return fruitore;
 	}
 
-
-	public void setFruitore(Fruitore fruitore) {
+	public void set_fruitore(Fruitore fruitore) {
 		this.fruitore = fruitore;
 	}
 
-
-	public LocalDateTime getData_inizio_prestito() {
+	public LocalDateTime get_data_inizio_prestito() {
 		return data_inizio_prestito;
 	}
 
-
-	public void setData_inizio_prestito(LocalDateTime data_inizio_prestito) {
+	public void set_data_inizio_prestito(LocalDateTime data_inizio_prestito) {
 		this.data_inizio_prestito = data_inizio_prestito;
 	}
 
-
-	public LocalDateTime getData_fine_prestito() {
+	public LocalDateTime get_data_fine_prestito() {
 		return data_fine_prestito;
 	}
 
-
-	public void setData_fine_prestito(LocalDateTime data_fine_prestito) {
+	public void set_data_fine_prestito(LocalDateTime data_fine_prestito) {
 		this.data_fine_prestito = data_fine_prestito;
 	}
 
-
-	public LocalDateTime getData_proroga_prestito() {
+	public LocalDateTime get_data_proroga_prestito() {
 		return data_proroga_prestito;
 	}
 
-
-	public void setData_proroga_prestito(LocalDateTime data_proroga_prestito) {
+	public void set_data_proroga_prestito(LocalDateTime data_proroga_prestito) {
 		this.data_proroga_prestito = data_proroga_prestito;
 	}
 
-
-	public LocalDateTime getData_inizio_proroga() {
+	public LocalDateTime get_data_inizio_proroga() {
 		return data_inizio_proroga;
 	}
 
-
-	public void setData_inizio_proroga(LocalDateTime data_inizio_proroga) {
+	public void set_data_inizio_proroga(LocalDateTime data_inizio_proroga) {
 		this.data_inizio_proroga = data_inizio_proroga;
 	}
 
-
-	public boolean isMai_prorogato() {
+	public boolean is_mai_prorogato() {
 		return mai_prorogato;
 	}
 
-
-	public void setMai_prorogato(boolean mai_progato) {
+	public void set_mai_prorogato(boolean mai_progato) {
 		this.mai_prorogato = mai_progato;
 	}
 
@@ -116,9 +103,9 @@ public class Prestito implements Serializable {
 	@Override
 	public boolean equals(Object obj) {
 		Prestito prestito=(Prestito)obj;
-		if(this.data_inizio_prestito.equals(prestito.getData_inizio_prestito())
-				&& this.fruitore.equals(prestito.getFruitore())
-				&& this.risorsa.equals(prestito.getRisorsa())) {
+		if(this.data_inizio_prestito.equals(prestito.get_data_inizio_prestito())
+				&& this.fruitore.equals(prestito.get_fruitore())
+				&& this.risorsa.equals(prestito.get_risorsa())) {
 			return true;
 		}
 		return false;
@@ -148,13 +135,13 @@ public class Prestito implements Serializable {
 	 * @param prestito	Prestito dal quale copiare i dati
 	 */
 	public void reset_dati(Prestito prestito) {
-		this.data_fine_prestito=prestito.getData_fine_prestito();
-		this.data_inizio_prestito=prestito.getData_inizio_prestito();
-		this.data_inizio_proroga=prestito.getData_inizio_proroga();
-		this.data_proroga_prestito=prestito.getData_proroga_prestito();
-		this.fruitore=prestito.getFruitore();
-		this.mai_prorogato=prestito.isMai_prorogato();
-		this.risorsa=prestito.getRisorsa();
+		this.data_fine_prestito=prestito.get_data_fine_prestito();
+		this.data_inizio_prestito=prestito.get_data_inizio_prestito();
+		this.data_inizio_proroga=prestito.get_data_inizio_proroga();
+		this.data_proroga_prestito=prestito.get_data_proroga_prestito();
+		this.fruitore=prestito.get_fruitore();
+		this.mai_prorogato=prestito.is_mai_prorogato();
+		this.risorsa=prestito.get_risorsa();
 	}
 	
 	/**
@@ -172,7 +159,7 @@ public class Prestito implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Username: "+this.fruitore.getUtente().getUsername()+"\nRisorsa: "+this.risorsa.toString()+"\nData di inizio: "+this.data_inizio_prestito.toString()+"\nE' Rinnovabile? "+String.valueOf(mai_prorogato)+ "\n" ;
+		return "Username: "+this.fruitore.get_utente().get_username()+"\nRisorsa: "+this.risorsa.toString()+"\nData di inizio: "+this.data_inizio_prestito.toString()+"\nE' Rinnovabile? "+String.valueOf(mai_prorogato)+ "\n" ;
 	}
 	
 	
