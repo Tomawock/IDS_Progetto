@@ -22,6 +22,8 @@ class Database_file_test {
 	private Utente utente,utente_2;
 	private Fruitore fruitore,fruitore_2;
 	private Operatore operatore, operatore_2;
+	private Prestito prestito,prestito_2;
+	private Risorsa risorsa,risorsa_2,risorsa_tipo_diversa;
 	private Categoria root;
 	
 	@BeforeEach
@@ -39,6 +41,13 @@ class Database_file_test {
 		operatore_2=new Operatore(utente_2);
 		
 		root = new Categoria(Database_file_test.ROOT);
+		
+		risorsa = new Film(1,1);
+		risorsa_2 = new Film(2,1);
+		risorsa_tipo_diversa = new Libro(1,1);
+		
+		prestito =new Prestito(risorsa, fruitore);
+		prestito_2 =new Prestito(risorsa_2, fruitore_2);
 	}
 	
 	/**
@@ -680,5 +689,158 @@ class Database_file_test {
         }
 		assertTrue(root.equals(base),"Salvataggio di una categoria come oggetto sul file");
 	}
+	
+	@Test
+	public void vero_se_carica_categoria_root_carica_la_categoria_root_dal_file() {
+		File file_eliminato= new File(Database_file.PERCORSO_FILE_CATEGORIE);
+		file_eliminato.delete();
+		
+		IO.CreaFile(Database_file.PERCORSO_FILE_CATEGORIE);
+		db.salva_categoria_root(root);	
+		
+		assertEquals(root, db.carica_root_categorie(),"La categoria redice è stata caricata in modo corretto dal file");
+	}
+	
+	public void vero_se_salva_prestito_salva_senza_prestitii_gia_presenti(){
+		//elimino il file per esere sicuro di non avere altri utenti salvati sullo stesso file
+		File file_eliminato= new File(Database_file.PERCORSO_FILE_PRESTITI);
+		file_eliminato.delete();
+		
+		IO.CreaFile(Database_file.PERCORSO_FILE_PRESTITI);
+		db.salva_prestito(prestito);	
+		
+		ArrayList<Prestito> prestiti=new ArrayList<>();
+		try {    
+            // Reading the object from a file 
+            FileInputStream file = new FileInputStream(Database_file.PERCORSO_FILE_PRESTITI); 
+            ObjectInputStream in = new ObjectInputStream(file); 
+              
+            prestiti = (ArrayList<Prestito>)in.readObject(); 
+              
+            in.close(); 
+            file.close(); 
+              
+        }catch(Exception ex) {
+        	System.out.println(ex.getMessage());
+        }
+		assertEquals(prestito,prestiti.get(0),"Salvataggio di un prestito come oggetto sul file,senza altri prestiti precedentemente salvati");
+	}
+	
+	@Test 
+	public void vero_se_salva_prestito_salva_con_prestiti_presenti(){
+		//elimino il file per esere sicuro di non avere altri utenti salvati sullo stesso file
+		File file_eliminato= new File(Database_file.PERCORSO_FILE_PRESTITI);
+		file_eliminato.delete();
+		
+		IO.CreaFile(Database_file.PERCORSO_FILE_PRESTITI);
+		db.salva_prestito(prestito);
+		db.salva_prestito(prestito_2);
+		
+		ArrayList<Prestito> prestiti=new ArrayList<>();
+		try {    
+            // Reading the object from a file 
+            FileInputStream file = new FileInputStream(Database_file.PERCORSO_FILE_PRESTITI); 
+            ObjectInputStream in = new ObjectInputStream(file); 
+              
+            prestiti = (ArrayList<Prestito>)in.readObject(); 
+              
+            in.close(); 
+            file.close(); 
+              
+        }catch(Exception ex) {
+        	System.out.println(ex.getMessage());
+        }
+		assertEquals(prestito_2,prestiti.get(prestiti.size()-1),"Salvataggio di un prestito come oggetto sul file,con prestiti precedentemente salvati");
+	}
+	
+	@Test
+	public void vero_se_carica_tutti_prestiti_ha_esito_popsitivo() {
+		//elimino il file per esere sicuro di non avere altri utenti salvati sullo stesso file
+		File file_eliminato= new File(Database_file.PERCORSO_FILE_PRESTITI);
+		file_eliminato.delete();
+		
+		IO.CreaFile(Database_file.PERCORSO_FILE_PRESTITI);
+		db.salva_prestito(prestito);
+		db.salva_prestito(prestito_2);
+		
+		ArrayList<Prestito> prestiti= new ArrayList<>();
+		prestiti.add(prestito);
+		prestiti.add(prestito_2);
+		
+		assertEquals(prestiti, db.carica_tutti_prestiti(),"Caricamento di tutti i prestiti presenti sul file");
+	}
+
+	@Test
+	public void vero_se_get_prestiti_per_fruitore_risorsa_ritorna_un_array_vuoto_poiche_non_trova_fruitore_corrispondente_ma_esistono_risorse_compatibili()
+	{
+		File file_eliminato= new File(Database_file.PERCORSO_FILE_PRESTITI);
+		file_eliminato.delete();
+		
+		db.salva_prestito(prestito);
+		
+		assertTrue(db.get_prestiti_per_fruitore_risorsa(fruitore_2, risorsa).isEmpty(),"Array vuoto in qunato non è presente il fruitore desiderato");
+		
+	}
+	
+	@Test
+	public void vero_se_get_prestiti_per_fruitore_risorsa_ritorna_un_array_vuoto_poiche_trova_fruitore_corrispondente_ma_non_esistono_risorse_compatibili()
+	{
+		File file_eliminato= new File(Database_file.PERCORSO_FILE_PRESTITI);
+		file_eliminato.delete();
+		
+		db.salva_prestito(prestito);
+		
+		assertTrue(db.get_prestiti_per_fruitore_risorsa(fruitore, risorsa_tipo_diversa).isEmpty(),"Array vuoto in qunato è presente il fruitore desiderato ma non il tipo di risorsa");
+		
+	}
+	
+	@Test
+	public void vero_se_get_prestiti_per_fruitore_risorsa_ritorna_un_array_vuoto_poiche_non_fruitore_corrispondente_e_non_esistono_risorse_compatibili()
+	{
+		File file_eliminato= new File(Database_file.PERCORSO_FILE_PRESTITI);
+		file_eliminato.delete();
+		
+		db.salva_prestito(prestito);
+		
+		assertTrue(db.get_prestiti_per_fruitore_risorsa(fruitore_2, risorsa_tipo_diversa).isEmpty(),"Array vuoto in qunato non è presente il fruitore desiderato e neanche il tipo di risorsa");
+		
+	}
+	
+	@Test
+	public void vero_se_get_prestiti_per_fruitore_risorsa_ritorna_un_array_non_vuoto_poiche_trova_fruitore_corrispondente_e_esistono_risorse_compatibili()
+	{
+		File file_eliminato= new File(Database_file.PERCORSO_FILE_PRESTITI);
+		file_eliminato.delete();
+		
+		db.salva_prestito(prestito);
+		
+		assertFalse(db.get_prestiti_per_fruitore_risorsa(fruitore, risorsa).isEmpty(),"Array non vuoto in qunato è presente il fruitore desiderato e il tipo di risorsa");
+		
+	}
+	
+	@Test
+	public void vero_se_get_tutti_prestiti_per_fruitore_ritorna_un_array_vuoto_poiche_non_trova_fruitore_corrispondente()
+	{
+		File file_eliminato= new File(Database_file.PERCORSO_FILE_PRESTITI);
+		file_eliminato.delete();
+		
+		db.salva_prestito(prestito);
+		
+		assertTrue(db.get_tutti_prestiti_per_fruitore(fruitore_2).isEmpty(),"Array vuoto in qunato non è presente il fruitore desiderato");
+		
+	}
+	
+	@Test
+	public void vero_se_get_prestiti_per_fruitore_risorsa_ritorna_un_array_poiche_trova_fruitore_corrispondente()
+	{
+		File file_eliminato= new File(Database_file.PERCORSO_FILE_PRESTITI);
+		file_eliminato.delete();
+		
+		db.salva_prestito(prestito);
+		
+		assertFalse(db.get_tutti_prestiti_per_fruitore(fruitore).isEmpty(),"Array non vuoto in qunato è presente il fruitore desiderato");
+		
+	}
+	
 	//mancano 13 funzioni da testare
 }
