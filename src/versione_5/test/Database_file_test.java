@@ -257,7 +257,7 @@ class Database_file_test {
 		
 		IO.CreaFile(Database_file.PERCORSO_FILE_UTENTE);
 		
-		assertEquals(null,db.carica_utente(utente.getUsername(), utente.getPassword()),"Caricamento nullo in quanto non vi sono utenti nel file");
+		assertEquals(null,db.carica_utente(utente.get_username(), utente.get_password()),"Caricamento nullo in quanto non vi sono utenti nel file");
 	}
 	
 	@Test
@@ -269,7 +269,7 @@ class Database_file_test {
 		IO.CreaFile(Database_file.PERCORSO_FILE_UTENTE);
 		db.salva_utente(utente);
 		
-		assertEquals(utente,db.carica_utente(utente.getUsername(), utente.getPassword()),"Caricamento dell'utente corrispondete a username e password combacianti con uno presente nel file");
+		assertEquals(utente,db.carica_utente(utente.get_username(), utente.get_password()),"Caricamento dell'utente corrispondete a username e password combacianti con uno presente nel file");
 	}
 	
 	@Test
@@ -281,7 +281,7 @@ class Database_file_test {
 		IO.CreaFile(Database_file.PERCORSO_FILE_UTENTE);
 		db.salva_utente(utente);
 		
-		assertEquals(null,db.carica_utente(utente_2.getUsername(), utente_2.getPassword()),"Caricamento nullo in qunto non è stato trovato l'utente corrispondete a username e password combaciante nel file");
+		assertEquals(null,db.carica_utente(utente_2.get_username(), utente_2.get_password()),"Caricamento nullo in qunto non è stato trovato l'utente corrispondete a username e password combaciante nel file");
 	}
 
 	@Test
@@ -293,7 +293,7 @@ class Database_file_test {
 		IO.CreaFile(Database_file.PERCORSO_FILE_UTENTE);
 		db.salva_utente(utente);
 		
-		assertEquals(null,db.carica_utente(utente.getUsername(), utente_2.getPassword()),"Caricamento dell'utente nullo in quanto combacia sul file solo con l'username");
+		assertEquals(null,db.carica_utente(utente.get_username(), utente_2.get_password()),"Caricamento dell'utente nullo in quanto combacia sul file solo con l'username");
 	}
 	
 	@Test
@@ -305,7 +305,7 @@ class Database_file_test {
 		IO.CreaFile(Database_file.PERCORSO_FILE_UTENTE);
 		db.salva_utente(utente);
 		
-		assertEquals(null,db.carica_utente(utente_2.getUsername(), utente.getPassword()),"Caricamento dell'utente nullo in quanto combacia sul file solo con la password");
+		assertEquals(null,db.carica_utente(utente_2.get_username(), utente.get_password()),"Caricamento dell'utente nullo in quanto combacia sul file solo con la password");
 	}
 
 	@Test
@@ -316,7 +316,7 @@ class Database_file_test {
 		
 		IO.CreaFile(Database_file.PERCORSO_FILE_FRUITORE);
 		
-		assertEquals(null,db.carica_fruitore(fruitore.getUtente().getUsername(), fruitore.getUtente().getPassword()),"Caricamento nullo in quanto non vi sono fruitori nel file");
+		assertEquals(null,db.carica_fruitore(fruitore.get_utente().get_username(), fruitore.get_utente().get_password()),"Caricamento nullo in quanto non vi sono fruitori nel file");
 	}
 	
 	@Test
@@ -328,7 +328,7 @@ class Database_file_test {
 		IO.CreaFile(Database_file.PERCORSO_FILE_FRUITORE);
 		db.salva_fruitore(fruitore);
 		
-		assertEquals(fruitore,db.carica_fruitore(fruitore.getUtente().getUsername(), fruitore.getUtente().getPassword()),"Caricamento del fruitore corrispondete a username e password combacianti con uno presente nel file");
+		assertEquals(fruitore,db.carica_fruitore(fruitore.get_utente().get_username(), fruitore.get_utente().get_password()),"Caricamento del fruitore corrispondete a username e password combacianti con uno presente nel file");
 	}
 	
 	@Test
@@ -340,7 +340,7 @@ class Database_file_test {
 		IO.CreaFile(Database_file.PERCORSO_FILE_FRUITORE);
 		db.salva_fruitore(fruitore);
 		
-		assertEquals(null,db.carica_fruitore(fruitore_2.getUtente().getUsername(), fruitore_2.getUtente().getPassword()),"Caricamento nullo in qunto non è stato trovato il fruitore corrispondete a username e password combaciante nel file");
+		assertEquals(null,db.carica_fruitore(fruitore_2.get_utente().get_username(), fruitore_2.get_utente().get_password()),"Caricamento nullo in qunto non è stato trovato il fruitore corrispondete a username e password combaciante nel file");
 	}
 	
 	@Test
@@ -352,7 +352,7 @@ class Database_file_test {
 		IO.CreaFile(Database_file.PERCORSO_FILE_FRUITORE);
 		db.salva_fruitore(fruitore);
 		
-		assertEquals(null,db.carica_fruitore(fruitore.getUtente().getUsername(), fruitore_2.getUtente().getPassword()),"Caricamento dell fruitore nullo in quanto combacia sul file solo con l'username");
+		assertEquals(null,db.carica_fruitore(fruitore.get_utente().get_username(), fruitore_2.get_utente().get_password()),"Caricamento dell fruitore nullo in quanto combacia sul file solo con l'username");
 	}
 	
 	@Test
@@ -364,7 +364,7 @@ class Database_file_test {
 		IO.CreaFile(Database_file.PERCORSO_FILE_FRUITORE);
 		db.salva_utente(utente);
 		
-		assertEquals(null,db.carica_fruitore(fruitore_2.getUtente().getUsername(), fruitore.getUtente().getPassword()),"Caricamento del fruitore nullo in quanto combacia sul file solo con la password");
+		assertEquals(null,db.carica_fruitore(fruitore_2.get_utente().get_username(), fruitore.get_utente().get_password()),"Caricamento del fruitore nullo in quanto combacia sul file solo con la password");
 	}
 	
 	public void vero_se_carica_operatore_non_trova_operatore_poiche_file_non_ha_operatori_salvati() {
@@ -374,7 +374,7 @@ class Database_file_test {
 		
 		IO.CreaFile(Database_file.PERCORSO_FILE_OPERATORE);
 		
-		assertEquals(null,db.carica_operatore(operatore.getUtente().getUsername(), operatore.getUtente().getPassword()),"Caricamento nullo in quanto non vi sono operatori nel file");
+		assertEquals(null,db.carica_operatore(operatore.get_utente().get_username(), operatore.get_utente().get_password()),"Caricamento nullo in quanto non vi sono operatori nel file");
 	}
 	
 	@Test
@@ -386,7 +386,7 @@ class Database_file_test {
 		IO.CreaFile(Database_file.PERCORSO_FILE_OPERATORE);
 		db.salva_operatore(operatore);
 		
-		assertEquals(operatore,db.carica_operatore(operatore.getUtente().getUsername(), operatore.getUtente().getPassword()),"Caricamento dell'operatore corrispondete a username e password combacianti con uno presente nel file");
+		assertEquals(operatore,db.carica_operatore(operatore.get_utente().get_username(), operatore.get_utente().get_password()),"Caricamento dell'operatore corrispondete a username e password combacianti con uno presente nel file");
 	}
 	
 	@Test
@@ -398,7 +398,7 @@ class Database_file_test {
 		IO.CreaFile(Database_file.PERCORSO_FILE_OPERATORE);
 		db.salva_operatore(operatore);
 		
-		assertEquals(null,db.carica_operatore(operatore_2.getUtente().getUsername(), operatore_2.getUtente().getPassword()),"Caricamento nullo in qunto non è stato trovato l'operatore corrispondete a username e password combaciante nel file");
+		assertEquals(null,db.carica_operatore(operatore_2.get_utente().get_username(), operatore_2.get_utente().get_password()),"Caricamento nullo in qunto non è stato trovato l'operatore corrispondete a username e password combaciante nel file");
 	}
 	
 	@Test
@@ -410,7 +410,7 @@ class Database_file_test {
 		IO.CreaFile(Database_file.PERCORSO_FILE_OPERATORE);
 		db.salva_operatore(operatore);
 		
-		assertEquals(null,db.carica_operatore(operatore.getUtente().getUsername(), operatore_2.getUtente().getPassword()),"Caricamento dell'operatore nullo in quanto combacia sul file solo con l'username");
+		assertEquals(null,db.carica_operatore(operatore.get_utente().get_username(), operatore_2.get_utente().get_password()),"Caricamento dell'operatore nullo in quanto combacia sul file solo con l'username");
 	}
 	
 	@Test
@@ -422,7 +422,7 @@ class Database_file_test {
 		IO.CreaFile(Database_file.PERCORSO_FILE_OPERATORE);
 		db.salva_operatore(operatore);
 		
-		assertEquals(null,db.carica_operatore(operatore_2.getUtente().getUsername(), operatore.getUtente().getPassword()),"Caricamento dell'operatore nullo in quanto combacia sul file solo con la password");
+		assertEquals(null,db.carica_operatore(operatore_2.get_utente().get_username(), operatore.get_utente().get_password()),"Caricamento dell'operatore nullo in quanto combacia sul file solo con la password");
 	}
 	
 	@Test 
@@ -597,7 +597,7 @@ class Database_file_test {
 		
 		IO.CreaFile(Database_file.PERCORSO_FILE_FRUITORE);
 		
-		fruitore.setData_fine_iscrizione(LocalDateTime.now().plusDays(1));
+		fruitore.set_data_fine_iscrizione(LocalDateTime.now().plusDays(1));
 			
 		db.salva_fruitore(fruitore);
 		ArrayList<Fruitore> prima= new ArrayList<>();
@@ -615,7 +615,7 @@ class Database_file_test {
 		
 		IO.CreaFile(Database_file.PERCORSO_FILE_FRUITORE);
 		
-		fruitore.setData_fine_iscrizione(LocalDateTime.now().minusDays(1));//se si mette solo il setvalidita il codice lo ripristina al valore corretto secondo la logica, quindi bisogna avere un oggetto effetivamnete scaduto 
+		fruitore.set_data_fine_iscrizione(LocalDateTime.now().minusDays(1));//se si mette solo il setvalidita il codice lo ripristina al valore corretto secondo la logica, quindi bisogna avere un oggetto effetivamnete scaduto 
 		
 		db.salva_fruitore(fruitore);
 		ArrayList<Fruitore> prima= new ArrayList<>();
