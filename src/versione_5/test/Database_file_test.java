@@ -16,10 +16,13 @@ import versione_5.model.*;
 
 class Database_file_test {
 
-	Database_file db;
-	Utente utente,utente_2;
-	Fruitore fruitore,fruitore_2;
-	Operatore operatore, operatore_2;
+	public static final String ROOT= "ROOT";
+	
+	private Database_file db;
+	private Utente utente,utente_2;
+	private Fruitore fruitore,fruitore_2;
+	private Operatore operatore, operatore_2;
+	private Categoria root;
 	
 	@BeforeEach
 	public void setup() {
@@ -34,6 +37,8 @@ class Database_file_test {
 		
 		operatore=new Operatore(utente);
 		operatore_2=new Operatore(utente_2);
+		
+		root = new Categoria(Database_file_test.ROOT);
 	}
 	
 	/**
@@ -650,5 +655,30 @@ class Database_file_test {
 		assertFalse(db.is_presente(utente_2));
 	}
 
+	@Test 
+	public void vero_se_salva_categoria_root_salva_categoria_sul_file() {
+		//elimino il file per esere sicuro di non avere altri utenti salvati sullo stesso file
+		File file_eliminato= new File(Database_file.PERCORSO_FILE_CATEGORIE);
+		file_eliminato.delete();
+		
+		IO.CreaFile(Database_file.PERCORSO_FILE_CATEGORIE);
+		db.salva_categoria_root(root);	
+		
+		Categoria base= new Categoria("");
+		try {    
+            // Reading the object from a file 
+            FileInputStream file = new FileInputStream(Database_file.PERCORSO_FILE_CATEGORIE); 
+            ObjectInputStream in = new ObjectInputStream(file); 
+              
+            base = (Categoria)in.readObject(); 
+              
+            in.close(); 
+            file.close(); 
+              
+        }catch(Exception ex) {
+        	System.out.println(ex.getMessage());
+        }
+		assertTrue(root.equals(base),"Salvataggio di una categoria come oggetto sul file");
+	}
 	//mancano 13 funzioni da testare
 }
