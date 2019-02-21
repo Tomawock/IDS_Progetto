@@ -7,6 +7,7 @@ import java.io.FileInputStream;
 import java.io.ObjectInputStream;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -840,6 +841,55 @@ class Database_file_test {
 		
 		assertFalse(db.get_tutti_prestiti_per_fruitore(fruitore).isEmpty(),"Array non vuoto in qunato è presente il fruitore desiderato");
 		
+	}
+	
+	@Test 
+	public void vero_se_reset_prestiti_resetta_il_file_con_un_novo_set_di_prestiti() {
+		File file_eliminato= new File(Database_file.PERCORSO_FILE_PRESTITI);
+		file_eliminato.delete();
+		
+		IO.CreaFile(Database_file.PERCORSO_FILE_PRESTITI);
+		db.salva_prestito(prestito);
+		db.salva_prestito(prestito_2);
+		
+		ArrayList<Prestito> resettato= new ArrayList<>();
+		resettato.add(prestito);
+		
+		db.reset_prestiti(resettato);
+		
+		assertEquals(resettato, db.carica_tutti_prestiti(),"Il file è stato resettato con i prestiti desiderati");
+	}
+	
+	@Test
+	public void vero_se_aggiorna_descrizione_prestiti_non_aggiorna_il_prestito_in_qunato_non_è_cambiato_il_suo_stato_sul_file() {
+		File file_eliminato= new File(Database_file.PERCORSO_FILE_PRESTITI);
+		file_eliminato.delete();
+		
+		IO.CreaFile(Database_file.PERCORSO_FILE_PRESTITI);
+		
+		db.salva_prestito(prestito);
+		
+		db.aggiorna_descrizione_prestiti();
+		
+		assertEquals(prestito, db.carica_tutti_prestiti().get(0),"Il prestito non è stato modificato percio l'aggionramento non muta i suio dati");
+	}
+	
+	@Test
+	public void vero_se_aggiorna_descrizione_prestiti_aggiorna_il_prestito_in_qunato_è_cambiato_il_suo_stato_sul_file() {
+		File file_eliminato= new File(Database_file.PERCORSO_FILE_PRESTITI);
+		file_eliminato.delete();
+		
+		IO.CreaFile(Database_file.PERCORSO_FILE_PRESTITI);
+		
+		db.salva_prestito(prestito);
+		
+		risorsa.aggiungi_descrizione(new ArrayList<>(Arrays.asList("1","2","3","4","5")));
+		
+		db.aggiorna_prestito(prestito);
+		
+		db.aggiorna_descrizione_prestiti();
+		
+		assertEquals(prestito, db.carica_tutti_prestiti().get(0),"Il prestito è stato modificato percio l'aggionramento muta i suio dati");
 	}
 	
 	//mancano 13 funzioni da testare
