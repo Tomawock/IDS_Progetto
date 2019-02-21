@@ -892,5 +892,188 @@ class Database_file_test {
 		assertEquals(prestito, db.carica_tutti_prestiti().get(0),"Il prestito è stato modificato percio l'aggionramento muta i suio dati");
 	}
 	
-	//mancano 13 funzioni da testare
+	@Test
+	public void vero_se_aggiorna_prestito_non_aggiorna_il_prestito_poiche_non_presente_sul_file() {
+		File file_eliminato= new File(Database_file.PERCORSO_FILE_PRESTITI);
+		file_eliminato.delete();
+		
+		IO.CreaFile(Database_file.PERCORSO_FILE_PRESTITI);
+		
+		db.salva_prestito(prestito);
+		
+		
+		db.aggiorna_prestito(prestito_2);
+		
+		assertEquals(prestito,db.carica_tutti_prestiti().get(0),"Aggiornane un prestito non presente sul file non modifica il file" );
+	}
+	
+	@Test
+	public void vero_se_aggiorna_prestito_aggiorna_il_prestito_selezionato() {
+		File file_eliminato= new File(Database_file.PERCORSO_FILE_PRESTITI);
+		file_eliminato.delete();
+		
+		IO.CreaFile(Database_file.PERCORSO_FILE_PRESTITI);
+		
+		db.salva_prestito(prestito);
+		prestito.set_data_inizio_proroga(LocalDateTime.now().plusDays(1));
+		
+		db.aggiorna_prestito(prestito);
+		
+		assertEquals(prestito,db.carica_tutti_prestiti().get(0),"Aggiornane un prestito non presente sul file modifica il file" );
+	}
+	
+	@Test
+	public void vero_se_aggiorna_fruitore_non_aggiorna_il_fruitore_poiche_non_presente_sul_file() {
+		File file_eliminato= new File(Database_file.PERCORSO_FILE_FRUITORE);
+		file_eliminato.delete();
+		
+		IO.CreaFile(Database_file.PERCORSO_FILE_FRUITORE);
+		
+		db.salva_fruitore(fruitore);
+		
+		db.aggiorna_fruitore(fruitore_2);
+		
+		assertEquals(fruitore,db.carica_tutti_fruitori().get(0),"Aggiornane un fruitore non presente sul file non modifica il file" );
+	}
+	
+	@Test
+	public void vero_se_aggiorna_fruitore_aggiorna_il_fruitore_selezionato() {
+		File file_eliminato= new File(Database_file.PERCORSO_FILE_FRUITORE);
+		file_eliminato.delete();
+		
+		IO.CreaFile(Database_file.PERCORSO_FILE_FRUITORE);
+		
+		db.salva_fruitore(fruitore);
+		fruitore.set_data_iscrizione(LocalDateTime.now().plusDays(1));
+		
+		db.aggiorna_fruitore(fruitore);
+		
+		assertEquals(fruitore,db.carica_tutti_fruitori().get(0),"Aggiornane un fruitore non presente sul file modifica il file" );
+	}
+	
+	@Test
+	public void vero_se_aggiorna_validia_prestiti_non_aggiorna_i_prestiti_poiche_non_vi_sono_prestiti_presenti_sul_file() {
+		File file_eliminato= new File(Database_file.PERCORSO_FILE_PRESTITI);
+		file_eliminato.delete();
+		
+		IO.CreaFile(Database_file.PERCORSO_FILE_PRESTITI);
+		
+		db.aggiorna_validita_prestiti();
+		
+		assertTrue(db.carica_tutti_prestiti().isEmpty(),"Aggiornare la validita dei prestiti non modifica il file se non ci sono prestiti presenti sul file");
+	}
+	
+	@Test
+	public void vero_se_aggiorna_validia_prestiti_rimuove_i_prestiti_terminati() {
+		File file_eliminato= new File(Database_file.PERCORSO_FILE_FRUITORE);
+		file_eliminato.delete();
+		
+		IO.CreaFile(Database_file.PERCORSO_FILE_FRUITORE);
+		
+		prestito.set_data_fine_prestito(LocalDateTime.now());
+		db.salva_prestito(prestito);
+		
+		db.aggiorna_validita_prestiti();
+		
+		assertTrue(db.carica_tutti_prestiti().isEmpty(),"Aggiornare la valida dei prestiti modifica il file se vengono trovati dei prestiti terminati" );
+	}
+	@Test
+	public void vero_se_aggiorna_validia_prestiti_non_rimuove_i_prestiti_non_terminati() {
+		File file_eliminato= new File(Database_file.PERCORSO_FILE_FRUITORE);
+		file_eliminato.delete();
+		
+		IO.CreaFile(Database_file.PERCORSO_FILE_FRUITORE);
+		
+		prestito.set_data_fine_prestito(LocalDateTime.now().plusDays(1));
+		db.salva_prestito(prestito);
+		
+		db.aggiorna_validita_prestiti();
+		
+		assertFalse(db.carica_tutti_prestiti().isEmpty(),"Aggiornare la valida dei prestiti non modifica il file poiche non ci sono prestiti terminati" );
+	}
+	
+	@Test
+	public void vero_se_ricerca_per_descrizione_non_trova_nessuna_risorsa_poiche_quelle_presenti_sono_di_un_altro_tipo() {
+		File file_eliminato= new File(Database_file.PERCORSO_FILE_CATEGORIE);
+		file_eliminato.delete();
+		
+		IO.CreaFile(Database_file.PERCORSO_FILE_CATEGORIE);
+		
+		root.add_risorsa(risorsa_tipo_diversa);
+		
+		db.salva_categoria_root(root);
+		
+		assertTrue(db.ricerca_per_descrizione(risorsa).isEmpty(),"Non trova risorse corripondenti alla risorsa in qunato il tipo din risorsa non è presente");
+	}
+	
+	@Test
+	public void vero_se_ricerca_per_descrizione_non_trova_nessuna_risorsa_poiche_la_descrizione_non_combacia() {
+		File file_eliminato= new File(Database_file.PERCORSO_FILE_CATEGORIE);
+		file_eliminato.delete();
+		
+		IO.CreaFile(Database_file.PERCORSO_FILE_CATEGORIE);
+		
+		root.add_risorsa(risorsa);
+		risorsa_2.aggiungi_descrizione(new ArrayList<>(Arrays.asList("1","2","3","4","5")));
+		
+		db.salva_categoria_root(root);
+		
+		assertTrue(db.ricerca_per_descrizione(risorsa_2).isEmpty(),"Non trova risorse corrispondenti in qunato la descrizione è diversa");
+	}
+	
+	@Test
+	public void vero_se_ricerca_per_descrizione_non_trova_nessuna_risorsa_poiche_la_descrizione_non_combacia_e_le_descrizioni_presenti_sono_di_un_altro_tipo() {
+		File file_eliminato= new File(Database_file.PERCORSO_FILE_CATEGORIE);
+		file_eliminato.delete();
+		
+		IO.CreaFile(Database_file.PERCORSO_FILE_CATEGORIE);
+		
+		root.add_risorsa(risorsa_tipo_diversa);
+		risorsa_2.aggiungi_descrizione(new ArrayList<>(Arrays.asList("1","2","3","4","5")));
+		
+		db.salva_categoria_root(root);
+		
+		assertTrue(db.ricerca_per_descrizione(risorsa_2).isEmpty(),"Non trova risorse corrispondenti in qunato la descrizione è diversae anche il tipo di risorsa ricercata");
+	}
+	
+	@Test
+	public void vero_se_ricerca_per_descrizione_trova_la_risorsa_poiche_la_descrizione_combacia() {
+		File file_eliminato= new File(Database_file.PERCORSO_FILE_CATEGORIE);
+		file_eliminato.delete();
+		
+		IO.CreaFile(Database_file.PERCORSO_FILE_CATEGORIE);
+		
+		root.add_risorsa(risorsa);
+		
+		db.salva_categoria_root(root);
+		
+		assertFalse(db.ricerca_per_descrizione(risorsa).isEmpty(),"Trova risorse corrispondenti alla descrizione");
+	}
+	
+	@Test
+	public void vero_se_get_n_copie_disponibili_by_id_non_trova_la_risorsa_selezionata() {
+		File file_eliminato= new File(Database_file.PERCORSO_FILE_CATEGORIE);
+		file_eliminato.delete();
+		
+		IO.CreaFile(Database_file.PERCORSO_FILE_CATEGORIE);
+		
+		root.add_risorsa(risorsa);
+		
+		db.salva_categoria_root(root);
+		
+		assertEquals(-1,db.get_n_copie_disponibili_by_id(risorsa_2.get_id()),"Non trova la risorsa con l'id selezionato");
+	}
+	@Test
+	public void vero_se_get_n_copie_disponibili_by_id_trova_la_risorsa_selezionata() {
+		File file_eliminato= new File(Database_file.PERCORSO_FILE_CATEGORIE);
+		file_eliminato.delete();
+		
+		IO.CreaFile(Database_file.PERCORSO_FILE_CATEGORIE);
+		
+		root.add_risorsa(risorsa);
+		
+		db.salva_categoria_root(root);
+		
+		assertEquals(risorsa.get_id(),db.get_n_copie_disponibili_by_id(risorsa.get_id()),"Non trova la risorsa con l'id selezionato");
+	}
 }
