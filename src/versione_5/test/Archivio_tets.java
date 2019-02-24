@@ -13,15 +13,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import utilita.IO;
-import versione_5.model.Archivio;
-import versione_5.model.Categoria;
-import versione_5.model.Film;
-import versione_5.model.Fruitore;
-import versione_5.model.Libro;
-import versione_5.model.Operatore;
-import versione_5.model.Prestito;
-import versione_5.model.Risorsa;
-import versione_5.model.Utente;
+import versione_5.model.*;
 
 class Archivio_tets {
 
