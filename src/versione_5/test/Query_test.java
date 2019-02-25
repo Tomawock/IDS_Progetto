@@ -54,10 +54,10 @@ class Query_test {
 		//elimino il file per esere sicuro di non avere altri utenti salvati sullo stesso file
 		File file_eliminato= new File(Database_file.PERCORSO_FILE_PRESTITI);
 		file_eliminato.delete();
+				
+		IO.CreaFile(Database_file.PERCORSO_FILE_PRESTITI);
 		
 		db.salva_prestito(prestito);
-		
-		IO.CreaFile(Database_file.PERCORSO_FILE_PRESTITI);
 		
 		assertEquals(0,query.count_numero_di_prestiti_per_anno_solare(LocalDateTime.of(2012,12,12,0,0)),"Il numero di prestiti nell'anno solare corrente è 0 poiche non vi sono salvataggi nell'anno selezionato");
 	}
@@ -68,11 +68,83 @@ class Query_test {
 		File file_eliminato= new File(Database_file.PERCORSO_FILE_PRESTITI);
 		file_eliminato.delete();
 		
-		db.salva_prestito(prestito);
-		
 		IO.CreaFile(Database_file.PERCORSO_FILE_PRESTITI);
+		
+		db.salva_prestito(prestito);
 		
 		assertEquals(1,query.count_numero_di_prestiti_per_anno_solare(LocalDateTime.now()),"Il numero di prestiti nell'anno solare corrente è 0 poiche non vi sono salvataggi nell'anno selezionato");
 	}
+	
+	@Test
+	public void vero_se_count_numero_di_proroghe_per_anno_solare_ritorna_zero_se_non_sono_presenti_prestiti_che_sono_stati_prorogati_nell_anno_soloare_selezionato() {
+		File file_eliminato= new File(Database_file.PERCORSO_FILE_PRESTITI);
+		file_eliminato.delete();
+		
+		IO.CreaFile(Database_file.PERCORSO_FILE_PRESTITI);
+		
+		prestito.set_mai_prorogato(true);
+		
+		db.salva_prestito(prestito);
+		
+		assertEquals(0,query.count_numero_di_proroghe_per_anno_solare(LocalDateTime.of(2012,12,12,0,0)),"Il numero di proroghe nell'anno solare corrente è 0 poiche non vi sono prestiti nell'anno selezionato che non sono mai stati prorogati");
+	}
 
+	@Test
+	public void vero_se_count_numero_di_proroghe_per_anno_solare_ritorna_zero_se_sono_presenti_prestiti_che_sono_stati_prorogati_ma_non_nell_anno_soloare_selezionato() {
+		File file_eliminato= new File(Database_file.PERCORSO_FILE_PRESTITI);
+		file_eliminato.delete();
+		
+		IO.CreaFile(Database_file.PERCORSO_FILE_PRESTITI);
+		
+		prestito.set_mai_prorogato(false);
+		prestito.set_data_inizio_proroga(LocalDateTime.now());
+		
+		db.salva_prestito(prestito);
+		
+		assertEquals(0,query.count_numero_di_proroghe_per_anno_solare(LocalDateTime.of(2012,12,12,0,0)),"Il numero di proroghe nell'anno solare corrente è 0 poiche vi sono prestiti che sono stati prorogati ma non nell'anno selezionato");
+	}
+	
+	@Test
+	public void vero_se_count_numero_di_proroghe_per_anno_solare_ritorna_il_numero_dei_prestiti_che_sono_stati_prorogati_nell_anno_soloare_selezionato() {
+		File file_eliminato= new File(Database_file.PERCORSO_FILE_PRESTITI);
+		file_eliminato.delete();
+		
+		IO.CreaFile(Database_file.PERCORSO_FILE_PRESTITI);
+		
+		prestito.set_mai_prorogato(false);
+		prestito.set_data_inizio_proroga(LocalDateTime.now());
+		
+		db.salva_prestito(prestito);
+		
+		assertEquals(1,query.count_numero_di_proroghe_per_anno_solare(LocalDateTime.now()),"Il numero di proroghe nell'anno solare selezionato");
+	}
+
+	@Test
+	public void vero_se_select_count_numero_di_prestiti_perogni_fruitore_risuta_zero_perchè_non_vi_sono_prestiti_nell_anno_selezionato() {
+		File file_eliminato= new File(Database_file.PERCORSO_FILE_PRESTITI);
+		file_eliminato.delete();
+		
+		IO.CreaFile(Database_file.PERCORSO_FILE_PRESTITI);
+		
+		prestito.set_data_inizio_prestito(LocalDateTime.now());
+		
+		db.salva_prestito(prestito);
+		
+		assertEquals(0,query.select_count_numero_di_prestiti_perogni_fruitore(LocalDateTime.of(2012, 1, 1, 12, 12, 12)).get(fruitore).intValue());
+	}
+	
+	@Test
+	public void vero_se_select_count_numero_di_prestiti_perogni_fruitore_risulta_non_zero_perchè_vi_sono_prestiti_nell_anno_selezionato() {
+		File file_eliminato= new File(Database_file.PERCORSO_FILE_PRESTITI);
+		file_eliminato.delete();
+		
+		IO.CreaFile(Database_file.PERCORSO_FILE_PRESTITI);
+		
+		prestito.set_data_inizio_prestito(LocalDateTime.now());
+		
+		db.salva_prestito(prestito);
+		
+		assertEquals(1,query.select_count_numero_di_prestiti_perogni_fruitore(LocalDateTime.now()).get(fruitore).intValue());
+	}
+	
 }
