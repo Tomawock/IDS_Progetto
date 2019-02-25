@@ -23,7 +23,7 @@ public class Query {
 	 * @return	il numero di prestiti effettuati in un anno solare 
 	 */
 	 public int count_numero_di_prestiti_per_anno_solare(LocalDateTime anno) {
-		 ArrayList<Prestito> prestiti_archiviati=db.carica_tutti_prestiti();//sono tutti i prestiti ? perchè questi sarebbero quelli "locali e non dell'archivio COME DIO CANE LA FAMO STA COSA"
+		 ArrayList<Prestito> prestiti_archiviati=db.carica_tutti_prestiti();//sono tutti i prestiti ? perchè questi sarebbero quelli "locali e non dell'archivio"
 		 int res=0;
 		 for(Prestito p:prestiti_archiviati) {
 			 if(p.get_data_inizio_prestito().getYear()==anno.getYear()) {
@@ -40,7 +40,7 @@ public class Query {
 	  * @return	il numero di proroghe effettaute in un anno solare
 	  */
 	 public int count_numero_di_proroghe_per_anno_solare(LocalDateTime anno) {
-		 ArrayList<Prestito> prestiti_archiviati=db.carica_tutti_prestiti();//sono tutti i prestiti ? perchè questi sarebbero quelli "locali e non dell'archivio COME DIO CANE LA FAMO STA COSA"
+		 ArrayList<Prestito> prestiti_archiviati=db.carica_tutti_prestiti();//sono tutti i prestiti ? perchè questi sarebbero quelli "locali e non dell'archivio"
 		 int res=0;
 		 for(Prestito p:prestiti_archiviati) {
 			 if(!p.is_mai_prorogato()) {//TODO

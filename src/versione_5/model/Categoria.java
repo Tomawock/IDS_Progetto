@@ -99,7 +99,7 @@ public class Categoria implements Serializable{
 	@Override
 	public boolean equals(Object obj) {
 		Categoria c=(Categoria)obj;
-		if(c.get_nome()==this.nome) {
+		if(c.get_nome().equals(this.nome)) {
 			return true;
 		}
 		return false;
