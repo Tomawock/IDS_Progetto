@@ -19,10 +19,8 @@ class Query_test {
 	private Database_file db;
 	private Utente utente,utente_2;
 	private Fruitore fruitore,fruitore_2;
-	private Operatore operatore, operatore_2;
-	private Prestito prestito,prestito_2;
-	private Risorsa risorsa,risorsa_2,risorsa_tipo_diversa;
-	private Categoria root;
+	private Prestito prestito;
+	private Risorsa risorsa,risorsa_2;
 	
 	@BeforeEach
 	public void setup() {		
@@ -36,17 +34,10 @@ class Query_test {
 		fruitore=new Fruitore(utente);
 		fruitore_2=new Fruitore(utente_2);
 		
-		operatore=new Operatore(utente);
-		operatore_2=new Operatore(utente_2);
-		
-		root = new Categoria(Database_file_test.ROOT);
-		
 		risorsa = new Film(1,1);
 		risorsa_2 = new Film(2,1);
-		risorsa_tipo_diversa = new Libro(1,1);
 		
 		prestito =new Prestito(risorsa, fruitore);
-		prestito_2 =new Prestito(risorsa_2, fruitore_2);
 	}
 	
 	@Test
@@ -145,6 +136,18 @@ class Query_test {
 		db.salva_prestito(prestito);
 		
 		assertEquals(1,query.select_count_numero_di_prestiti_perogni_fruitore(LocalDateTime.now()).get(fruitore).intValue());
+	}
+	
+	@Test
+	public void vero_se_select_risorsa_con_max_numero_prestiti_con_risorsa_massima_presente_nell_anno_selezionato() {
+		File file_eliminato= new File(Database_file.PERCORSO_FILE_PRESTITI);
+		file_eliminato.delete();
+		
+		IO.CreaFile(Database_file.PERCORSO_FILE_PRESTITI);
+		
+		prestito.set_data_inizio_prestito(LocalDateTime.now());
+		
+		assertEquals(prestito.get_risorsa(),query.select_risorsa_con_max_numero_prestiti(LocalDateTime.now()));
 	}
 	
 }
