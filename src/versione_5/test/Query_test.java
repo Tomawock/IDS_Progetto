@@ -19,7 +19,7 @@ class Query_test {
 	private Database_file db;
 	private Utente utente,utente_2;
 	private Fruitore fruitore,fruitore_2;
-	private Prestito prestito;
+	private Prestito prestito,prestito_2;
 	private Risorsa risorsa,risorsa_2;
 	
 	@BeforeEach
@@ -38,6 +38,7 @@ class Query_test {
 		risorsa_2 = new Film(2,1);
 		
 		prestito =new Prestito(risorsa, fruitore);
+		prestito_2 =new Prestito(risorsa_2, fruitore_2);
 	}
 	
 	@Test
@@ -146,8 +147,24 @@ class Query_test {
 		IO.CreaFile(Database_file.PERCORSO_FILE_PRESTITI);
 		
 		prestito.set_data_inizio_prestito(LocalDateTime.now());
+		db.salva_prestito(prestito);
 		
 		assertEquals(prestito.get_risorsa(),query.select_risorsa_con_max_numero_prestiti(LocalDateTime.now()));
+	}
+	
+	@Test
+	public void vero_se_select_risorsa_con_max_numero_prestiti_con_risorsa_massima_non_presente_nell_anno_selezionato() {
+		File file_eliminato= new File(Database_file.PERCORSO_FILE_PRESTITI);
+		file_eliminato.delete();
+		
+		IO.CreaFile(Database_file.PERCORSO_FILE_PRESTITI);
+		
+		prestito.set_data_inizio_prestito(LocalDateTime.of(2012, 1, 1, 1, 1, 1));
+		prestito_2.set_data_inizio_prestito(LocalDateTime.now());
+		db.salva_prestito(prestito);
+		db.salva_prestito(prestito_2);
+		
+		assertEquals(prestito_2.get_risorsa(),query.select_risorsa_con_max_numero_prestiti(LocalDateTime.now()));
 	}
 	
 }
