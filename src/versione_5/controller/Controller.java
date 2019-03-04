@@ -217,6 +217,11 @@ public class Controller {
 	/**
 	 * Gestione delle opzioni di Fruitore
 	 * @param fruitore Fruitore selezionato sul quale vengono svolti i casi d'uso
+	 * - L'ID del Libro sia presente.
+- Il Libro abbia almeno una copia disponibile.
+- Il Fruitore non abbia raggiunto il numero massimo di Libri che può
+   richiedere in prestito
+
 	 */
 	private void fruitore_loggato(Fruitore fruitore) {
 		db.aggiorna_descrizione_prestiti();//serve per avere i prestiti con la descrizione corretta
@@ -227,7 +232,6 @@ public class Controller {
 		int scelta=view.fruitore_view(fruitore);
 		if(scelta ==1) {//Rinnovo del fruitore
 			if(fruitore.is_rinnovabile()) {
-				 
 				fruitore.rinnova_iscrizione();//rinnova oggetto ma non il db
 				archivio.aggiorna_fruitore(fruitore);
 				db.aggiorna_fruitore(fruitore);
@@ -240,6 +244,12 @@ public class Controller {
 			int id=this.view.ricerca_risorsa_id();
 			Categoria cat=db.carica_root_categorie();
 			Risorsa res=cat.get_risorsa_by_id(cat, id);
+				ArrayList<Risorsa> risorse = cat.get_risorse();
+				ArrayList<Integer> tutti_id = new ArrayList<>();
+				for(Risorsa r:risorse){
+					tutti_id.add(r.get_id());
+				}
+			assert(tutti_id.contains(id));
 			if(res!=null) {
 				ArrayList<Prestito> prestiti_per_fruitore=db.get_prestiti_per_fruitore_risorsa(fruitore,res);
 				//check se sforo il numero massimo di prestiti o se la risorsa selezionata Ã¨ disponibile
